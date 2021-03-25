@@ -28,10 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Action_for_Orders
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(623, 193);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "Action_for_Orders";
+            this.ShowIcon = false;
             this.Text = "Add_Orders";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
