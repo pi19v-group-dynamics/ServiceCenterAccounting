@@ -16,5 +16,10 @@ namespace ServiceCenterAccounting
         {
             InitializeComponent();
         }
+
+        private void btn_Add_Order_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
