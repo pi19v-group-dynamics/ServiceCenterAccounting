@@ -16,7 +16,7 @@ namespace ServiceCenterAccounting
         static void Main()
         {
             RegistryKey currentUserKey = Registry.CurrentUser;
-            //currentUserKey.DeleteSubKey("SCA_Key");
+            currentUserKey.DeleteSubKey("SCA_Key");
             string[] sub_keys = currentUserKey.GetSubKeyNames();
             if(sub_keys.Contains("SCA_Key"))
             {
