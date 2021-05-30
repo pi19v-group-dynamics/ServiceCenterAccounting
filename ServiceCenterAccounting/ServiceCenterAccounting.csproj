@@ -86,6 +86,13 @@
     <Compile Include="Action_for_Orders.Designer.cs">
       <DependentUpon>Action_for_Orders.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingAndChangingOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingAndChangingOrders.Designer.cs">
+      <DependentUpon>AddingAndChangingOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connect.cs" />
     <Compile Include="Initial_Setup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +121,9 @@
     </Compile>
     <EmbeddedResource Include="Action_for_Orders.resx">
       <DependentUpon>Action_for_Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingAndChangingOrders.resx">
+      <DependentUpon>AddingAndChangingOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Initial_Setup.resx">
       <DependentUpon>Initial_Setup.cs</DependentUpon>
