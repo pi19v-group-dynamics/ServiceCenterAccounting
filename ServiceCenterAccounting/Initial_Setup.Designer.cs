@@ -44,12 +44,22 @@ namespace ServiceCenterAccounting
             this.l_Warning2 = new System.Windows.Forms.Label();
             this.l_Warning3 = new System.Windows.Forms.Label();
             this.l_Text2 = new System.Windows.Forms.Label();
+            this.l_Text3 = new System.Windows.Forms.Label();
+            this.tb_Login = new System.Windows.Forms.TextBox();
+            this.tb_Password = new System.Windows.Forms.TextBox();
+            this.tb_Name_Database = new System.Windows.Forms.TextBox();
+            this.l_Input_Text4 = new System.Windows.Forms.Label();
+            this.l_Input_Text6 = new System.Windows.Forms.Label();
+            this.l_Input_Text5 = new System.Windows.Forms.Label();
+            this.l_Warning4 = new System.Windows.Forms.Label();
+            this.l_Warning6 = new System.Windows.Forms.Label();
+            this.l_Warning5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // l_Text1
             // 
             this.l_Text1.AutoSize = true;
-            this.l_Text1.Location = new System.Drawing.Point(37, 68);
+            this.l_Text1.Location = new System.Drawing.Point(64, 87);
             this.l_Text1.Name = "l_Text1";
             this.l_Text1.Size = new System.Drawing.Size(347, 104);
             this.l_Text1.TabIndex = 0;
@@ -57,7 +67,7 @@ namespace ServiceCenterAccounting
             // 
             // btn_Further
             // 
-            this.btn_Further.Location = new System.Drawing.Point(246, 242);
+            this.btn_Further.Location = new System.Drawing.Point(316, 257);
             this.btn_Further.Name = "btn_Further";
             this.btn_Further.Size = new System.Drawing.Size(75, 23);
             this.btn_Further.TabIndex = 1;
@@ -67,7 +77,7 @@ namespace ServiceCenterAccounting
             // 
             // btn_Cancel
             // 
-            this.btn_Cancel.Location = new System.Drawing.Point(327, 242);
+            this.btn_Cancel.Location = new System.Drawing.Point(397, 257);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancel.TabIndex = 2;
@@ -78,7 +88,7 @@ namespace ServiceCenterAccounting
             // btn_Back
             // 
             this.btn_Back.Enabled = false;
-            this.btn_Back.Location = new System.Drawing.Point(165, 242);
+            this.btn_Back.Location = new System.Drawing.Point(235, 257);
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(75, 23);
             this.btn_Back.TabIndex = 3;
@@ -89,7 +99,7 @@ namespace ServiceCenterAccounting
             // tb_Name_Srvice
             // 
             this.tb_Name_Srvice.Enabled = false;
-            this.tb_Name_Srvice.Location = new System.Drawing.Point(125, 97);
+            this.tb_Name_Srvice.Location = new System.Drawing.Point(165, 116);
             this.tb_Name_Srvice.Name = "tb_Name_Srvice";
             this.tb_Name_Srvice.Size = new System.Drawing.Size(145, 20);
             this.tb_Name_Srvice.TabIndex = 4;
@@ -99,7 +109,7 @@ namespace ServiceCenterAccounting
             // tb_Addres_Service
             // 
             this.tb_Addres_Service.Enabled = false;
-            this.tb_Addres_Service.Location = new System.Drawing.Point(125, 136);
+            this.tb_Addres_Service.Location = new System.Drawing.Point(165, 155);
             this.tb_Addres_Service.Name = "tb_Addres_Service";
             this.tb_Addres_Service.Size = new System.Drawing.Size(145, 20);
             this.tb_Addres_Service.TabIndex = 5;
@@ -110,7 +120,7 @@ namespace ServiceCenterAccounting
             // tb_Phone_Service
             // 
             this.tb_Phone_Service.Enabled = false;
-            this.tb_Phone_Service.Location = new System.Drawing.Point(125, 175);
+            this.tb_Phone_Service.Location = new System.Drawing.Point(165, 194);
             this.tb_Phone_Service.Name = "tb_Phone_Service";
             this.tb_Phone_Service.Size = new System.Drawing.Size(145, 20);
             this.tb_Phone_Service.TabIndex = 6;
@@ -122,7 +132,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text2.AutoSize = true;
             this.l_Input_Text2.Enabled = false;
-            this.l_Input_Text2.Location = new System.Drawing.Point(122, 120);
+            this.l_Input_Text2.Location = new System.Drawing.Point(162, 139);
             this.l_Input_Text2.Name = "l_Input_Text2";
             this.l_Input_Text2.Size = new System.Drawing.Size(130, 13);
             this.l_Input_Text2.TabIndex = 7;
@@ -133,7 +143,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text3.AutoSize = true;
             this.l_Input_Text3.Enabled = false;
-            this.l_Input_Text3.Location = new System.Drawing.Point(122, 159);
+            this.l_Input_Text3.Location = new System.Drawing.Point(162, 178);
             this.l_Input_Text3.Name = "l_Input_Text3";
             this.l_Input_Text3.Size = new System.Drawing.Size(143, 13);
             this.l_Input_Text3.TabIndex = 8;
@@ -144,7 +154,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text1.AutoSize = true;
             this.l_Input_Text1.Enabled = false;
-            this.l_Input_Text1.Location = new System.Drawing.Point(122, 81);
+            this.l_Input_Text1.Location = new System.Drawing.Point(162, 100);
             this.l_Input_Text1.Name = "l_Input_Text1";
             this.l_Input_Text1.Size = new System.Drawing.Size(148, 13);
             this.l_Input_Text1.TabIndex = 9;
@@ -155,7 +165,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning1.AutoSize = true;
             this.l_Warning1.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning1.Location = new System.Drawing.Point(276, 100);
+            this.l_Warning1.Location = new System.Drawing.Point(316, 119);
             this.l_Warning1.Name = "l_Warning1";
             this.l_Warning1.Size = new System.Drawing.Size(16, 13);
             this.l_Warning1.TabIndex = 10;
@@ -166,7 +176,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning2.AutoSize = true;
             this.l_Warning2.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning2.Location = new System.Drawing.Point(276, 139);
+            this.l_Warning2.Location = new System.Drawing.Point(316, 158);
             this.l_Warning2.Name = "l_Warning2";
             this.l_Warning2.Size = new System.Drawing.Size(16, 13);
             this.l_Warning2.TabIndex = 11;
@@ -177,7 +187,7 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning3.AutoSize = true;
             this.l_Warning3.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning3.Location = new System.Drawing.Point(276, 178);
+            this.l_Warning3.Location = new System.Drawing.Point(316, 197);
             this.l_Warning3.Name = "l_Warning3";
             this.l_Warning3.Size = new System.Drawing.Size(16, 13);
             this.l_Warning3.TabIndex = 12;
@@ -187,18 +197,131 @@ namespace ServiceCenterAccounting
             // l_Text2
             // 
             this.l_Text2.AutoSize = true;
-            this.l_Text2.Location = new System.Drawing.Point(94, 26);
+            this.l_Text2.Location = new System.Drawing.Point(54, 9);
             this.l_Text2.Name = "l_Text2";
-            this.l_Text2.Size = new System.Drawing.Size(227, 13);
+            this.l_Text2.Size = new System.Drawing.Size(376, 91);
             this.l_Text2.TabIndex = 13;
-            this.l_Text2.Text = "Введите основную информацию о сервисе.\r\n";
+            this.l_Text2.Text = resources.GetString("l_Text2.Text");
             this.l_Text2.Visible = false;
+            // 
+            // l_Text3
+            // 
+            this.l_Text3.AutoSize = true;
+            this.l_Text3.Location = new System.Drawing.Point(52, 9);
+            this.l_Text3.Name = "l_Text3";
+            this.l_Text3.Size = new System.Drawing.Size(378, 91);
+            this.l_Text3.TabIndex = 14;
+            this.l_Text3.Text = resources.GetString("l_Text3.Text");
+            this.l_Text3.Visible = false;
+            // 
+            // tb_Login
+            // 
+            this.tb_Login.Location = new System.Drawing.Point(165, 155);
+            this.tb_Login.Name = "tb_Login";
+            this.tb_Login.Size = new System.Drawing.Size(170, 20);
+            this.tb_Login.TabIndex = 15;
+            this.tb_Login.Visible = false;
+            this.tb_Login.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Eng_and_Digits_KeyPress);
+            this.tb_Login.Leave += new System.EventHandler(this.tb_Login_Leave);
+            // 
+            // tb_Password
+            // 
+            this.tb_Password.Location = new System.Drawing.Point(165, 194);
+            this.tb_Password.Name = "tb_Password";
+            this.tb_Password.Size = new System.Drawing.Size(170, 20);
+            this.tb_Password.TabIndex = 16;
+            this.tb_Password.Visible = false;
+            this.tb_Password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Eng_and_Digits_KeyPress);
+            this.tb_Password.Leave += new System.EventHandler(this.tb_Password_Leave);
+            // 
+            // tb_Name_Database
+            // 
+            this.tb_Name_Database.Location = new System.Drawing.Point(165, 116);
+            this.tb_Name_Database.Name = "tb_Name_Database";
+            this.tb_Name_Database.Size = new System.Drawing.Size(170, 20);
+            this.tb_Name_Database.TabIndex = 17;
+            this.tb_Name_Database.Visible = false;
+            this.tb_Name_Database.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Eng_and_Digits_KeyPress);
+            this.tb_Name_Database.Leave += new System.EventHandler(this.tb_Name_Database_Leave);
+            // 
+            // l_Input_Text4
+            // 
+            this.l_Input_Text4.AutoSize = true;
+            this.l_Input_Text4.Location = new System.Drawing.Point(162, 100);
+            this.l_Input_Text4.Name = "l_Input_Text4";
+            this.l_Input_Text4.Size = new System.Drawing.Size(172, 13);
+            this.l_Input_Text4.TabIndex = 18;
+            this.l_Input_Text4.Text = "Введите название базы данных:";
+            this.l_Input_Text4.Visible = false;
+            // 
+            // l_Input_Text6
+            // 
+            this.l_Input_Text6.AutoSize = true;
+            this.l_Input_Text6.Location = new System.Drawing.Point(162, 178);
+            this.l_Input_Text6.Name = "l_Input_Text6";
+            this.l_Input_Text6.Size = new System.Drawing.Size(178, 13);
+            this.l_Input_Text6.TabIndex = 19;
+            this.l_Input_Text6.Text = "Введите пароль администратора:";
+            this.l_Input_Text6.Visible = false;
+            // 
+            // l_Input_Text5
+            // 
+            this.l_Input_Text5.AutoSize = true;
+            this.l_Input_Text5.Location = new System.Drawing.Point(162, 139);
+            this.l_Input_Text5.Name = "l_Input_Text5";
+            this.l_Input_Text5.Size = new System.Drawing.Size(173, 13);
+            this.l_Input_Text5.TabIndex = 20;
+            this.l_Input_Text5.Text = "Введите логин админимтратора:";
+            this.l_Input_Text5.Visible = false;
+            // 
+            // l_Warning4
+            // 
+            this.l_Warning4.AutoSize = true;
+            this.l_Warning4.ForeColor = System.Drawing.Color.Red;
+            this.l_Warning4.Location = new System.Drawing.Point(341, 119);
+            this.l_Warning4.Name = "l_Warning4";
+            this.l_Warning4.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning4.TabIndex = 21;
+            this.l_Warning4.Text = "!!!";
+            this.l_Warning4.Visible = false;
+            // 
+            // l_Warning6
+            // 
+            this.l_Warning6.AutoSize = true;
+            this.l_Warning6.ForeColor = System.Drawing.Color.Red;
+            this.l_Warning6.Location = new System.Drawing.Point(341, 197);
+            this.l_Warning6.Name = "l_Warning6";
+            this.l_Warning6.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning6.TabIndex = 22;
+            this.l_Warning6.Text = "!!!";
+            this.l_Warning6.Visible = false;
+            // 
+            // l_Warning5
+            // 
+            this.l_Warning5.AutoSize = true;
+            this.l_Warning5.ForeColor = System.Drawing.Color.Red;
+            this.l_Warning5.Location = new System.Drawing.Point(341, 158);
+            this.l_Warning5.Name = "l_Warning5";
+            this.l_Warning5.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning5.TabIndex = 23;
+            this.l_Warning5.Text = "!!!";
+            this.l_Warning5.Visible = false;
             // 
             // Initial_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 277);
+            this.ClientSize = new System.Drawing.Size(484, 292);
+            this.Controls.Add(this.l_Warning5);
+            this.Controls.Add(this.l_Warning6);
+            this.Controls.Add(this.l_Warning4);
+            this.Controls.Add(this.l_Input_Text5);
+            this.Controls.Add(this.l_Input_Text6);
+            this.Controls.Add(this.l_Input_Text4);
+            this.Controls.Add(this.tb_Name_Database);
+            this.Controls.Add(this.tb_Password);
+            this.Controls.Add(this.tb_Login);
+            this.Controls.Add(this.l_Text3);
             this.Controls.Add(this.l_Text2);
             this.Controls.Add(this.l_Warning3);
             this.Controls.Add(this.l_Warning2);
@@ -240,5 +363,15 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label l_Warning2;
         private System.Windows.Forms.Label l_Warning3;
         private System.Windows.Forms.Label l_Text2;
+        private System.Windows.Forms.Label l_Text3;
+        private System.Windows.Forms.TextBox tb_Login;
+        private System.Windows.Forms.TextBox tb_Password;
+        private System.Windows.Forms.TextBox tb_Name_Database;
+        private System.Windows.Forms.Label l_Input_Text4;
+        private System.Windows.Forms.Label l_Input_Text6;
+        private System.Windows.Forms.Label l_Input_Text5;
+        private System.Windows.Forms.Label l_Warning4;
+        private System.Windows.Forms.Label l_Warning6;
+        private System.Windows.Forms.Label l_Warning5;
     }
 }

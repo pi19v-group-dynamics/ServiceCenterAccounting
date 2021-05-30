@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,9 @@ namespace ServiceCenterAccounting
         bool is_have_name_service = false;
         bool is_have_addres_service = false;
         bool is_have_phone_service = false;
+        bool is_have_name_database = false;
+        bool is_have_login_admin = false;
+        bool is_have_password_admin = false;
 
         public Initial_Setup()
         {
@@ -67,7 +71,20 @@ namespace ServiceCenterAccounting
                             tb_Addres_Service.Visible = false;
                             tb_Name_Srvice.Visible = false;
                             tb_Phone_Service.Visible = false;
-
+                            l_Text3.Visible = true;
+                            l_Input_Text4.Visible = true;
+                            l_Input_Text5.Visible = true;
+                            l_Input_Text6.Visible = true;
+                            tb_Name_Database.Visible = true;
+                            tb_Password.Visible = true;
+                            tb_Login.Visible = true;
+                            l_Text3.Enabled = true;
+                            l_Input_Text4.Enabled = true;
+                            l_Input_Text5.Enabled = true;
+                            l_Input_Text6.Enabled = true;
+                            tb_Name_Database.Enabled = true;
+                            tb_Password.Enabled = true;
+                            tb_Login.Enabled = true;
                         }
                         else
                         {
@@ -102,8 +119,25 @@ namespace ServiceCenterAccounting
                                             );
                             }
                         }
-
-                        
+                        break;
+                    }
+                case 2:
+                    {
+                        if(is_have_name_database & is_have_login_admin & is_have_password_admin)
+                        {
+                            counter++;
+                            RegistryKey currentUserKey = Registry.CurrentUser;
+                            RegistryKey SCA_Key = currentUserKey.CreateSubKey("SCA_Key");
+                            SCA_Key.SetValue("name_database", tb_Name_Database.Text);
+                            l_Text3.Visible = false;
+                            l_Input_Text4.Visible = false;
+                            l_Input_Text5.Visible = false;
+                            l_Input_Text6.Visible = false;
+                            tb_Name_Database.Visible = false;
+                            tb_Password.Visible = false;
+                            tb_Login.Visible = false;
+                            CreateDatabase(tb_Password.Text.ToString(), tb_Login.Text.ToString());
+                        }
                         break;
                     }
             }
@@ -195,6 +229,260 @@ namespace ServiceCenterAccounting
                     return false;
             }
             return true;
+        }
+
+        private void Eng_and_Digits_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if ((e.KeyChar >= 'A' && e.KeyChar <= 'Z') || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == '_' || e.KeyChar == (char)Keys.Back)
+            {
+
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tb_Name_Database_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tb_Name_Database.Text) || tb_Name_Database.Text.StartsWith(" "))
+            {
+                l_Warning4.Visible = true;
+                is_have_name_database = false;
+            }
+            else
+            {
+                is_have_name_database = true;
+                l_Warning4.Visible = false;
+            }
+        }
+
+        private void tb_Login_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tb_Login.Text) || tb_Login.Text.StartsWith(" "))
+            {
+                l_Warning5.Visible = true;
+                is_have_login_admin = false;
+            }
+            else
+            {
+                is_have_login_admin = true;
+                l_Warning5.Visible = false;
+            }
+        }
+
+        private void tb_Password_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tb_Password.Text) || tb_Password.Text.StartsWith(" "))
+            {
+                l_Warning6.Visible = true;
+                is_have_password_admin = false;
+            }
+            else
+            {
+                is_have_password_admin = true;
+                l_Warning6.Visible = false;
+            }
+        }
+
+        private void CreateDatabase(string password, string login)
+        {
+            string log = "postgres";
+            string pass = "1234";
+            string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
+            NpgsqlConnection Connection = new NpgsqlConnection(ConnectionString);
+            try
+            {
+                Connection.Open();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show("Неверный ввод названия базы данных!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            pass = "";
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
+            string name_database = SCA_Key.GetValue("name_database").ToString();
+            try
+            {
+                NpgsqlCommand Command = new NpgsqlCommand();
+                Command.Connection = Connection;
+                Command.CommandType = CommandType.Text;
+                Command.CommandText = $"CREATE DATABASE \"{name_database}\" " + 
+                    "WITH " +
+                    "OWNER = \"Admin_Glodbal\" " + 
+                    "ENCODING = 'UTF8' " +
+                    "LC_COLLATE = 'Russian_Russia.1251' " +
+                    "LC_CTYPE = 'Russian_Russia.1251' " +
+                    "TABLESPACE = pg_default;";
+                NpgsqlDataReader DataReader = Command.ExecuteReader();
+                Command.Dispose();
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            try
+            {
+                Connection.Open();
+                NpgsqlCommand Command = new NpgsqlCommand();
+                Command.Connection = Connection;
+                Command.CommandType = CommandType.Text;
+                Command.CommandText = $"CREATE ROLE \"{login}\" CREATEDB CREATEROLE LOGIN PASSWORD '{password}'; " +
+                    $"GRANT Connect, Create ON DATABASE \"{name_database}\" TO \"{login}\";" +
+                    $"GRANT Create, Usage ON SCHEMA \"public\" TO \"{login}\"; ";
+                NpgsqlDataReader DataReader = Command.ExecuteReader();
+                Command.Dispose();
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={login};Password={password}; Database={name_database};Timeout=180;Command Timeout=180";
+            Connection = new NpgsqlConnection(ConnectionString);
+            try
+            {
+                Connection.Open();
+                NpgsqlCommand Command = new NpgsqlCommand();
+                Command.Connection = Connection;
+                Command.CommandType = CommandType.Text;
+                Command.CommandText = $"" +
+                    $"CREATE TABLE public.clients " +
+                    "( "+
+                        "id_client serial NOT NULL, " +
+                        "last_name_client character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "first_name_client character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "middle_name_client character varying(255) COLLATE pg_catalog.\"default\", " +
+                        "passport_series character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "phone character varying(255) COLLATE pg_catalog.\"default\" NOT NULL," +
+                        "CONSTRAINT clients_pkey PRIMARY KEY(id_client), " +
+                        "CONSTRAINT clients_id_client_key UNIQUE(id_client), " +
+                        "CONSTRAINT clients_passport_series_key UNIQUE(passport_series), " +
+                        "CONSTRAINT clients_phone_key UNIQUE(phone) " +
+                    ")" +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.clients " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.component_or_other_device_types " +
+                    "(" +
+                        "id_component_or_other_device_type serial NOT NULL, " +
+                        "name_component_or_other_device_type character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT component_types_pkey PRIMARY KEY(id_component_or_other_device_type), " +
+                        "CONSTRAINT component_types_id_component_type_key UNIQUE(id_component_or_other_device_type), " +
+                        "CONSTRAINT component_types_name_component_type_key UNIQUE(name_component_or_other_device_type) " +
+                        ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.component_or_other_device_types " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.components_or_other_devices " +
+                    "( " +
+                        "id_component_or_other_devices serial NOT NULL, " +
+                        "id_component_type integer NOT NULL, " +
+                        "manufacturer character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "model character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT components_or_other_devices_pkey PRIMARY KEY(id_component_or_other_devices), " +
+                        "CONSTRAINT components_or_other_devices_id_component_or_other_devices_key UNIQUE(id_component_or_other_devices), " +
+                        "CONSTRAINT components_or_other_devices_id_component_type_fkey FOREIGN KEY(id_component_type) " +
+                        "REFERENCES public.component_or_other_device_types(id_component_or_other_device_type) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.components_or_other_devices " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.laptops_and_monoblocks " +
+                    "( " +
+                        "id_laptop_or_monoblock serial NOT NULL, " +
+                        "manufacturer character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "model character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "cpu character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "ram character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "ram_capacity integer NOT NULL, " +
+                        "number_of_drives integer NOT NULL, " +
+                        "total_drives_capacity integer NOT NULL, " +
+                        "CONSTRAINT laptops_and_monoblocks_pkey PRIMARY KEY(id_laptop_or_monoblock) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.laptops_and_monoblocks " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.orders " +
+                    "( " +
+                        "id_orders serial NOT NULL, " +
+                        "id_client integer NOT NULL, " +
+                        "id_worker integer NOT NULL, " +
+                        "date_of_adoption date NOT NULL, " +
+                        "date_of_completion date NOT NULL, " +
+                        "date_of_issue date NOT NULL, " +
+                        "customer_comment text COLLATE pg_catalog.\"default\", " +
+                        "id_stage_of_execution integer NOT NULL, " +
+                        "id_type_of_service integer NOT NULL, " +
+                        "cost_of_parts real, " +
+                        "price real, " +
+                        "CONSTRAINT orders_pkey PRIMARY KEY(id_orders), " +
+                        "CONSTRAINT orders_id_client_fkey FOREIGN KEY(id_client) " +
+                        "REFERENCES public.clients(id_client) MATCH SIMPLE " + 
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE, " +
+                        "CONSTRAINT orders_id_stage_of_execution_fkey FOREIGN KEY(id_stage_of_execution) " +
+                        "REFERENCES public.stages_of_execution(id_stage_of_execution) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE, " +
+                        "CONSTRAINT orders_id_type_of_service_fkey FOREIGN KEY(id_type_of_service) " +
+                        "REFERENCES public.types_of_service(id_type_of_service) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE, " +
+                        "CONSTRAINT orders_id_worker_fkey FOREIGN KEY(id_worker) " +
+                        "REFERENCES public.workers(id_worker) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.orders " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.orders_and_devices " +
+                    "( " +
+                        "id_order_and_device serial NOT NULL, " +
+                        "id_order integer NOT NULL, " +
+                        "id_type_of_device integer NOT NULL, " +
+                        "id_specific_device integer NOT NULL, " +
+                        "CONSTRAINT orders_and_devices_pkey PRIMARY KEY(id_order_and_device), " + 
+                        "CONSTRAINT orders_and_devices_id_order_fkey FOREIGN KEY(id_order) " +
+                        "REFERENCES public.orders(id_orders) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE, " +
+                        "CONSTRAINT orders_and_devices_id_type_of_device_fkey FOREIGN KEY(id_type_of_device) " +
+                        "REFERENCES public.types_of_device(id_type_of_device) MATCH SIMPLE " +
+                            "ON UPDATE NO ACTION " +
+                            "ON DELETE CASCADE " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.orders_and_devices " +
+                        $"OWNER to {login}; " +
+                    "CREATE TABLE public.smartphones " +
+                    "( " +
+                        "id_smartphone serial NOT NULL DEFAULT, " +
+                        "manufacturer character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "model character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "imei character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT smartphones_pkey PRIMARY KEY(id_smartphone), " +
+                        "CONSTRAINT smartphones_imei_key UNIQUE(imei) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.smartphones " +
+                        $"OWNER to {login}; ";
+                NpgsqlDataReader DataReader = Command.ExecuteReader();
+                Command.Dispose();
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
+            }
+
         }
     }
 }
