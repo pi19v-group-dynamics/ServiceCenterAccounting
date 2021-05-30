@@ -27,5 +27,10 @@ namespace ServiceCenterAccounting
                 IntervalAfter.Visible = true;
             }
         }
+
+        private void Reports_Creator_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -60,7 +60,7 @@
             "За месяц",
             "За год",
             "За определённый промежуток"});
-            this.IntervalBox.Location = new System.Drawing.Point(237, 43);
+            this.IntervalBox.Location = new System.Drawing.Point(246, 43);
             this.IntervalBox.Name = "IntervalBox";
             this.IntervalBox.Size = new System.Drawing.Size(248, 21);
             this.IntervalBox.TabIndex = 2;
@@ -181,6 +181,7 @@
             this.Name = "Reports_Creator";
             this.ShowIcon = false;
             this.Text = "Reports_Createor";
+            this.Load += new System.EventHandler(this.Reports_Creator_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ReportTable)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
