@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,22 @@ namespace ServiceCenterAccounting
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Main());
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            currentUserKey.DeleteSubKey("SCA_Key");
+            string[] sub_keys = currentUserKey.GetSubKeyNames();
+            if(sub_keys.Contains("SCA_Key"))
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form_Main());
+            }
+            else
+            {
+                RegistryKey SCA_Key = currentUserKey.CreateSubKey("SCA_Key");
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Initial_Setup());
+            }
         }
     }
 }
