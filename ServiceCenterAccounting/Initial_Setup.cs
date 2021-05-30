@@ -289,7 +289,7 @@ namespace ServiceCenterAccounting
         private void CreateDatabase(string password, string login)
         {
             string log = "postgres";
-            string pass = "55321";
+            string pass = "1234";
             string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
             NpgsqlConnection Connection = new NpgsqlConnection(ConnectionString);
             try

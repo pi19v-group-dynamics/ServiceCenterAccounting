@@ -104,6 +104,7 @@
             this.IntervalAfter.Size = new System.Drawing.Size(200, 20);
             this.IntervalAfter.TabIndex = 8;
             this.IntervalAfter.Visible = false;
+            this.IntervalAfter.CloseUp += new System.EventHandler(this.IntervalAfter_CloseUp);
             // 
             // ReportTable
             // 
