@@ -71,7 +71,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(27, 68);
+            this.label2.Location = new System.Drawing.Point(61, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 21);
             this.label2.TabIndex = 5;
@@ -80,7 +80,7 @@
             // 
             // IntervalTo
             // 
-            this.IntervalTo.Location = new System.Drawing.Point(56, 70);
+            this.IntervalTo.Location = new System.Drawing.Point(90, 69);
             this.IntervalTo.Name = "IntervalTo";
             this.IntervalTo.Size = new System.Drawing.Size(200, 20);
             this.IntervalTo.TabIndex = 6;
@@ -90,7 +90,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(442, 67);
+            this.label3.Location = new System.Drawing.Point(426, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 21);
             this.label3.TabIndex = 7;
@@ -99,7 +99,7 @@
             // 
             // IntervalAfter
             // 
-            this.IntervalAfter.Location = new System.Drawing.Point(481, 69);
+            this.IntervalAfter.Location = new System.Drawing.Point(465, 68);
             this.IntervalAfter.Name = "IntervalAfter";
             this.IntervalAfter.Size = new System.Drawing.Size(200, 20);
             this.IntervalAfter.TabIndex = 8;
