@@ -301,6 +301,7 @@ namespace ServiceCenterAccounting
                 MessageBox.Show("Неверный ввод названия базы данных!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             pass = "";
+            log = "";
             RegistryKey currentUserKey = Registry.CurrentUser;
             RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
             string name_database = SCA_Key.GetValue("name_database").ToString();
@@ -349,8 +350,76 @@ namespace ServiceCenterAccounting
                 NpgsqlCommand Command = new NpgsqlCommand();
                 Command.Connection = Connection;
                 Command.CommandType = CommandType.Text;
-                Command.CommandText = $"" +
-                    $"CREATE TABLE public.clients " +
+                Command.CommandText = $"CREATE TABLE public.stages_of_execution " +
+                    "( "+
+                        "id_stage_of_execution serial NOT NULL, " +
+                        "name_stage_of_execution character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT \"stages _of_execution_pkey\" PRIMARY KEY(id_stage_of_execution), " +
+                        "CONSTRAINT \"stages _of_execution_id_stage_of_execution_key\" UNIQUE(id_stage_of_execution), " +
+                        "CONSTRAINT \"stages _of_execution_name_stage_of_execution_key\" UNIQUE(name_stage_of_execution) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.stages_of_execution " +
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.stationary_computers " +
+                    "( " +
+                        "id_stationary_computer serial NOT NULL, " +
+                        "motherboard character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "cpu character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "gpu character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "power_supply character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "number_of_drives integer NOT NULL, " +
+                        "total_drives_capacity integer NOT NULL, " +
+                        "cpu_cooling character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "additional_devices text COLLATE pg_catalog.\"default\", " +
+                        "ram character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "ram_capacity integer NOT NULL, " +
+                        "CONSTRAINT stationary_computers_pkey PRIMARY KEY(id_stationary_computer) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.stationary_computers " +
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.types_of_device " +
+                    "( "+
+                        "id_type_of_device serial NOT NULL, " +
+                        "type_of_device character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "name_table character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT types_of_device_pkey PRIMARY KEY(id_type_of_device), " + 
+                        "CONSTRAINT types_of_device_id_type_of_device_key UNIQUE(id_type_of_device), " +
+                        "CONSTRAINT types_of_device_name_table_key UNIQUE(name_table), " +
+                        "CONSTRAINT types_of_device_type_of_device_key UNIQUE(type_of_device) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.types_of_device " +
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.types_of_service " +
+                    "( " +
+                        "id_type_of_service serial NOT NULL, " +
+                        "name_type_of_service character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "cost_of_service character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "CONSTRAINT types_of_service_pkey PRIMARY KEY(id_type_of_service), " +
+                        "CONSTRAINT types_of_service_name_type_of_service_key UNIQUE(name_type_of_service) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.types_of_service " +
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.workers " +
+                    "( " +
+                        "id_worker serial NOT NULL, " +
+                        "last_name_worker character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "first_name_worker character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "middle_name_worker character varying(255) COLLATE pg_catalog.\"default\", " +
+                        "interest_rate integer NOT NULL, " +
+                        "employment boolean NOT NULL, " +
+                        "date_of_brth date NOT NULL, " + 
+                        "CONSTRAINT workers_pkey PRIMARY KEY(id_worker), " +
+                        "CONSTRAINT workers_date_of_brth_key UNIQUE(date_of_brth), " +
+                        "CONSTRAINT workers_id_worker_key UNIQUE(id_worker) " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.workers " +
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.clients" +
                     "( "+
                         "id_client serial NOT NULL, " +
                         "last_name_client character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
@@ -463,7 +532,7 @@ namespace ServiceCenterAccounting
                         $"OWNER to {login}; " +
                     "CREATE TABLE public.smartphones " +
                     "( " +
-                        "id_smartphone serial NOT NULL DEFAULT, " +
+                        "id_smartphone serial NOT NULL, " +
                         "manufacturer character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
                         "model character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
                         "imei character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
