@@ -19,7 +19,13 @@ namespace ServiceCenterAccounting
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (IntervalBox.SelectedItem.ToString() == "За определённый промежуток")
+            {
+                label2.Visible = true;
+                label3.Visible = true;
+                IntervalTo.Visible = true;
+                IntervalAfter.Visible = true;
+            }
         }
     }
 }
