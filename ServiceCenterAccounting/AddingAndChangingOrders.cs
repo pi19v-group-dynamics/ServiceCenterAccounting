@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ServiceCenterAccounting
 {
-    public partial class Reports_Creator : Form
+    public partial class AddingAndChangingOrders : Form
     {
-        public Reports_Creator()
+        public AddingAndChangingOrders()
         {
             InitializeComponent();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
