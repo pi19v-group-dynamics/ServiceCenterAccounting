@@ -12,7 +12,7 @@
  Target Server Version : 130002
  File Encoding         : 65001
 
- Date: 29/05/2021 23:50:27
+ Date: 30/05/2021 12:50:45
 */
 
 
@@ -116,6 +116,17 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for types_of_service_id_type_of_service_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."types_of_service_id_type_of_service_seq";
+CREATE SEQUENCE "public"."types_of_service_id_type_of_service_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for workers_id_worker_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."workers_id_worker_seq";
@@ -168,7 +179,7 @@ DROP TABLE IF EXISTS "public"."components_or_other_devices";
 CREATE TABLE "public"."components_or_other_devices" (
   "id_component_or_other_devices" int4 NOT NULL DEFAULT nextval('components_or_other_devices_id_component_or_other_devices_seq'::regclass),
   "id_component_type" int4 NOT NULL,
-  "brand" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "manufacturer" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "model" varchar(255) COLLATE "pg_catalog"."default" NOT NULL
 )
 ;
@@ -201,7 +212,10 @@ CREATE TABLE "public"."orders" (
   "date_of_completion" date NOT NULL,
   "date_of_issue" date NOT NULL,
   "customer_comment" text COLLATE "pg_catalog"."default",
-  "id_stage_of_execution" int4 NOT NULL
+  "id_stage_of_execution" int4 NOT NULL,
+  "id_type_of_service" int4 NOT NULL,
+  "cost_of_parts" float4,
+  "price" float4
 )
 ;
 
@@ -230,10 +244,10 @@ CREATE TABLE "public"."smartphones" (
 ;
 
 -- ----------------------------
--- Table structure for stages _of_execution
+-- Table structure for stages_of_execution
 -- ----------------------------
-DROP TABLE IF EXISTS "public"."stages _of_execution";
-CREATE TABLE "public"."stages _of_execution" (
+DROP TABLE IF EXISTS "public"."stages_of_execution";
+CREATE TABLE "public"."stages_of_execution" (
   "id_stage_of_execution" int4 NOT NULL DEFAULT nextval('"stages _of_execution_id_stage_of_execution_seq"'::regclass),
   "name_stage_of_execution" varchar(255) COLLATE "pg_catalog"."default" NOT NULL
 )
@@ -266,6 +280,17 @@ CREATE TABLE "public"."types_of_device" (
   "id_type_of_device" int4 NOT NULL DEFAULT nextval('types_of_device_id_type_of_device_seq'::regclass),
   "type_of_device" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "name_table" varchar(255) COLLATE "pg_catalog"."default" NOT NULL
+)
+;
+
+-- ----------------------------
+-- Table structure for types_of_service
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."types_of_service";
+CREATE TABLE "public"."types_of_service" (
+  "id_type_of_service" int4 NOT NULL DEFAULT nextval('types_of_service_id_type_of_service_seq'::regclass),
+  "name_type_of_service" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "cost_of_service" varchar(255) COLLATE "pg_catalog"."default" NOT NULL
 )
 ;
 
@@ -330,7 +355,7 @@ SELECT setval('"public"."smartphones_id_smartphone_seq"', 2, false);
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."stages _of_execution_id_stage_of_execution_seq"
-OWNED BY "public"."stages _of_execution"."id_stage_of_execution";
+OWNED BY "public"."stages_of_execution"."id_stage_of_execution";
 SELECT setval('"public"."stages _of_execution_id_stage_of_execution_seq"', 2, false);
 
 -- ----------------------------
@@ -346,6 +371,13 @@ SELECT setval('"public"."stationary_computers_id_stationary computer_seq"', 2, f
 ALTER SEQUENCE "public"."types_of_device_id_type_of_device_seq"
 OWNED BY "public"."types_of_device"."id_type_of_device";
 SELECT setval('"public"."types_of_device_id_type_of_device_seq"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."types_of_service_id_type_of_service_seq"
+OWNED BY "public"."types_of_service"."id_type_of_service";
+SELECT setval('"public"."types_of_service_id_type_of_service_seq"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -366,6 +398,7 @@ SELECT setval('"public"."сomponent_types_id_component type_seq"', 2, false);
 -- ----------------------------
 ALTER TABLE "public"."clients" ADD CONSTRAINT "clients_id_client_key" UNIQUE ("id_client");
 ALTER TABLE "public"."clients" ADD CONSTRAINT "clients_passport_series_key" UNIQUE ("passport_series");
+ALTER TABLE "public"."clients" ADD CONSTRAINT "clients_phone_key" UNIQUE ("phone");
 
 -- ----------------------------
 -- Primary Key structure for table clients
@@ -419,15 +452,15 @@ ALTER TABLE "public"."smartphones" ADD CONSTRAINT "smartphones_imei_key" UNIQUE 
 ALTER TABLE "public"."smartphones" ADD CONSTRAINT "smartphones_pkey" PRIMARY KEY ("id_smartphone");
 
 -- ----------------------------
--- Uniques structure for table stages _of_execution
+-- Uniques structure for table stages_of_execution
 -- ----------------------------
-ALTER TABLE "public"."stages _of_execution" ADD CONSTRAINT "stages _of_execution_id_stage_of_execution_key" UNIQUE ("id_stage_of_execution");
-ALTER TABLE "public"."stages _of_execution" ADD CONSTRAINT "stages _of_execution_name_stage_of_execution_key" UNIQUE ("name_stage_of_execution");
+ALTER TABLE "public"."stages_of_execution" ADD CONSTRAINT "stages _of_execution_id_stage_of_execution_key" UNIQUE ("id_stage_of_execution");
+ALTER TABLE "public"."stages_of_execution" ADD CONSTRAINT "stages _of_execution_name_stage_of_execution_key" UNIQUE ("name_stage_of_execution");
 
 -- ----------------------------
--- Primary Key structure for table stages _of_execution
+-- Primary Key structure for table stages_of_execution
 -- ----------------------------
-ALTER TABLE "public"."stages _of_execution" ADD CONSTRAINT "stages _of_execution_pkey" PRIMARY KEY ("id_stage_of_execution");
+ALTER TABLE "public"."stages_of_execution" ADD CONSTRAINT "stages _of_execution_pkey" PRIMARY KEY ("id_stage_of_execution");
 
 -- ----------------------------
 -- Primary Key structure for table stationary_computers
@@ -445,6 +478,16 @@ ALTER TABLE "public"."types_of_device" ADD CONSTRAINT "types_of_device_name_tabl
 -- Primary Key structure for table types_of_device
 -- ----------------------------
 ALTER TABLE "public"."types_of_device" ADD CONSTRAINT "types_of_device_pkey" PRIMARY KEY ("id_type_of_device");
+
+-- ----------------------------
+-- Uniques structure for table types_of_service
+-- ----------------------------
+ALTER TABLE "public"."types_of_service" ADD CONSTRAINT "types_of_service_name_type_of_service_key" UNIQUE ("name_type_of_service");
+
+-- ----------------------------
+-- Primary Key structure for table types_of_service
+-- ----------------------------
+ALTER TABLE "public"."types_of_service" ADD CONSTRAINT "types_of_service_pkey" PRIMARY KEY ("id_type_of_service");
 
 -- ----------------------------
 -- Uniques structure for table workers
@@ -465,9 +508,10 @@ ALTER TABLE "public"."components_or_other_devices" ADD CONSTRAINT "components_or
 -- ----------------------------
 -- Foreign Keys structure for table orders
 -- ----------------------------
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_client_fkey" FOREIGN KEY ("id_client") REFERENCES "public"."clients" ("id_client") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_stage_of_execution_fkey" FOREIGN KEY ("id_stage_of_execution") REFERENCES "public"."stages _of_execution" ("id_stage_of_execution") ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_worker_fkey" FOREIGN KEY ("id_worker") REFERENCES "public"."workers" ("id_worker") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_client_fkey" FOREIGN KEY ("id_client") REFERENCES "public"."clients" ("id_client") ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_stage_of_execution_fkey" FOREIGN KEY ("id_stage_of_execution") REFERENCES "public"."stages_of_execution" ("id_stage_of_execution") ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_type_of_service_fkey" FOREIGN KEY ("id_type_of_service") REFERENCES "public"."types_of_service" ("id_type_of_service") ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_id_worker_fkey" FOREIGN KEY ("id_worker") REFERENCES "public"."workers" ("id_worker") ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- ----------------------------
 -- Foreign Keys structure for table orders_and_devices
