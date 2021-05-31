@@ -23,6 +23,8 @@ namespace ServiceCenterAccounting
         bool is_have_name_database = false;
         bool is_have_login_admin = false;
         bool is_have_password_admin = false;
+        bool is_have_name_type_service = false;
+        bool is_have_cosst_service = false;
 
         public Initial_Setup()
         {
@@ -137,6 +139,58 @@ namespace ServiceCenterAccounting
                             tb_Password.Visible = false;
                             tb_Login.Visible = false;
                             CreateDatabase(tb_Password.Text.ToString(), tb_Login.Text.ToString());
+                            l_Text4.Visible = true;
+                            l_Input_Text7.Visible = true;
+                            l_Input_Text8.Visible = true;
+                            tb_Name_Service.Visible = true;
+                            tb_Cost_Service.Visible = true;
+                            dg_Table_Viev.Visible = true;
+                            l_Text4.Enabled = true;
+                            l_Input_Text7.Enabled = true;
+                            l_Input_Text8.Enabled = true;
+                            tb_Name_Service.Enabled = true;
+                            tb_Cost_Service.Enabled = true;
+                            dg_Table_Viev.Enabled = true;
+                        }
+                        else
+                        {
+                            if (!is_have_name_database)
+                            {
+                                MessageBox.Show(
+                                            $"Заполните название базы данных!\nПоля доступные для заполнения не могут содержать только пробелы!",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                            if (!is_have_login_admin)
+                            {
+                                MessageBox.Show(
+                                            $"Заполните логин администратора!\n" +
+                                            $"Поля доступные для заполнения не могут содержать только пробелы!",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                            if (!is_have_password_admin)
+                            {
+                                MessageBox.Show(
+                                            $"Заполните пароль администратора!\n" +
+                                            $"Поля доступные для заполнения не могут содержать только пробелы!",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if(is_have_name_type_service && is_have_cosst_service )
+                        {
+
                         }
                         break;
                     }
@@ -289,7 +343,7 @@ namespace ServiceCenterAccounting
         private void CreateDatabase(string password, string login)
         {
             string log = "postgres";
-            string pass = "55321";
+            string pass = "1234";
             string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
             NpgsqlConnection Connection = new NpgsqlConnection(ConnectionString);
             try
@@ -299,6 +353,7 @@ namespace ServiceCenterAccounting
             catch (Exception ee)
             {
                 MessageBox.Show("Неверный ввод названия базы данных!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
             }
             pass = "";
             log = "";
@@ -324,6 +379,7 @@ namespace ServiceCenterAccounting
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
             }
             try
             {
@@ -341,6 +397,7 @@ namespace ServiceCenterAccounting
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
             }
             ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={login};Password={password}; Database={name_database};Timeout=180;Command Timeout=180";
             Connection = new NpgsqlConnection(ConnectionString);
@@ -483,8 +540,7 @@ namespace ServiceCenterAccounting
                         "id_client integer NOT NULL, " +
                         "id_worker integer NOT NULL, " +
                         "date_of_adoption date NOT NULL, " +
-                        "date_of_completion date NOT NULL, " +
-                        "date_of_issue date NOT NULL, " +
+                        "date_of_completion date, " +
                         "customer_comment text COLLATE pg_catalog.\"default\", " +
                         "id_stage_of_execution integer NOT NULL, " +
                         "id_type_of_service integer NOT NULL, " +
@@ -551,7 +607,72 @@ namespace ServiceCenterAccounting
                 MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Connection.Close();
             }
+            try
+            {
+                Connection.Open();
+                NpgsqlCommand Command = new NpgsqlCommand();
+                Command.Connection = Connection;
+                Command.CommandType = CommandType.Text;
+                Command.CommandText = $"INSERT INTO stages_of_execution (name_stage_of_execution) VALUES " +
+                    $"('Принятый заказы'), " +
+                    $"('Заказы в работе'), " +
+                    $"('Завершенные заказы'); " +
+                    $"INSERT INTO types_of_device (type_of_device, name_table) VALUES " +
+                    $"('Смартфоны', 'smartphones'), " +
+                    $"('Стационарные компьютеры', 'stationary_computers'), " +
+                    $"('Ноутбуки и моноблоки', 'laptops_and_monoblocks'), " +
+                    $"('Компоненты и другие устройства', 'components_or_other_devices');" +
+                    $"INSERT INTO component_or_other_device_types (name_component_or_other_device_type) VALUES " +
+                    $"('Другое'); ";
+                NpgsqlDataReader DataReader = Command.ExecuteReader();
+                Command.Dispose();
+                Connection.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
+            }
+        }
 
+        private void tb_Name_Service_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tb_Name_Service.Text) || DigitsOnly(tb_Name_Service.Text) ||
+                tb_Name_Service.Text.StartsWith("-") | tb_Name_Service.Text.StartsWith("`") | tb_Name_Service.Text.StartsWith("'")
+                || tb_Name_Service.Text.StartsWith(" ") || tb_Name_Service.Text.StartsWith(".") || tb_Name_Service.Text.StartsWith(",")
+                || tb_Name_Service.Text.StartsWith("/"))
+            {
+                l_Warning7.Visible = true;
+                is_have_name_type_service = false;
+            }
+            else
+            {
+                is_have_name_type_service = true;
+                l_Warning7.Visible = false;
+            }
+        }
+
+        private void tb_Cost_Service_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tb_Cost_Service_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(tb_Cost_Service.Text) || tb_Cost_Service.Text.StartsWith(".") || Single.Parse(tb_Cost_Service.Text.Replace('.', ',')) > 10000 || Single.Parse(tb_Cost_Service.Text.Replace('.', ',')) < 50)
+            {
+                l_Warning8.Visible = true;
+                is_have_cosst_service = false;
+            }
+            else
+            {
+                is_have_cosst_service = true;
+                l_Warning8.Visible = false;
+            }
         }
     }
 }

@@ -54,6 +54,16 @@ namespace ServiceCenterAccounting
             this.l_Warning4 = new System.Windows.Forms.Label();
             this.l_Warning6 = new System.Windows.Forms.Label();
             this.l_Warning5 = new System.Windows.Forms.Label();
+            this.dg_Table_Viev = new System.Windows.Forms.DataGridView();
+            this.tb_Name_Service = new System.Windows.Forms.TextBox();
+            this.l_Input_Text7 = new System.Windows.Forms.Label();
+            this.tb_Cost_Service = new System.Windows.Forms.TextBox();
+            this.l_Input_Text8 = new System.Windows.Forms.Label();
+            this.l_Text4 = new System.Windows.Forms.Label();
+            this.l_Warning7 = new System.Windows.Forms.Label();
+            this.l_Warning8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Table_Viev)).BeginInit();
             this.SuspendLayout();
             // 
             // l_Text1
@@ -307,11 +317,113 @@ namespace ServiceCenterAccounting
             this.l_Warning5.Text = "!!!";
             this.l_Warning5.Visible = false;
             // 
+            // dg_Table_Viev
+            // 
+            this.dg_Table_Viev.AllowUserToAddRows = false;
+            this.dg_Table_Viev.AllowUserToDeleteRows = false;
+            this.dg_Table_Viev.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Table_Viev.Location = new System.Drawing.Point(12, 119);
+            this.dg_Table_Viev.Name = "dg_Table_Viev";
+            this.dg_Table_Viev.ReadOnly = true;
+            this.dg_Table_Viev.Size = new System.Drawing.Size(464, 132);
+            this.dg_Table_Viev.TabIndex = 24;
+            this.dg_Table_Viev.Visible = false;
+            // 
+            // tb_Name_Service
+            // 
+            this.tb_Name_Service.Location = new System.Drawing.Point(31, 93);
+            this.tb_Name_Service.Name = "tb_Name_Service";
+            this.tb_Name_Service.Size = new System.Drawing.Size(145, 20);
+            this.tb_Name_Service.TabIndex = 25;
+            this.tb_Name_Service.Visible = false;
+            this.tb_Name_Service.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Addres_Service_KeyPress);
+            this.tb_Name_Service.Leave += new System.EventHandler(this.tb_Name_Service_Leave);
+            // 
+            // l_Input_Text7
+            // 
+            this.l_Input_Text7.AutoSize = true;
+            this.l_Input_Text7.Location = new System.Drawing.Point(28, 77);
+            this.l_Input_Text7.Name = "l_Input_Text7";
+            this.l_Input_Text7.Size = new System.Drawing.Size(148, 13);
+            this.l_Input_Text7.TabIndex = 26;
+            this.l_Input_Text7.Text = "Наименование типа услуги:";
+            this.l_Input_Text7.Visible = false;
+            // 
+            // tb_Cost_Service
+            // 
+            this.tb_Cost_Service.Location = new System.Drawing.Point(331, 93);
+            this.tb_Cost_Service.Name = "tb_Cost_Service";
+            this.tb_Cost_Service.Size = new System.Drawing.Size(145, 20);
+            this.tb_Cost_Service.TabIndex = 27;
+            this.tb_Cost_Service.Visible = false;
+            this.tb_Cost_Service.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Cost_Service_KeyPress);
+            this.tb_Cost_Service.Leave += new System.EventHandler(this.tb_Cost_Service_Leave);
+            // 
+            // l_Input_Text8
+            // 
+            this.l_Input_Text8.AutoSize = true;
+            this.l_Input_Text8.Location = new System.Drawing.Point(329, 77);
+            this.l_Input_Text8.Name = "l_Input_Text8";
+            this.l_Input_Text8.Size = new System.Drawing.Size(101, 13);
+            this.l_Input_Text8.TabIndex = 28;
+            this.l_Input_Text8.Text = "Стоимость услуги:";
+            this.l_Input_Text8.Visible = false;
+            // 
+            // l_Text4
+            // 
+            this.l_Text4.AutoSize = true;
+            this.l_Text4.Location = new System.Drawing.Point(54, 9);
+            this.l_Text4.Name = "l_Text4";
+            this.l_Text4.Size = new System.Drawing.Size(395, 65);
+            this.l_Text4.TabIndex = 29;
+            this.l_Text4.Text = resources.GetString("l_Text4.Text");
+            this.l_Text4.Visible = false;
+            // 
+            // l_Warning7
+            // 
+            this.l_Warning7.AutoSize = true;
+            this.l_Warning7.ForeColor = System.Drawing.Color.Red;
+            this.l_Warning7.Location = new System.Drawing.Point(182, 96);
+            this.l_Warning7.Name = "l_Warning7";
+            this.l_Warning7.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning7.TabIndex = 30;
+            this.l_Warning7.Text = "!!!";
+            this.l_Warning7.Visible = false;
+            // 
+            // l_Warning8
+            // 
+            this.l_Warning8.AutoSize = true;
+            this.l_Warning8.ForeColor = System.Drawing.Color.Red;
+            this.l_Warning8.Location = new System.Drawing.Point(309, 96);
+            this.l_Warning8.Name = "l_Warning8";
+            this.l_Warning8.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning8.TabIndex = 31;
+            this.l_Warning8.Text = "!!!";
+            this.l_Warning8.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(204, 91);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(99, 23);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "Добавить";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Initial_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(488, 292);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.l_Warning8);
+            this.Controls.Add(this.l_Warning7);
+            this.Controls.Add(this.l_Text4);
+            this.Controls.Add(this.l_Input_Text8);
+            this.Controls.Add(this.tb_Cost_Service);
+            this.Controls.Add(this.l_Input_Text7);
+            this.Controls.Add(this.tb_Name_Service);
+            this.Controls.Add(this.dg_Table_Viev);
             this.Controls.Add(this.l_Warning5);
             this.Controls.Add(this.l_Warning6);
             this.Controls.Add(this.l_Warning4);
@@ -342,6 +454,7 @@ namespace ServiceCenterAccounting
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Initial_Setup";
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Table_Viev)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,5 +486,14 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label l_Warning4;
         private System.Windows.Forms.Label l_Warning6;
         private System.Windows.Forms.Label l_Warning5;
+        private System.Windows.Forms.DataGridView dg_Table_Viev;
+        private System.Windows.Forms.TextBox tb_Name_Service;
+        private System.Windows.Forms.Label l_Input_Text7;
+        private System.Windows.Forms.TextBox tb_Cost_Service;
+        private System.Windows.Forms.Label l_Input_Text8;
+        private System.Windows.Forms.Label l_Text4;
+        private System.Windows.Forms.Label l_Warning7;
+        private System.Windows.Forms.Label l_Warning8;
+        private System.Windows.Forms.Button button1;
     }
 }
