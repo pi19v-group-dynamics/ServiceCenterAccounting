@@ -156,6 +156,7 @@
             this.bnt_Reports.TabIndex = 3;
             this.bnt_Reports.Text = "Создание отчетов";
             this.bnt_Reports.UseVisualStyleBackColor = true;
+            this.bnt_Reports.Click += new System.EventHandler(this.bnt_Reports_Click);
             // 
             // btn_Change_of_Status
             // 
