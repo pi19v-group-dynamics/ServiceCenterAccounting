@@ -92,6 +92,18 @@
     <Compile Include="AddingAndChangingOrders.Designer.cs">
       <DependentUpon>AddingAndChangingOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingClient.Designer.cs">
+      <DependentUpon>AddingClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddingDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingDevice.Designer.cs">
+      <DependentUpon>AddingDevice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Connect.cs" />
     <Compile Include="Initial_Setup.cs">
       <SubType>Form</SubType>
@@ -124,6 +136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddingAndChangingOrders.resx">
       <DependentUpon>AddingAndChangingOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingClient.resx">
+      <DependentUpon>AddingClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingDevice.resx">
+      <DependentUpon>AddingDevice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Initial_Setup.resx">
       <DependentUpon>Initial_Setup.cs</DependentUpon>
