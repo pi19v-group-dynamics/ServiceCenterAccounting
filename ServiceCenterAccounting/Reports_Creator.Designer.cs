@@ -85,6 +85,7 @@
             this.IntervalTo.Size = new System.Drawing.Size(200, 20);
             this.IntervalTo.TabIndex = 6;
             this.IntervalTo.Visible = false;
+            this.IntervalTo.CloseUp += new System.EventHandler(this.IntervalTo_CloseUp);
             // 
             // label3
             // 
@@ -159,6 +160,7 @@
             this.Save_to_PDF.TabIndex = 14;
             this.Save_to_PDF.Text = "Сохранить в PDF";
             this.Save_to_PDF.UseVisualStyleBackColor = true;
+            this.Save_to_PDF.Click += new System.EventHandler(this.Save_to_PDF_Click);
             // 
             // Reports_Creator
             // 
