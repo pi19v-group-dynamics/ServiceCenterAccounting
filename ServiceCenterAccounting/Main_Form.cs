@@ -21,5 +21,10 @@ namespace ServiceCenterAccounting
         {
 
         }
+
+        private void bnt_Reports_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
