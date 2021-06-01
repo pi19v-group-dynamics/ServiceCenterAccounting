@@ -64,9 +64,10 @@ namespace ServiceCenterAccounting
             // l_Text1
             // 
             this.l_Text1.AutoSize = true;
-            this.l_Text1.Location = new System.Drawing.Point(64, 87);
+            this.l_Text1.Location = new System.Drawing.Point(85, 107);
+            this.l_Text1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Text1.Name = "l_Text1";
-            this.l_Text1.Size = new System.Drawing.Size(347, 104);
+            this.l_Text1.Size = new System.Drawing.Size(451, 136);
             this.l_Text1.TabIndex = 0;
             this.l_Text1.Text = resources.GetString("l_Text1.Text");
             // 
@@ -74,7 +75,7 @@ namespace ServiceCenterAccounting
             // 
             this.btn_Further.Location = new System.Drawing.Point(320, 272);
             this.btn_Further.Name = "btn_Further";
-            this.btn_Further.Size = new System.Drawing.Size(75, 23);
+            this.btn_Further.Size = new System.Drawing.Size(100, 28);
             this.btn_Further.TabIndex = 1;
             this.btn_Further.Text = "Далее";
             this.btn_Further.UseVisualStyleBackColor = true;
@@ -84,7 +85,7 @@ namespace ServiceCenterAccounting
             // 
             this.btn_Cancel.Location = new System.Drawing.Point(401, 272);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancel.Size = new System.Drawing.Size(100, 28);
             this.btn_Cancel.TabIndex = 2;
             this.btn_Cancel.Text = "Отмена";
             this.btn_Cancel.UseVisualStyleBackColor = true;
@@ -95,7 +96,7 @@ namespace ServiceCenterAccounting
             this.btn_Back.Enabled = false;
             this.btn_Back.Location = new System.Drawing.Point(239, 272);
             this.btn_Back.Name = "btn_Back";
-            this.btn_Back.Size = new System.Drawing.Size(75, 23);
+            this.btn_Back.Size = new System.Drawing.Size(100, 28);
             this.btn_Back.TabIndex = 3;
             this.btn_Back.Text = "Назад";
             this.btn_Back.UseVisualStyleBackColor = true;
@@ -104,9 +105,10 @@ namespace ServiceCenterAccounting
             // tb_Name_Srvice
             // 
             this.tb_Name_Srvice.Enabled = false;
-            this.tb_Name_Srvice.Location = new System.Drawing.Point(165, 116);
+            this.tb_Name_Srvice.Location = new System.Drawing.Point(220, 143);
+            this.tb_Name_Srvice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Name_Srvice.Name = "tb_Name_Srvice";
-            this.tb_Name_Srvice.Size = new System.Drawing.Size(145, 20);
+            this.tb_Name_Srvice.Size = new System.Drawing.Size(192, 22);
             this.tb_Name_Srvice.TabIndex = 4;
             this.tb_Name_Srvice.Visible = false;
             this.tb_Name_Srvice.Leave += new System.EventHandler(this.tb_Name_Srvice_Leave);
@@ -114,9 +116,10 @@ namespace ServiceCenterAccounting
             // tb_Addres_Service
             // 
             this.tb_Addres_Service.Enabled = false;
-            this.tb_Addres_Service.Location = new System.Drawing.Point(165, 155);
+            this.tb_Addres_Service.Location = new System.Drawing.Point(220, 191);
+            this.tb_Addres_Service.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Addres_Service.Name = "tb_Addres_Service";
-            this.tb_Addres_Service.Size = new System.Drawing.Size(145, 20);
+            this.tb_Addres_Service.Size = new System.Drawing.Size(192, 22);
             this.tb_Addres_Service.TabIndex = 5;
             this.tb_Addres_Service.Visible = false;
             this.tb_Addres_Service.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Addres_Service_KeyPress);
@@ -125,9 +128,10 @@ namespace ServiceCenterAccounting
             // tb_Phone_Service
             // 
             this.tb_Phone_Service.Enabled = false;
-            this.tb_Phone_Service.Location = new System.Drawing.Point(165, 194);
+            this.tb_Phone_Service.Location = new System.Drawing.Point(220, 239);
+            this.tb_Phone_Service.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_Phone_Service.Name = "tb_Phone_Service";
-            this.tb_Phone_Service.Size = new System.Drawing.Size(145, 20);
+            this.tb_Phone_Service.Size = new System.Drawing.Size(192, 22);
             this.tb_Phone_Service.TabIndex = 6;
             this.tb_Phone_Service.Visible = false;
             this.tb_Phone_Service.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Phone_Service_KeyPress);
@@ -137,9 +141,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text2.AutoSize = true;
             this.l_Input_Text2.Enabled = false;
-            this.l_Input_Text2.Location = new System.Drawing.Point(162, 139);
+            this.l_Input_Text2.Location = new System.Drawing.Point(216, 171);
+            this.l_Input_Text2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Input_Text2.Name = "l_Input_Text2";
-            this.l_Input_Text2.Size = new System.Drawing.Size(130, 13);
+            this.l_Input_Text2.Size = new System.Drawing.Size(167, 17);
             this.l_Input_Text2.TabIndex = 7;
             this.l_Input_Text2.Text = "Введите адрес сервиса:";
             this.l_Input_Text2.Visible = false;
@@ -148,9 +153,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text3.AutoSize = true;
             this.l_Input_Text3.Enabled = false;
-            this.l_Input_Text3.Location = new System.Drawing.Point(162, 178);
+            this.l_Input_Text3.Location = new System.Drawing.Point(216, 219);
+            this.l_Input_Text3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Input_Text3.Name = "l_Input_Text3";
-            this.l_Input_Text3.Size = new System.Drawing.Size(143, 13);
+            this.l_Input_Text3.Size = new System.Drawing.Size(186, 17);
             this.l_Input_Text3.TabIndex = 8;
             this.l_Input_Text3.Text = "Введите телефон сервиса:";
             this.l_Input_Text3.Visible = false;
@@ -159,9 +165,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Input_Text1.AutoSize = true;
             this.l_Input_Text1.Enabled = false;
-            this.l_Input_Text1.Location = new System.Drawing.Point(162, 100);
+            this.l_Input_Text1.Location = new System.Drawing.Point(216, 123);
+            this.l_Input_Text1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Input_Text1.Name = "l_Input_Text1";
-            this.l_Input_Text1.Size = new System.Drawing.Size(148, 13);
+            this.l_Input_Text1.Size = new System.Drawing.Size(190, 17);
             this.l_Input_Text1.TabIndex = 9;
             this.l_Input_Text1.Text = "Введите название сервиса:";
             this.l_Input_Text1.Visible = false;
@@ -170,9 +177,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning1.AutoSize = true;
             this.l_Warning1.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning1.Location = new System.Drawing.Point(316, 119);
+            this.l_Warning1.Location = new System.Drawing.Point(421, 146);
+            this.l_Warning1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Warning1.Name = "l_Warning1";
-            this.l_Warning1.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning1.Size = new System.Drawing.Size(17, 17);
             this.l_Warning1.TabIndex = 10;
             this.l_Warning1.Text = "!!!";
             this.l_Warning1.Visible = false;
@@ -181,9 +189,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning2.AutoSize = true;
             this.l_Warning2.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning2.Location = new System.Drawing.Point(316, 158);
+            this.l_Warning2.Location = new System.Drawing.Point(421, 194);
+            this.l_Warning2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Warning2.Name = "l_Warning2";
-            this.l_Warning2.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning2.Size = new System.Drawing.Size(17, 17);
             this.l_Warning2.TabIndex = 11;
             this.l_Warning2.Text = "!!!";
             this.l_Warning2.Visible = false;
@@ -192,9 +201,10 @@ namespace ServiceCenterAccounting
             // 
             this.l_Warning3.AutoSize = true;
             this.l_Warning3.ForeColor = System.Drawing.Color.Red;
-            this.l_Warning3.Location = new System.Drawing.Point(316, 197);
+            this.l_Warning3.Location = new System.Drawing.Point(421, 242);
+            this.l_Warning3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Warning3.Name = "l_Warning3";
-            this.l_Warning3.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning3.Size = new System.Drawing.Size(17, 17);
             this.l_Warning3.TabIndex = 12;
             this.l_Warning3.Text = "!!!";
             this.l_Warning3.Visible = false;
@@ -202,9 +212,10 @@ namespace ServiceCenterAccounting
             // l_Text2
             // 
             this.l_Text2.AutoSize = true;
-            this.l_Text2.Location = new System.Drawing.Point(54, 9);
+            this.l_Text2.Location = new System.Drawing.Point(72, 11);
+            this.l_Text2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Text2.Name = "l_Text2";
-            this.l_Text2.Size = new System.Drawing.Size(376, 91);
+            this.l_Text2.Size = new System.Drawing.Size(492, 119);
             this.l_Text2.TabIndex = 13;
             this.l_Text2.Text = resources.GetString("l_Text2.Text");
             this.l_Text2.Visible = false;
@@ -212,7 +223,8 @@ namespace ServiceCenterAccounting
             // l_Text3
             // 
             this.l_Text3.AutoSize = true;
-            this.l_Text3.Location = new System.Drawing.Point(52, 9);
+            this.l_Text3.Location = new System.Drawing.Point(69, 11);
+            this.l_Text3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.l_Text3.Name = "l_Text3";
             this.l_Text3.Size = new System.Drawing.Size(378, 104);
             this.l_Text3.TabIndex = 14;
@@ -254,7 +266,7 @@ namespace ServiceCenterAccounting
             this.l_Input_Text4.AutoSize = true;
             this.l_Input_Text4.Location = new System.Drawing.Point(162, 113);
             this.l_Input_Text4.Name = "l_Input_Text4";
-            this.l_Input_Text4.Size = new System.Drawing.Size(172, 13);
+            this.l_Input_Text4.Size = new System.Drawing.Size(222, 17);
             this.l_Input_Text4.TabIndex = 18;
             this.l_Input_Text4.Text = "Введите название базы данных:";
             this.l_Input_Text4.Visible = false;
@@ -264,7 +276,7 @@ namespace ServiceCenterAccounting
             this.l_Input_Text6.AutoSize = true;
             this.l_Input_Text6.Location = new System.Drawing.Point(160, 191);
             this.l_Input_Text6.Name = "l_Input_Text6";
-            this.l_Input_Text6.Size = new System.Drawing.Size(178, 13);
+            this.l_Input_Text6.Size = new System.Drawing.Size(232, 17);
             this.l_Input_Text6.TabIndex = 19;
             this.l_Input_Text6.Text = "Введите пароль администратора:";
             this.l_Input_Text6.Visible = false;
@@ -285,7 +297,7 @@ namespace ServiceCenterAccounting
             this.l_Warning4.ForeColor = System.Drawing.Color.Red;
             this.l_Warning4.Location = new System.Drawing.Point(358, 132);
             this.l_Warning4.Name = "l_Warning4";
-            this.l_Warning4.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning4.Size = new System.Drawing.Size(17, 17);
             this.l_Warning4.TabIndex = 21;
             this.l_Warning4.Text = "!!!";
             this.l_Warning4.Visible = false;
@@ -296,7 +308,7 @@ namespace ServiceCenterAccounting
             this.l_Warning6.ForeColor = System.Drawing.Color.Red;
             this.l_Warning6.Location = new System.Drawing.Point(358, 210);
             this.l_Warning6.Name = "l_Warning6";
-            this.l_Warning6.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning6.Size = new System.Drawing.Size(17, 17);
             this.l_Warning6.TabIndex = 22;
             this.l_Warning6.Text = "!!!";
             this.l_Warning6.Visible = false;
@@ -307,7 +319,7 @@ namespace ServiceCenterAccounting
             this.l_Warning5.ForeColor = System.Drawing.Color.Red;
             this.l_Warning5.Location = new System.Drawing.Point(358, 171);
             this.l_Warning5.Name = "l_Warning5";
-            this.l_Warning5.Size = new System.Drawing.Size(16, 13);
+            this.l_Warning5.Size = new System.Drawing.Size(17, 17);
             this.l_Warning5.TabIndex = 23;
             this.l_Warning5.Text = "!!!";
             this.l_Warning5.Visible = false;
@@ -365,7 +377,7 @@ namespace ServiceCenterAccounting
             // 
             // Initial_Setup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(488, 307);
             this.Controls.Add(this.l_Text5);
@@ -397,6 +409,7 @@ namespace ServiceCenterAccounting
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Further);
             this.Controls.Add(this.l_Text1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Initial_Setup";
