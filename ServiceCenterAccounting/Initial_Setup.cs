@@ -15,6 +15,7 @@ namespace ServiceCenterAccounting
 {
     public partial class Initial_Setup : Form
     {
+        NpgsqlConnection Connection;
         Regex Telephone_Check = new Regex(@"^\+?38-?\(?0\d{2}\)?-?\d{3}-?\d{2}-?\d{2}$");
         int counter = 0; 
         bool is_have_name_service = false;
@@ -23,8 +24,7 @@ namespace ServiceCenterAccounting
         bool is_have_name_database = false;
         bool is_have_login_admin = false;
         bool is_have_password_admin = false;
-        bool is_have_name_type_service = false;
-        bool is_have_cosst_service = false;
+        bool is_have_repeat_password = false;
 
         public Initial_Setup()
         {
@@ -77,16 +77,20 @@ namespace ServiceCenterAccounting
                             l_Input_Text4.Visible = true;
                             l_Input_Text5.Visible = true;
                             l_Input_Text6.Visible = true;
+                            l_Input_Text7.Visible = true;
                             tb_Name_Database.Visible = true;
                             tb_Password.Visible = true;
                             tb_Login.Visible = true;
+                            tb_Password_Repeat.Visible = true;
                             l_Text3.Enabled = true;
                             l_Input_Text4.Enabled = true;
                             l_Input_Text5.Enabled = true;
                             l_Input_Text6.Enabled = true;
+                            l_Input_Text7.Enabled = true;
                             tb_Name_Database.Enabled = true;
                             tb_Password.Enabled = true;
                             tb_Login.Enabled = true;
+                            tb_Password_Repeat.Enabled = true;
                         }
                         else
                         {
@@ -125,32 +129,28 @@ namespace ServiceCenterAccounting
                     }
                 case 2:
                     {
-                        if(is_have_name_database & is_have_login_admin & is_have_password_admin)
+                        if(is_have_name_database & is_have_login_admin & is_have_password_admin & is_have_repeat_password)
                         {
                             counter++;
                             RegistryKey currentUserKey = Registry.CurrentUser;
                             RegistryKey SCA_Key = currentUserKey.CreateSubKey("SCA_Key");
                             SCA_Key.SetValue("name_database", tb_Name_Database.Text);
                             l_Text3.Visible = false;
+                            is_have_name_database = false;
+                            is_have_login_admin = false;
+                            is_have_password_admin = false;
+                            is_have_repeat_password = false;
                             l_Input_Text4.Visible = false;
-                            l_Input_Text5.Visible = false;
-                            l_Input_Text6.Visible = false;
                             tb_Name_Database.Visible = false;
-                            tb_Password.Visible = false;
-                            tb_Login.Visible = false;
-                            CreateDatabase(tb_Password.Text.ToString(), tb_Login.Text.ToString());
                             l_Text4.Visible = true;
-                            l_Input_Text7.Visible = true;
-                            l_Input_Text8.Visible = true;
-                            tb_Name_Service.Visible = true;
-                            tb_Cost_Service.Visible = true;
-                            dg_Table_Viev.Visible = true;
                             l_Text4.Enabled = true;
-                            l_Input_Text7.Enabled = true;
-                            l_Input_Text8.Enabled = true;
-                            tb_Name_Service.Enabled = true;
-                            tb_Cost_Service.Enabled = true;
-                            dg_Table_Viev.Enabled = true;
+                            l_Input_Text5.Text = "Введите логин опратора:";
+                            l_Input_Text6.Text = "Введите пароль опратора:";
+                            l_Input_Text7.Text = "Повторите пароль опратора:";
+                            CreateDatabase(tb_Password.Text.ToString(), tb_Login.Text.ToString());
+                            tb_Password_Repeat.Text = "";
+                            tb_Login.Text = "";
+                            tb_Password.Text = "";
                         }
                         else
                         {
@@ -183,15 +183,75 @@ namespace ServiceCenterAccounting
                                             MessageBoxIcon.Error
                                             );
                             }
+                            if (!is_have_repeat_password)
+                            {
+                                MessageBox.Show(
+                                            $"Пароли не совпадают!\n",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
                         }
                         break;
                     }
                 case 3:
                     {
-                        if(is_have_name_type_service && is_have_cosst_service )
+                        if (is_have_login_admin & is_have_password_admin & is_have_repeat_password)
                         {
-
+                            counter++;
+                            l_Text4.Visible = false;
+                            l_Input_Text4.Visible = false;
+                            l_Input_Text5.Visible = false;
+                            l_Input_Text6.Visible = false;
+                            l_Input_Text7.Visible = false;
+                            tb_Name_Database.Visible = false;
+                            tb_Password.Visible = false;
+                            tb_Login.Visible = false;
+                            tb_Password_Repeat.Visible = false;
+                            btn_Back.Visible = false;
+                            btn_Cancel.Text = "Закрыть";
+                            btn_Further.Text = "Готово";
+                            l_Text5.Visible = true;
+                            l_Text5.Enabled = true;
+                            Create_Operator(tb_Password.Text.ToString(), tb_Login.Text.ToString());
                         }
+                        else
+                        {
+                            if (!is_have_login_admin)
+                            {
+                                MessageBox.Show(
+                                            $"Заполните пароль опратора!\n" +
+                                            $"Поля доступные для заполнения не могут содержать только пробелы!",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                            if (!is_have_password_admin)
+                            {
+                                MessageBox.Show(
+                                            $"Пароли не совпадают!\n",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                            if (!is_have_repeat_password)
+                            {
+                                MessageBox.Show(
+                                            $"Пароли не совпадают!\n",
+                                            "Ошибка",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error
+                                            );
+                            }
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        this.Close();
                         break;
                     }
             }
@@ -213,7 +273,74 @@ namespace ServiceCenterAccounting
 
         private void btn_Back_Click(object sender, EventArgs e)
         {
-
+            switch (counter)
+            {
+                case 1:
+                    {
+                        counter--;
+                        btn_Back.Enabled = false;
+                        l_Text1.Visible = true;
+                        l_Input_Text1.Enabled = true;
+                        l_Text2.Visible = false;
+                        l_Input_Text1.Visible = false;
+                        l_Input_Text2.Visible = false;
+                        l_Input_Text3.Visible = false;
+                        tb_Addres_Service.Visible = false;
+                        tb_Name_Srvice.Visible = false;
+                        tb_Phone_Service.Visible = false;
+                        l_Warning1.Visible = false;
+                        l_Warning2.Visible = false;
+                        l_Warning3.Visible = false;
+                        break;
+                    }
+                case 2:
+                    {
+                        counter--;
+                        l_Text2.Visible = true;
+                        l_Input_Text1.Visible = true;
+                        l_Input_Text2.Visible = true;
+                        l_Input_Text3.Visible = true;
+                        tb_Addres_Service.Visible = true;
+                        tb_Name_Srvice.Visible = true;
+                        tb_Phone_Service.Visible = true;
+                        l_Text3.Visible = false;
+                        l_Input_Text4.Visible = false;
+                        l_Input_Text5.Visible = false;
+                        l_Input_Text6.Visible = false;
+                        l_Input_Text7.Visible = false;
+                        tb_Name_Database.Visible = false;
+                        tb_Password.Visible = false;
+                        tb_Login.Visible = false;
+                        tb_Password_Repeat.Visible = false;
+                        break;
+                    }
+                case 3:
+                    {
+                        counter--;
+                        l_Text3.Visible = true;
+                        l_Input_Text4.Visible = true;
+                        l_Input_Text5.Visible = true;
+                        l_Input_Text6.Visible = true;
+                        l_Input_Text7.Visible = true;
+                        tb_Name_Database.Visible = true;
+                        tb_Password.Visible = true;
+                        tb_Login.Visible = true;
+                        tb_Password_Repeat.Visible = true;
+                        is_have_name_database = false;
+                        is_have_login_admin = false;
+                        is_have_password_admin = false;
+                        is_have_repeat_password = false;
+                        l_Text4.Visible = false;
+                        l_Input_Text5.Text = "Введите логин администратора:";
+                        l_Input_Text6.Text = "Введите пароль администратора:";
+                        l_Input_Text7.Text = "Повторите пароль администратора:";
+                        tb_Name_Database.Text = "";
+                        tb_Password_Repeat.Text = "";
+                        tb_Login.Text = "";
+                        tb_Password.Text = "";
+                        break;
+                    }
+            }
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
@@ -345,7 +472,7 @@ namespace ServiceCenterAccounting
             string log = "postgres";
             string pass = "1234";
             string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
-            NpgsqlConnection Connection = new NpgsqlConnection(ConnectionString);
+            Connection = new NpgsqlConnection(ConnectionString);
             try
             {
                 Connection.Open();
@@ -453,7 +580,7 @@ namespace ServiceCenterAccounting
                     "( " +
                         "id_type_of_service serial NOT NULL, " +
                         "name_type_of_service character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
-                        "cost_of_service character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "cost_of_service real NOT NULL, " +
                         "CONSTRAINT types_of_service_pkey PRIMARY KEY(id_type_of_service), " +
                         "CONSTRAINT types_of_service_name_type_of_service_key UNIQUE(name_type_of_service) " +
                     ") " +
@@ -468,9 +595,7 @@ namespace ServiceCenterAccounting
                         "middle_name_worker character varying(255) COLLATE pg_catalog.\"default\", " +
                         "interest_rate integer NOT NULL, " +
                         "employment boolean NOT NULL, " +
-                        "date_of_brth date NOT NULL, " + 
                         "CONSTRAINT workers_pkey PRIMARY KEY(id_worker), " +
-                        "CONSTRAINT workers_date_of_brth_key UNIQUE(date_of_brth), " +
                         "CONSTRAINT workers_id_worker_key UNIQUE(id_worker) " +
                     ") " +
                     "TABLESPACE pg_default; " +
@@ -614,9 +739,9 @@ namespace ServiceCenterAccounting
                 Command.Connection = Connection;
                 Command.CommandType = CommandType.Text;
                 Command.CommandText = $"INSERT INTO stages_of_execution (name_stage_of_execution) VALUES " +
-                    $"('Принятый заказы'), " +
-                    $"('Заказы в работе'), " +
-                    $"('Завершенные заказы'); " +
+                    $"('Принятый заказ'), " +
+                    $"('Заказ в работе'), " +
+                    $"('Завершенный заказ'); " +
                     $"INSERT INTO types_of_device (type_of_device, name_table) VALUES " +
                     $"('Смартфоны', 'smartphones'), " +
                     $"('Стационарные компьютеры', 'stationary_computers'), " +
@@ -635,43 +760,49 @@ namespace ServiceCenterAccounting
             }
         }
 
-        private void tb_Name_Service_Leave(object sender, EventArgs e)
+        private void tb_Password_Repeat_Leave(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(tb_Name_Service.Text) || DigitsOnly(tb_Name_Service.Text) ||
-                tb_Name_Service.Text.StartsWith("-") | tb_Name_Service.Text.StartsWith("`") | tb_Name_Service.Text.StartsWith("'")
-                || tb_Name_Service.Text.StartsWith(" ") || tb_Name_Service.Text.StartsWith(".") || tb_Name_Service.Text.StartsWith(",")
-                || tb_Name_Service.Text.StartsWith("/"))
+            if (String.IsNullOrWhiteSpace(tb_Password_Repeat.Text) || tb_Password_Repeat.Text.StartsWith(" ") || !(tb_Password_Repeat.Text.Equals(tb_Password.Text)))
             {
                 l_Warning7.Visible = true;
-                is_have_name_type_service = false;
+                is_have_repeat_password = false;
             }
             else
             {
-                is_have_name_type_service = true;
+                is_have_repeat_password = true;
                 l_Warning7.Visible = false;
             }
         }
 
-        private void tb_Cost_Service_KeyPress(object sender, KeyPressEventArgs e)
+        private void Create_Operator(string password, string login)
         {
-            char number = e.KeyChar;
-            if (!Char.IsDigit(number) && number != 8 && number != 46)
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
+            string name_database = SCA_Key.GetValue("name_database").ToString();
+            try
             {
-                e.Handled = true;
+                Connection.Open();
+                NpgsqlCommand Command = new NpgsqlCommand();
+                Command.Connection = Connection;
+                Command.CommandType = CommandType.Text;
+                Command.CommandText = $"CREATE ROLE \"{login}\" CREATEDB CREATEROLE LOGIN PASSWORD '{password}'; " +
+                    $"GRANT Connect ON DATABASE \"{name_database}\" TO \"{login}\"; " +
+                    $"GRANT Create, Usage ON SCHEMA \"public\" TO \"{login}\"; " +
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"clients\" TO \"{login}\"; " +
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"components_or_other_devices\" TO \"{login}\"; " +
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"laptops_and_monoblocks\" TO \"{login}\"; " +
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"orders\" TO \"{login}\"; " + 
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"orders_and_devices\" TO \"{login}\"; " + 
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"smartphones\" TO \"{login}\"; " +
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"stationary_computers\" TO \"{login}\";";
+                NpgsqlDataReader DataReader = Command.ExecuteReader();
+                Command.Dispose();
+                Connection.Close();
             }
-        }
-
-        private void tb_Cost_Service_Leave(object sender, EventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(tb_Cost_Service.Text) || tb_Cost_Service.Text.StartsWith(".") || Single.Parse(tb_Cost_Service.Text.Replace('.', ',')) > 10000 || Single.Parse(tb_Cost_Service.Text.Replace('.', ',')) < 50)
+            catch (Exception e)
             {
-                l_Warning8.Visible = true;
-                is_have_cosst_service = false;
-            }
-            else
-            {
-                is_have_cosst_service = true;
-                l_Warning8.Visible = false;
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection.Close();
             }
         }
     }
