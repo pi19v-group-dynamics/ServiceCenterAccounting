@@ -151,6 +151,7 @@ namespace ServiceCenterAccounting
                     return;
                 }
 
+                Close();
             }
         }
     }
