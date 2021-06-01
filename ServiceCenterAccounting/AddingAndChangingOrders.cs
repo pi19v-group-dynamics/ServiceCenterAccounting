@@ -19,6 +19,7 @@ namespace ServiceCenterAccounting
         {
             InitializeComponent();
             Filling();
+            Text = "Добавление заказа";
         }
 
         private void Filling()
@@ -33,6 +34,10 @@ namespace ServiceCenterAccounting
                 "cost_of_service || ' руб.' || ')' as name from types_of_service ");
             servicesList.DisplayMember = "name";
             servicesList.ValueMember = "id";
+
+            typeList.DataSource = Connect.Select("select id_type_of_device as id, type_of_device as name from types_of_device");
+            typeList.DisplayMember = "name";
+            typeList.ValueMember = "id";
 
             dateTimePicker.MaxDate = Convert.ToDateTime(Connect.GetString("select CURRENT_DATE"));
         }
@@ -53,7 +58,7 @@ namespace ServiceCenterAccounting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AddingDevice f = new AddingDevice((Devices)typeList.SelectedIndex);
+            AddingDevice f = new AddingDevice((Devices)typeList.SelectedValue);
             f.ShowDialog();
             device = f.device;
             deviceField.Text = $"{device.Text2} ({device.Text1})";
@@ -65,6 +70,8 @@ namespace ServiceCenterAccounting
             string client_id = null;
             string device_id = null;
             string sql = null;
+            string order_id = null;
+            string completed = null;
 
             if(client == null)
             {
@@ -127,6 +134,22 @@ namespace ServiceCenterAccounting
                     return;
                 }
 
+                order_id = Connect.GetString("insert into orders (id_client, id_worker, date_of_adoption, customer_comment, id_stage_of_execution) " +
+                    $"values ({client_id}, {workersList.SelectedValue}, '{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', 1) " +
+                    "RETURNING id");
+                if (order_id == null)
+                {
+                    MessageBox.Show("Не удалось добавить заказ!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                completed = Connect.GetString("insert into orders_and_devices (id_order, id_type_of_device, id_specific_device) " +
+                    $"values ({order_id}, {(int)device.Type}, {device_id})");
+                if (completed == null)
+                {
+                    MessageBox.Show("Не удалось добавить заказ!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
             }
         }

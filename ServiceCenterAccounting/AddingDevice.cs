@@ -13,10 +13,10 @@ namespace ServiceCenterAccounting
 
     public enum Devices
     {
-        Computer = 0,
+        Computer = 2,
         Phone = 1,
-        Laptop = 2,
-        Other = 3
+        Laptop = 3,
+        Other = 4
     }
 
     public partial class AddingDevice : Form

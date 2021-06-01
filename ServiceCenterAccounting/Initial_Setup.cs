@@ -343,7 +343,7 @@ namespace ServiceCenterAccounting
         private void CreateDatabase(string password, string login)
         {
             string log = "postgres";
-            string pass = "1234";
+            string pass = "ASUS2002";
             string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
             NpgsqlConnection Connection = new NpgsqlConnection(ConnectionString);
             try
@@ -367,7 +367,7 @@ namespace ServiceCenterAccounting
                 Command.CommandType = CommandType.Text;
                 Command.CommandText = $"CREATE DATABASE \"{name_database}\" " + 
                     "WITH " +
-                    "OWNER = \"Admin_Glodbal\" " + 
+                    "OWNER = \"postgres\" " + 
                     "ENCODING = 'UTF8' " +
                     "LC_COLLATE = 'Russian_Russia.1251' " +
                     "LC_CTYPE = 'Russian_Russia.1251' " +
@@ -673,6 +673,11 @@ namespace ServiceCenterAccounting
                 is_have_cosst_service = true;
                 l_Warning8.Visible = false;
             }
+        }
+
+        private void Initial_Setup_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

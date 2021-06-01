@@ -48,6 +48,8 @@ namespace ServiceCenterAccounting
             this.deviceWarning = new System.Windows.Forms.Label();
             this.workerWarning = new System.Windows.Forms.Label();
             this.servicesWarning = new System.Windows.Forms.Label();
+            this.commentField = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clientField
@@ -147,7 +149,7 @@ namespace ServiceCenterAccounting
             // addBut
             // 
             this.addBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addBut.Location = new System.Drawing.Point(496, 323);
+            this.addBut.Location = new System.Drawing.Point(496, 430);
             this.addBut.Name = "addBut";
             this.addBut.Size = new System.Drawing.Size(110, 34);
             this.addBut.TabIndex = 27;
@@ -158,7 +160,7 @@ namespace ServiceCenterAccounting
             // cancleBut
             // 
             this.cancleBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cancleBut.Location = new System.Drawing.Point(12, 323);
+            this.cancleBut.Location = new System.Drawing.Point(12, 430);
             this.cancleBut.Name = "cancleBut";
             this.cancleBut.Size = new System.Drawing.Size(110, 34);
             this.cancleBut.TabIndex = 26;
@@ -239,11 +241,31 @@ namespace ServiceCenterAccounting
             this.servicesWarning.Text = "!!!";
             this.servicesWarning.Visible = false;
             // 
+            // commentField
+            // 
+            this.commentField.Location = new System.Drawing.Point(85, 288);
+            this.commentField.Multiline = true;
+            this.commentField.Name = "commentField";
+            this.commentField.Size = new System.Drawing.Size(428, 125);
+            this.commentField.TabIndex = 48;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(84, 265);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(203, 20);
+            this.label4.TabIndex = 49;
+            this.label4.Text = "Комментарий клиента:";
+            // 
             // AddingAndChangingOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 366);
+            this.ClientSize = new System.Drawing.Size(618, 476);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.commentField);
             this.Controls.Add(this.servicesWarning);
             this.Controls.Add(this.workerWarning);
             this.Controls.Add(this.deviceWarning);
@@ -292,5 +314,7 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label deviceWarning;
         private System.Windows.Forms.Label workerWarning;
         private System.Windows.Forms.Label servicesWarning;
+        private System.Windows.Forms.TextBox commentField;
+        private System.Windows.Forms.Label label4;
     }
 }
