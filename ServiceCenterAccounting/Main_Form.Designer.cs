@@ -30,20 +30,20 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_Accepted_Orders = new System.Windows.Forms.TabPage();
-            this.dg_ = new System.Windows.Forms.DataGridView();
+            this.dg_Orders_Viev = new System.Windows.Forms.DataGridView();
             this.tp_Orders_in_Progress = new System.Windows.Forms.TabPage();
             this.dg_Orders_in_Progress = new System.Windows.Forms.DataGridView();
             this.tp_Completed_Orders = new System.Windows.Forms.TabPage();
             this.dg_Completed_Orders = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_Settings = new System.Windows.Forms.Button();
-            this.bnt_Reports = new System.Windows.Forms.Button();
+            this.bnt_Report = new System.Windows.Forms.Button();
             this.btn_Change_of_Status = new System.Windows.Forms.Button();
             this.btn_ = new System.Windows.Forms.Button();
             this.btn_Add_Order = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Accepted_Orders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dg_)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Orders_Viev)).BeginInit();
             this.tp_Orders_in_Progress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg_Orders_in_Progress)).BeginInit();
             this.tp_Completed_Orders.SuspendLayout();
@@ -64,7 +64,7 @@
             // 
             // tp_Accepted_Orders
             // 
-            this.tp_Accepted_Orders.Controls.Add(this.dg_);
+            this.tp_Accepted_Orders.Controls.Add(this.dg_Orders_Viev);
             this.tp_Accepted_Orders.Location = new System.Drawing.Point(4, 22);
             this.tp_Accepted_Orders.Name = "tp_Accepted_Orders";
             this.tp_Accepted_Orders.Size = new System.Drawing.Size(604, 268);
@@ -72,16 +72,16 @@
             this.tp_Accepted_Orders.Text = "Принятые заказы";
             this.tp_Accepted_Orders.UseVisualStyleBackColor = true;
             // 
-            // dg_
+            // dg_Orders_Viev
             // 
-            this.dg_.AllowUserToAddRows = false;
-            this.dg_.AllowUserToDeleteRows = false;
-            this.dg_.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg_.Location = new System.Drawing.Point(5, 3);
-            this.dg_.Name = "dg_";
-            this.dg_.ReadOnly = true;
-            this.dg_.Size = new System.Drawing.Size(596, 262);
-            this.dg_.TabIndex = 0;
+            this.dg_Orders_Viev.AllowUserToAddRows = false;
+            this.dg_Orders_Viev.AllowUserToDeleteRows = false;
+            this.dg_Orders_Viev.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dg_Orders_Viev.Location = new System.Drawing.Point(5, 3);
+            this.dg_Orders_Viev.Name = "dg_Orders_Viev";
+            this.dg_Orders_Viev.ReadOnly = true;
+            this.dg_Orders_Viev.Size = new System.Drawing.Size(596, 262);
+            this.dg_Orders_Viev.TabIndex = 0;
             // 
             // tp_Orders_in_Progress
             // 
@@ -129,7 +129,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btn_Settings);
-            this.groupBox2.Controls.Add(this.bnt_Reports);
+            this.groupBox2.Controls.Add(this.bnt_Report);
             this.groupBox2.Controls.Add(this.btn_Change_of_Status);
             this.groupBox2.Controls.Add(this.btn_);
             this.groupBox2.Controls.Add(this.btn_Add_Order);
@@ -148,15 +148,15 @@
             this.btn_Settings.Text = "Настройки";
             this.btn_Settings.UseVisualStyleBackColor = true;
             // 
-            // bnt_Reports
+            // bnt_Report
             // 
-            this.bnt_Reports.Location = new System.Drawing.Point(4, 90);
-            this.bnt_Reports.Name = "bnt_Reports";
-            this.bnt_Reports.Size = new System.Drawing.Size(138, 23);
-            this.bnt_Reports.TabIndex = 3;
-            this.bnt_Reports.Text = "Создание отчетов";
-            this.bnt_Reports.UseVisualStyleBackColor = true;
-            this.bnt_Reports.Click += new System.EventHandler(this.bnt_Reports_Click);
+            this.bnt_Report.Location = new System.Drawing.Point(4, 90);
+            this.bnt_Report.Name = "bnt_Report";
+            this.bnt_Report.Size = new System.Drawing.Size(138, 23);
+            this.bnt_Report.TabIndex = 3;
+            this.bnt_Report.Text = "Создание отчета";
+            this.bnt_Report.UseVisualStyleBackColor = true;
+            this.bnt_Report.Click += new System.EventHandler(this.bnt_Reports_Click);
             // 
             // btn_Change_of_Status
             // 
@@ -198,7 +198,7 @@
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tp_Accepted_Orders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dg_)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dg_Orders_Viev)).EndInit();
             this.tp_Orders_in_Progress.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_Orders_in_Progress)).EndInit();
             this.tp_Completed_Orders.ResumeLayout(false);
@@ -214,13 +214,13 @@
         private System.Windows.Forms.TabPage tp_Orders_in_Progress;
         private System.Windows.Forms.TabPage tp_Completed_Orders;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button bnt_Reports;
+        private System.Windows.Forms.Button bnt_Report;
         private System.Windows.Forms.Button btn_Change_of_Status;
         private System.Windows.Forms.Button btn_;
         private System.Windows.Forms.Button btn_Add_Order;
         private System.Windows.Forms.Button btn_Settings;
         private System.Windows.Forms.TabPage tp_Accepted_Orders;
-        private System.Windows.Forms.DataGridView dg_;
+        private System.Windows.Forms.DataGridView dg_Orders_Viev;
         private System.Windows.Forms.DataGridView dg_Orders_in_Progress;
         private System.Windows.Forms.DataGridView dg_Completed_Orders;
     }

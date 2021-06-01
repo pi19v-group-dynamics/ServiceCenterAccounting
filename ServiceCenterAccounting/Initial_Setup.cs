@@ -1,14 +1,8 @@
 ﻿using Microsoft.Win32;
 using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServiceCenterAccounting
@@ -345,7 +339,7 @@ namespace ServiceCenterAccounting
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void tb_Addres_Service_KeyPress(object sender, KeyPressEventArgs e)
@@ -470,7 +464,7 @@ namespace ServiceCenterAccounting
         private void CreateDatabase(string password, string login)
         {
             string log = "postgres";
-            string pass = "ASUS2002";
+            string pass = "1234";
             string ConnectionString = $"Server=127.0.0.1;Port=5432;User Id={log};Password={pass};Timeout=180;Command Timeout=180";
             Connection = new NpgsqlConnection(ConnectionString);
             try
@@ -515,8 +509,7 @@ namespace ServiceCenterAccounting
                 Command.Connection = Connection;
                 Command.CommandType = CommandType.Text;
                 Command.CommandText = $"CREATE ROLE \"{login}\" CREATEDB CREATEROLE LOGIN PASSWORD '{password}'; " +
-                    $"GRANT Connect, Create ON DATABASE \"{name_database}\" TO \"{login}\";" +
-                    $"GRANT Create, Usage ON SCHEMA \"public\" TO \"{login}\"; ";
+                    $"GRANT Connect, Create ON DATABASE \"{name_database}\" TO \"{login}\";";
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();
@@ -804,11 +797,6 @@ namespace ServiceCenterAccounting
                 MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Connection.Close();
             }
-        }
-
-        private void Initial_Setup_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
