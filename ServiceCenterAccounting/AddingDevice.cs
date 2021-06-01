@@ -13,15 +13,15 @@ namespace ServiceCenterAccounting
 
     public enum Devices
     {
-        Computer,
-        Phone,
-        Laptop,
-        Other
+        Computer = 0,
+        Phone = 1,
+        Laptop = 2,
+        Other = 3
     }
 
     public partial class AddingDevice : Form
     {
-        Device device;
+        public Device device;
         Devices type;
 
         public AddingDevice(Devices type)
@@ -51,7 +51,7 @@ namespace ServiceCenterAccounting
             if (type == Devices.Computer)
             {
                 label1.Visible = true;
-                label1.Text = "Модель:";
+                label1.Text = "Модель материнской платы:";
                 textBox2.Visible = true;
                 label2.Visible = true;
                 label2.Text = "Процессор:";
@@ -187,6 +187,7 @@ namespace ServiceCenterAccounting
                 if (type == Devices.Computer)
                 {
                     device = new Device();
+                    device.Type = Devices.Computer;
                     device.Text1 = label1.Text;
                     device.Text2 = label2.Text;
                     device.Text3 = label3.Text;
@@ -200,12 +201,14 @@ namespace ServiceCenterAccounting
                 }
                 else if (type == Devices.Phone)
                 {
+                    device.Type = Devices.Phone;
                     device.Text1 = textBox1.Text;
                     device.Text2 = textBox3.Text;
                     device.Text3 = textBox5.Text;
                 }
                 else if (type == Devices.Laptop) 
                 {
+                    device.Type = Devices.Laptop;
                     device.Text1 = textBox1.Text;
                     device.Text2 = textBox2.Text;
                     device.Text3 = textBox3.Text;
@@ -216,6 +219,7 @@ namespace ServiceCenterAccounting
                 }
                 else
                 {
+                    device.Type = Devices.Other;
                     device.Text1 = textBox1.Text;
                     device.Text2 = textBox2.Text;
                     device.Num1 =  (int)comboBox1.SelectedValue;
@@ -286,6 +290,7 @@ namespace ServiceCenterAccounting
 
     public class Device
     {
+        public Devices Type { get; set; }
         public string Text1 { get; set; }
         public string Text2 { get; set; }
         public string Text3 { get; set; }
