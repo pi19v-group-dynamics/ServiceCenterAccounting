@@ -34,7 +34,7 @@ namespace ServiceCenterAccounting
             this.workersList = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.typeList = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.servicesList = new System.Windows.Forms.ComboBox();
@@ -43,6 +43,11 @@ namespace ServiceCenterAccounting
             this.cancleBut = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dateLable = new System.Windows.Forms.Label();
+            this.deviceField = new System.Windows.Forms.TextBox();
+            this.clientWarning = new System.Windows.Forms.Label();
+            this.deviceWarning = new System.Windows.Forms.Label();
+            this.workerWarning = new System.Windows.Forms.Label();
+            this.servicesWarning = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clientField
@@ -92,19 +97,19 @@ namespace ServiceCenterAccounting
             this.label2.TabIndex = 4;
             this.label2.Text = "Работник:";
             // 
-            // comboBox2
+            // typeList
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(85, 143);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(163, 24);
-            this.comboBox2.TabIndex = 5;
+            this.typeList.FormattingEnabled = true;
+            this.typeList.Location = new System.Drawing.Point(85, 127);
+            this.typeList.Name = "typeList";
+            this.typeList.Size = new System.Drawing.Size(163, 24);
+            this.typeList.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(82, 111);
+            this.label3.Location = new System.Drawing.Point(82, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(145, 20);
             this.label3.TabIndex = 6;
@@ -119,6 +124,7 @@ namespace ServiceCenterAccounting
             this.button2.TabIndex = 7;
             this.button2.Text = "+";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // servicesList
             // 
@@ -147,6 +153,7 @@ namespace ServiceCenterAccounting
             this.addBut.TabIndex = 27;
             this.addBut.Text = "Сохранить";
             this.addBut.UseVisualStyleBackColor = true;
+            this.addBut.Click += new System.EventHandler(this.addBut_Click);
             // 
             // cancleBut
             // 
@@ -176,11 +183,72 @@ namespace ServiceCenterAccounting
             this.dateLable.TabIndex = 13;
             this.dateLable.Text = "Дата принятия:";
             // 
+            // deviceField
+            // 
+            this.deviceField.Location = new System.Drawing.Point(85, 157);
+            this.deviceField.Name = "deviceField";
+            this.deviceField.ReadOnly = true;
+            this.deviceField.Size = new System.Drawing.Size(164, 22);
+            this.deviceField.TabIndex = 28;
+            // 
+            // clientWarning
+            // 
+            this.clientWarning.AutoSize = true;
+            this.clientWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clientWarning.ForeColor = System.Drawing.Color.Maroon;
+            this.clientWarning.Location = new System.Drawing.Point(57, 52);
+            this.clientWarning.Name = "clientWarning";
+            this.clientWarning.Size = new System.Drawing.Size(24, 20);
+            this.clientWarning.TabIndex = 44;
+            this.clientWarning.Text = "!!!";
+            this.clientWarning.Visible = false;
+            // 
+            // deviceWarning
+            // 
+            this.deviceWarning.AutoSize = true;
+            this.deviceWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deviceWarning.ForeColor = System.Drawing.Color.Maroon;
+            this.deviceWarning.Location = new System.Drawing.Point(55, 141);
+            this.deviceWarning.Name = "deviceWarning";
+            this.deviceWarning.Size = new System.Drawing.Size(24, 20);
+            this.deviceWarning.TabIndex = 45;
+            this.deviceWarning.Text = "!!!";
+            this.deviceWarning.Visible = false;
+            // 
+            // workerWarning
+            // 
+            this.workerWarning.AutoSize = true;
+            this.workerWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.workerWarning.ForeColor = System.Drawing.Color.Maroon;
+            this.workerWarning.Location = new System.Drawing.Point(520, 52);
+            this.workerWarning.Name = "workerWarning";
+            this.workerWarning.Size = new System.Drawing.Size(24, 20);
+            this.workerWarning.TabIndex = 46;
+            this.workerWarning.Text = "!!!";
+            this.workerWarning.Visible = false;
+            // 
+            // servicesWarning
+            // 
+            this.servicesWarning.AutoSize = true;
+            this.servicesWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.servicesWarning.ForeColor = System.Drawing.Color.Maroon;
+            this.servicesWarning.Location = new System.Drawing.Point(520, 150);
+            this.servicesWarning.Name = "servicesWarning";
+            this.servicesWarning.Size = new System.Drawing.Size(24, 20);
+            this.servicesWarning.TabIndex = 47;
+            this.servicesWarning.Text = "!!!";
+            this.servicesWarning.Visible = false;
+            // 
             // AddingAndChangingOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 366);
+            this.Controls.Add(this.servicesWarning);
+            this.Controls.Add(this.workerWarning);
+            this.Controls.Add(this.deviceWarning);
+            this.Controls.Add(this.clientWarning);
+            this.Controls.Add(this.deviceField);
             this.Controls.Add(this.addBut);
             this.Controls.Add(this.cancleBut);
             this.Controls.Add(this.label7);
@@ -189,7 +257,7 @@ namespace ServiceCenterAccounting
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.typeList);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.workersList);
@@ -210,7 +278,7 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.ComboBox workersList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox typeList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox servicesList;
@@ -219,5 +287,10 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Button cancleBut;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label dateLable;
+        private System.Windows.Forms.TextBox deviceField;
+        private System.Windows.Forms.Label clientWarning;
+        private System.Windows.Forms.Label deviceWarning;
+        private System.Windows.Forms.Label workerWarning;
+        private System.Windows.Forms.Label servicesWarning;
     }
 }
