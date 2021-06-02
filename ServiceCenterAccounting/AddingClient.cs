@@ -59,7 +59,7 @@ namespace ServiceCenterAccounting
                 seriesWarning.Visible = true;
                 MessageBox.Show($"Поле 'Серия паспорта' должно содержать {seriesField.MaxLength} цифр!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (numberField.Text == "" || numberWarning.Text.Length < numberField.MaxLength)
+            else if (numberField.Text == "" || numberField.Text.Length < numberField.MaxLength)
             {
                 numberWarning.Visible = true;
                 MessageBox.Show($"Поле 'Тел. номер' должно содержать {numberField.MaxLength} цифр", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);

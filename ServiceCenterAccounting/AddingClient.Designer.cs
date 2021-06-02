@@ -52,17 +52,19 @@ namespace ServiceCenterAccounting
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(62, 23);
+            this.label1.Location = new System.Drawing.Point(46, 19);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 20);
+            this.label1.Size = new System.Drawing.Size(74, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "Фамилия:";
             // 
             // lastNameField
             // 
-            this.lastNameField.Location = new System.Drawing.Point(65, 52);
+            this.lastNameField.Location = new System.Drawing.Point(49, 42);
+            this.lastNameField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lastNameField.Name = "lastNameField";
-            this.lastNameField.Size = new System.Drawing.Size(134, 22);
+            this.lastNameField.Size = new System.Drawing.Size(102, 20);
             this.lastNameField.TabIndex = 4;
             this.lastNameField.TextChanged += new System.EventHandler(this.lastNameField_TextChanged);
             // 
@@ -70,17 +72,19 @@ namespace ServiceCenterAccounting
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(281, 29);
+            this.label2.Location = new System.Drawing.Point(211, 24);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 20);
+            this.label2.Size = new System.Drawing.Size(39, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Имя:";
             // 
             // firstNameField
             // 
-            this.firstNameField.Location = new System.Drawing.Point(283, 52);
+            this.firstNameField.Location = new System.Drawing.Point(212, 42);
+            this.firstNameField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.firstNameField.Name = "firstNameField";
-            this.firstNameField.Size = new System.Drawing.Size(134, 22);
+            this.firstNameField.Size = new System.Drawing.Size(102, 20);
             this.firstNameField.TabIndex = 6;
             this.firstNameField.TextChanged += new System.EventHandler(this.firstNameField_TextChanged);
             // 
@@ -88,17 +92,19 @@ namespace ServiceCenterAccounting
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(170, 111);
+            this.label3.Location = new System.Drawing.Point(128, 90);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 20);
+            this.label3.Size = new System.Drawing.Size(75, 17);
             this.label3.TabIndex = 9;
             this.label3.Text = "Отчество:";
             // 
             // middleNameField
             // 
-            this.middleNameField.Location = new System.Drawing.Point(173, 140);
+            this.middleNameField.Location = new System.Drawing.Point(130, 114);
+            this.middleNameField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.middleNameField.Name = "middleNameField";
-            this.middleNameField.Size = new System.Drawing.Size(134, 22);
+            this.middleNameField.Size = new System.Drawing.Size(102, 20);
             this.middleNameField.TabIndex = 8;
             this.middleNameField.TextChanged += new System.EventHandler(this.middleNameField_TextChanged);
             // 
@@ -106,18 +112,20 @@ namespace ServiceCenterAccounting
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(169, 184);
+            this.label4.Location = new System.Drawing.Point(127, 150);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 20);
+            this.label4.Size = new System.Drawing.Size(119, 17);
             this.label4.TabIndex = 11;
             this.label4.Text = "Серия паспорта:";
             // 
             // seriesField
             // 
-            this.seriesField.Location = new System.Drawing.Point(172, 213);
+            this.seriesField.Location = new System.Drawing.Point(129, 173);
+            this.seriesField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.seriesField.MaxLength = 6;
             this.seriesField.Name = "seriesField";
-            this.seriesField.Size = new System.Drawing.Size(135, 22);
+            this.seriesField.Size = new System.Drawing.Size(102, 20);
             this.seriesField.TabIndex = 10;
             this.seriesField.TextChanged += new System.EventHandler(this.seriesField_TextChanged);
             // 
@@ -125,27 +133,30 @@ namespace ServiceCenterAccounting
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(169, 265);
+            this.label5.Location = new System.Drawing.Point(127, 215);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 20);
+            this.label5.Size = new System.Drawing.Size(86, 17);
             this.label5.TabIndex = 13;
             this.label5.Text = "Тел. номер:";
             // 
             // numberField
             // 
-            this.numberField.Location = new System.Drawing.Point(172, 293);
+            this.numberField.Location = new System.Drawing.Point(129, 238);
+            this.numberField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numberField.MaxLength = 10;
             this.numberField.Name = "numberField";
-            this.numberField.Size = new System.Drawing.Size(135, 22);
+            this.numberField.Size = new System.Drawing.Size(102, 20);
             this.numberField.TabIndex = 12;
             this.numberField.TextChanged += new System.EventHandler(this.numberField_TextChanged);
             // 
             // cancleBut
             // 
             this.cancleBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cancleBut.Location = new System.Drawing.Point(89, 389);
+            this.cancleBut.Location = new System.Drawing.Point(67, 316);
+            this.cancleBut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cancleBut.Name = "cancleBut";
-            this.cancleBut.Size = new System.Drawing.Size(110, 34);
+            this.cancleBut.Size = new System.Drawing.Size(82, 28);
             this.cancleBut.TabIndex = 14;
             this.cancleBut.Text = "Отмена";
             this.cancleBut.UseVisualStyleBackColor = true;
@@ -154,9 +165,10 @@ namespace ServiceCenterAccounting
             // addBut
             // 
             this.addBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addBut.Location = new System.Drawing.Point(285, 389);
+            this.addBut.Location = new System.Drawing.Point(214, 316);
+            this.addBut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addBut.Name = "addBut";
-            this.addBut.Size = new System.Drawing.Size(110, 34);
+            this.addBut.Size = new System.Drawing.Size(89, 28);
             this.addBut.TabIndex = 15;
             this.addBut.Text = "Сохранить";
             this.addBut.UseVisualStyleBackColor = true;
@@ -167,9 +179,10 @@ namespace ServiceCenterAccounting
             this.middleNameWarning.AutoSize = true;
             this.middleNameWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.middleNameWarning.ForeColor = System.Drawing.Color.Maroon;
-            this.middleNameWarning.Location = new System.Drawing.Point(314, 140);
+            this.middleNameWarning.Location = new System.Drawing.Point(236, 114);
+            this.middleNameWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.middleNameWarning.Name = "middleNameWarning";
-            this.middleNameWarning.Size = new System.Drawing.Size(24, 20);
+            this.middleNameWarning.Size = new System.Drawing.Size(17, 17);
             this.middleNameWarning.TabIndex = 16;
             this.middleNameWarning.Text = "!!!";
             // 
@@ -178,9 +191,10 @@ namespace ServiceCenterAccounting
             this.seriesWarning.AutoSize = true;
             this.seriesWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.seriesWarning.ForeColor = System.Drawing.Color.Maroon;
-            this.seriesWarning.Location = new System.Drawing.Point(314, 213);
+            this.seriesWarning.Location = new System.Drawing.Point(236, 173);
+            this.seriesWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.seriesWarning.Name = "seriesWarning";
-            this.seriesWarning.Size = new System.Drawing.Size(24, 20);
+            this.seriesWarning.Size = new System.Drawing.Size(17, 17);
             this.seriesWarning.TabIndex = 17;
             this.seriesWarning.Text = "!!!";
             // 
@@ -189,9 +203,10 @@ namespace ServiceCenterAccounting
             this.numberWarning.AutoSize = true;
             this.numberWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numberWarning.ForeColor = System.Drawing.Color.Maroon;
-            this.numberWarning.Location = new System.Drawing.Point(314, 293);
+            this.numberWarning.Location = new System.Drawing.Point(236, 238);
+            this.numberWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.numberWarning.Name = "numberWarning";
-            this.numberWarning.Size = new System.Drawing.Size(24, 20);
+            this.numberWarning.Size = new System.Drawing.Size(17, 17);
             this.numberWarning.TabIndex = 18;
             this.numberWarning.Text = "!!!";
             // 
@@ -200,9 +215,10 @@ namespace ServiceCenterAccounting
             this.lastNameWarning.AutoSize = true;
             this.lastNameWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lastNameWarning.ForeColor = System.Drawing.Color.Maroon;
-            this.lastNameWarning.Location = new System.Drawing.Point(205, 54);
+            this.lastNameWarning.Location = new System.Drawing.Point(154, 44);
+            this.lastNameWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lastNameWarning.Name = "lastNameWarning";
-            this.lastNameWarning.Size = new System.Drawing.Size(24, 20);
+            this.lastNameWarning.Size = new System.Drawing.Size(17, 17);
             this.lastNameWarning.TabIndex = 19;
             this.lastNameWarning.Text = "!!!";
             // 
@@ -211,17 +227,18 @@ namespace ServiceCenterAccounting
             this.firstNameWarning.AutoSize = true;
             this.firstNameWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.firstNameWarning.ForeColor = System.Drawing.Color.Maroon;
-            this.firstNameWarning.Location = new System.Drawing.Point(423, 54);
+            this.firstNameWarning.Location = new System.Drawing.Point(317, 44);
+            this.firstNameWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.firstNameWarning.Name = "firstNameWarning";
-            this.firstNameWarning.Size = new System.Drawing.Size(24, 20);
+            this.firstNameWarning.Size = new System.Drawing.Size(17, 17);
             this.firstNameWarning.TabIndex = 20;
             this.firstNameWarning.Text = "!!!";
             // 
             // AddingClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.ClientSize = new System.Drawing.Size(362, 368);
             this.Controls.Add(this.firstNameWarning);
             this.Controls.Add(this.lastNameWarning);
             this.Controls.Add(this.numberWarning);
@@ -239,6 +256,7 @@ namespace ServiceCenterAccounting
             this.Controls.Add(this.firstNameField);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lastNameField);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddingClient";
             this.Text = "AddingClient";
             this.Load += new System.EventHandler(this.AddingClient_Load);

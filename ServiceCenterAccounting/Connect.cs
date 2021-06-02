@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
 using Npgsql;
 
 namespace ServiceCenterAccounting
@@ -26,8 +28,9 @@ namespace ServiceCenterAccounting
                 dt.Load(cmd.ExecuteReader());
                 return dt;
             }
-            catch
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             finally

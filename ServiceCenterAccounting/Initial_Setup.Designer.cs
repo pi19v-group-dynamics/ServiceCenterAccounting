@@ -73,7 +73,7 @@ namespace ServiceCenterAccounting
             // btn_Further
             // 
             this.btn_Further.Location = new System.Drawing.Point(327, 265);
-            this.btn_Further.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Further.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Further.Name = "btn_Further";
             this.btn_Further.Size = new System.Drawing.Size(75, 23);
             this.btn_Further.TabIndex = 1;
@@ -84,7 +84,7 @@ namespace ServiceCenterAccounting
             // btn_Cancel
             // 
             this.btn_Cancel.Location = new System.Drawing.Point(406, 265);
-            this.btn_Cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Cancel.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancel.TabIndex = 2;
@@ -96,7 +96,7 @@ namespace ServiceCenterAccounting
             // 
             this.btn_Back.Enabled = false;
             this.btn_Back.Location = new System.Drawing.Point(248, 265);
-            this.btn_Back.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Back.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Back.Name = "btn_Back";
             this.btn_Back.Size = new System.Drawing.Size(75, 23);
             this.btn_Back.TabIndex = 3;
@@ -225,7 +225,7 @@ namespace ServiceCenterAccounting
             // tb_Login
             // 
             this.tb_Login.Location = new System.Drawing.Point(163, 168);
-            this.tb_Login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Login.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Login.Name = "tb_Login";
             this.tb_Login.Size = new System.Drawing.Size(187, 20);
             this.tb_Login.TabIndex = 15;
@@ -236,7 +236,7 @@ namespace ServiceCenterAccounting
             // tb_Password
             // 
             this.tb_Password.Location = new System.Drawing.Point(163, 204);
-            this.tb_Password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Password.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.Size = new System.Drawing.Size(187, 20);
             this.tb_Password.TabIndex = 16;
@@ -247,7 +247,7 @@ namespace ServiceCenterAccounting
             // tb_Name_Database
             // 
             this.tb_Name_Database.Location = new System.Drawing.Point(163, 130);
-            this.tb_Name_Database.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Name_Database.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Name_Database.Name = "tb_Name_Database";
             this.tb_Name_Database.Size = new System.Drawing.Size(187, 20);
             this.tb_Name_Database.TabIndex = 17;
@@ -361,7 +361,7 @@ namespace ServiceCenterAccounting
             // tb_Password_Repeat
             // 
             this.tb_Password_Repeat.Location = new System.Drawing.Point(163, 241);
-            this.tb_Password_Repeat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Password_Repeat.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Password_Repeat.Name = "tb_Password_Repeat";
             this.tb_Password_Repeat.Size = new System.Drawing.Size(187, 20);
             this.tb_Password_Repeat.TabIndex = 30;
