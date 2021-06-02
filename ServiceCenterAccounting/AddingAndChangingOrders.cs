@@ -24,11 +24,6 @@ namespace ServiceCenterAccounting
 
         private void Filling()
         {
-            workersList.DataSource = Connect.Select("select id_worker as id, " +
-                "last_name_worker || ' ' || substring(first_name_worker from 1 for 1) " +
-                "|| '.'|| substring(middle_name_worker from 1 for 1) || '.' as name from workers where employment = false");
-            workersList.DisplayMember = "name";
-            workersList.ValueMember = "id";
 
             servicesList.DataSource = Connect.Select("select id_type_of_service as id, name_type_of_service || ' (' || " +
                 "cost_of_service || ' руб.' || ')' as name from types_of_service ");
@@ -52,8 +47,11 @@ namespace ServiceCenterAccounting
             AddingClient f = new AddingClient();
             f.ShowDialog();
             client = f.GetClient();
-            clientField.Text = $"{client.LastName} {client.FirstName[0]}. {client.MiddleName[0]}.";
-            clientWarning.Visible = false;
+            if (client != null)
+            {
+                clientField.Text = $"{client.LastName} {client.FirstName[0]}. {client.MiddleName[0]}.";
+                clientWarning.Visible = false;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -61,8 +59,11 @@ namespace ServiceCenterAccounting
             AddingDevice f = new AddingDevice((Devices)typeList.SelectedValue);
             f.ShowDialog();
             device = f.device;
-            deviceField.Text = $"{device.Text2} ({device.Text1})";
-            deviceWarning.Visible = false;
+            if (device != null)
+            {
+                deviceField.Text = $"{device.Text2} ({device.Text1})";
+                deviceWarning.Visible = false;
+            }
         }
 
         private void addBut_Click(object sender, EventArgs e)
@@ -83,11 +84,6 @@ namespace ServiceCenterAccounting
                 deviceWarning.Visible = true;
                 MessageBox.Show("Сначала добавьте устройство!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(workersList.Items.Count == 0)
-            {
-                workerWarning.Visible = true;
-                MessageBox.Show("Нет свободных работников!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             else if(servicesList.Items.Count == 0)
             {
                 servicesWarning.Visible = true;
@@ -95,6 +91,7 @@ namespace ServiceCenterAccounting
             }
             else
             {
+
                 client_id = Connect.GetString("insert into clients (last_name_client, first_name_client, middle_name_client, passport_series, phone) " +
                     $"values('{client.LastName}', '{client.FirstName}', '{client.MiddleName}', '{client.Series}', '{client.Number}') RETURNING id_client");
                 if(client_id == null)
@@ -113,7 +110,7 @@ namespace ServiceCenterAccounting
                 }
                 else if (device.Type == Devices.Phone)
                 {
-                    sql = $"insert into smartphones (manufacturer, model, imei) VALUES ('{device.Text1}', '{device.Text2}', '{device.Text3}') RETURNS id_smartphone";
+                    sql = $"insert into smartphones (manufacturer, model, imei) VALUES ('{device.Text1}', '{device.Text2}', '{device.Text3}') RETURNING id_smartphone";
                 }
                 else if (device.Type == Devices.Laptop)
                 {
@@ -127,24 +124,25 @@ namespace ServiceCenterAccounting
                         $"VALUES ({device.Num1}, '{device.Text1}', '{device.Text2}') RETURNING id_component_or_other_devices";
                 }
 
-                device_id = Connect.GetString("sql");
+                device_id = Connect.GetString(sql);
                 if (device_id == null)
                 {
                     MessageBox.Show("Не удалось добавить девайс!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                order_id = Connect.GetString("insert into orders (id_client, id_worker, date_of_adoption, customer_comment, id_stage_of_execution) " +
-                    $"values ({client_id}, {workersList.SelectedValue}, '{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', 1) " +
-                    "RETURNING id");
+                order_id = Connect.GetString("insert into orders (id_client, date_of_adoption, customer_comment, id_stage_of_execution, id_type_of_service) " +
+                    $"values ({client_id}, '{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', 1, {servicesList.SelectedValue}) " +
+                    "RETURNING id_orders");
                 if (order_id == null)
                 {
-                    MessageBox.Show("Не удалось добавить заказ!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("1Не удалось добавить заказ!1", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 completed = Connect.GetString("insert into orders_and_devices (id_order, id_type_of_device, id_specific_device) " +
-                    $"values ({order_id}, {(int)device.Type}, {device_id})");
+                    $"values ({order_id}, {(int)device.Type}, {device_id}) " +
+                    $" RETURNING id_order_and_device");
                 if (completed == null)
                 {
                     MessageBox.Show("Не удалось добавить заказ!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -153,6 +151,11 @@ namespace ServiceCenterAccounting
 
                 Close();
             }
+        }
+
+        private void cancleBut_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

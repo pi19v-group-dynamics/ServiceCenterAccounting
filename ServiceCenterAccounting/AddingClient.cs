@@ -59,7 +59,7 @@ namespace ServiceCenterAccounting
                 seriesWarning.Visible = true;
                 MessageBox.Show($"Поле 'Серия паспорта' должно содержать {seriesField.MaxLength} цифр!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (numberField.Text == "" || numberWarning.Text.Length < numberField.MaxLength)
+            else if (numberField.Text == "" || numberField.Text.Length < numberField.MaxLength)
             {
                 numberWarning.Visible = true;
                 MessageBox.Show($"Поле 'Тел. номер' должно содержать {numberField.MaxLength} цифр", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -67,7 +67,7 @@ namespace ServiceCenterAccounting
 
             else
             {
-                client = new Client(lastNameField.Text, firstNameField.Text, middleNameField.Text, seriesField.Text, numberField.Text);
+                client = new Client(lastNameField.Text, firstNameField.Text, middleNameField.Text, seriesField.Text, (numLable.Text + numberField.Text));
                 Close();
             }
         }
@@ -100,6 +100,36 @@ namespace ServiceCenterAccounting
         private void cancleBut_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void numberField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar < 48 || e.KeyChar > 57)
+                e.Handled = true;
+        }
+
+        private void seriesField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar < 48 || e.KeyChar > 57)
+                e.Handled = true;
+        }
+
+        private void lastNameField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= 48 & e.KeyChar <= 57)
+                e.Handled = true;
+        }
+
+        private void firstNameField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= 48 & e.KeyChar <= 57)
+                e.Handled = true;
+        }
+
+        private void middleNameField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= 48 & e.KeyChar <= 57)
+                e.Handled = true;
         }
     }
 

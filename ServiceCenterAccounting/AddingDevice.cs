@@ -51,7 +51,7 @@ namespace ServiceCenterAccounting
             if (type == Devices.Computer)
             {
                 label1.Visible = true;
-                label1.Text = "Модель материнской платы:";
+                label1.Text = "Мат.плата:";
                 textBox2.Visible = true;
                 label2.Visible = true;
                 label2.Text = "Процессор:";
@@ -69,14 +69,16 @@ namespace ServiceCenterAccounting
                 label6.Text = "ОЗУ:";
                 numericUpDown1.Visible = true;
                 labelNum1.Visible = true;
-                labelNum1.Text = "Количество накопителей:";
+                labelNum1.Text = "Кол-во накопителей:";
                 numericUpDown2.Visible = true;
                 labelNum2.Visible = true;
-                labelNum2.Text = "Суммарный объм накопителей:";
+                labelNum2.Text = "Общ.объм памяти:";
                 numericUpDown3.Visible = true;
                 labelNum3.Visible = true;
                 labelNum3.Text = "Объём ОЗУ:";
                 text.Visible = true;
+                labelText.Visible = true;
+                labelText.Text = "Доп.устройства:";
             }
             else if(type == Devices.Phone)
             {
@@ -99,14 +101,14 @@ namespace ServiceCenterAccounting
                 label5.Visible = true;
                 label5.Text = "ОЗУ:";
                 numericUpDown1.Visible = true;
-                labelNum2.Visible = true;
-                labelNum2.Text = "Объём ОЗУ:";
+                labelNum1.Visible = true;
+                labelNum1.Text = "Объём ОЗУ:";
                 numericUpDown2.Visible = true;
                 labelNum2.Visible = true;
-                labelNum2.Text = "Количество накопителей:";
+                labelNum2.Text = "Кол-во накопителей:";
                 numericUpDown3.Visible = true;
                 labelNum3.Visible = true;
-                labelNum3.Text = "Суммарный объём памяти накопителей:";
+                labelNum3.Text = "Общ.объём памяти:";
             }
             else
             {
@@ -184,16 +186,16 @@ namespace ServiceCenterAccounting
             }
             else 
             {
+                device = new Device();
                 if (type == Devices.Computer)
                 {
-                    device = new Device();
                     device.Type = Devices.Computer;
-                    device.Text1 = label1.Text;
-                    device.Text2 = label2.Text;
-                    device.Text3 = label3.Text;
-                    device.Text4 = label4.Text;
-                    device.Text5 = label5.Text;
-                    device.Text6 = label6.Text;
+                    device.Text1 = textBox1.Text;
+                    device.Text2 = textBox2.Text;
+                    device.Text3 = textBox3.Text;
+                    device.Text4 = textBox4.Text;
+                    device.Text5 = textBox5.Text;
+                    device.Text6 = textBox6.Text;
                     device.Num1 = (int)numericUpDown1.Value;
                     device.Num2 = (int)numericUpDown2.Value;
                     device.Num3 = (int)numericUpDown3.Value;
@@ -224,6 +226,7 @@ namespace ServiceCenterAccounting
                     device.Text2 = textBox2.Text;
                     device.Num1 =  (int)comboBox1.SelectedValue;
                 }
+                Close();
             }
         }
 
