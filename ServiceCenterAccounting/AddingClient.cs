@@ -15,7 +15,7 @@ namespace ServiceCenterAccounting
 
         public Client client = null;
 
-        public AddingClient()
+        public AddingClient(Client c)
         {
             InitializeComponent();
 
@@ -24,6 +24,16 @@ namespace ServiceCenterAccounting
             middleNameWarning.Visible = false;
             seriesWarning.Visible = false;
             numberWarning.Visible = false;
+
+            if(c != null)
+            {
+                client = c;
+                lastNameField.Text = c.LastName;
+                firstNameField.Text = c.FirstName;
+                middleNameField.Text = c.MiddleName;
+                seriesField.Text = c.Series;
+                numberField.Text = c.Number;
+            }
         }
 
         public Client GetClient()
@@ -104,13 +114,13 @@ namespace ServiceCenterAccounting
 
         private void numberField_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar < 48 || e.KeyChar > 57)
+            if ((e.KeyChar < 48 | e.KeyChar > 57) && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void seriesField_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar < 48 || e.KeyChar > 57)
+            if ((e.KeyChar < 48 | e.KeyChar > 57) && e.KeyChar != 8)
                 e.Handled = true;
         }
 

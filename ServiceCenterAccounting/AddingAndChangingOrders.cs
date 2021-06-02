@@ -44,19 +44,21 @@ namespace ServiceCenterAccounting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddingClient f = new AddingClient();
+            AddingClient f = new AddingClient(client);
             f.ShowDialog();
             client = f.GetClient();
             if (client != null)
             {
-                clientField.Text = $"{client.LastName} {client.FirstName[0]}. {client.MiddleName[0]}.";
+                clientField.Text = $"{client.LastName} {client.FirstName[0]}. {client.MiddleName[0]}. ({client.Series})";
                 clientWarning.Visible = false;
             }
+            else
+                clientField.Text = "";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AddingDevice f = new AddingDevice((Devices)typeList.SelectedValue);
+            AddingDevice f = new AddingDevice((Devices)typeList.SelectedValue, device);
             f.ShowDialog();
             device = f.device;
             if (device != null)
@@ -64,6 +66,8 @@ namespace ServiceCenterAccounting
                 deviceField.Text = $"{device.Text2} ({device.Text1})";
                 deviceWarning.Visible = false;
             }
+            else
+                deviceField.Text = "";
         }
 
         private void addBut_Click(object sender, EventArgs e)
@@ -91,13 +95,23 @@ namespace ServiceCenterAccounting
             }
             else
             {
-
-                client_id = Connect.GetString("insert into clients (last_name_client, first_name_client, middle_name_client, passport_series, phone) " +
-                    $"values('{client.LastName}', '{client.FirstName}', '{client.MiddleName}', '{client.Series}', '{client.Number}') RETURNING id_client");
-                if(client_id == null)
+                client_id = Connect.GetString($"select id_client from clients where passport_series = '{client.Series}'");
+                if (client_id != null)
                 {
-                    MessageBox.Show("Не удалось добавить клиента!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (MessageBox.Show("Информация о клиенте с такой серией паспорта уже иммеется.\n" +
+                        "Желаете использовать данные уже существующего клиента ?", "Информация", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information) == DialogResult.No)
+                        return;
+                }
+                else
+                {
+                    client_id = Connect.GetString("insert into clients (last_name_client, first_name_client, middle_name_client, passport_series, phone) " +
+                        $"values('{client.LastName}', '{client.FirstName}', '{client.MiddleName}', '{client.Series}', '{client.Number}') RETURNING id_client");
+                    if (client_id == null)
+                    {
+                        MessageBox.Show("Не удалось добавить клиента!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
                 if(device.Type == Devices.Computer)

@@ -24,10 +24,12 @@ namespace ServiceCenterAccounting
         public Device device;
         Devices type;
 
-        public AddingDevice(Devices type)
+        public AddingDevice(Devices type, Device d)
         {
             InitializeComponent();
             this.type = type;
+            if (d != null)
+                device = d;
             Filling();
         }
 
@@ -79,6 +81,20 @@ namespace ServiceCenterAccounting
                 text.Visible = true;
                 labelText.Visible = true;
                 labelText.Text = "Доп.устройства:";
+
+                if(device != null && device.Type == Devices.Computer)
+                {
+                    textBox1.Text = device.Text1;
+                    textBox2.Text = device.Text2;
+                    textBox3.Text = device.Text3;
+                    textBox4.Text = device.Text4;
+                    textBox5.Text = device.Text5;
+                    textBox6.Text = device.Text6;
+                    numericUpDown1.Value = device.Num1;
+                    numericUpDown2.Value = device.Num2;
+                    numericUpDown3.Value = device.Num3;
+                    text.Text = device.MultiText;
+                }
             }
             else if(type == Devices.Phone)
             {
@@ -88,6 +104,13 @@ namespace ServiceCenterAccounting
                 textBox5.Visible = true;
                 label5.Visible = true;
                 label5.Text = "IMEI:";
+
+                if(device != null && device.Type == Devices.Phone)
+                {
+                    textBox1.Text = device.Text1;
+                    textBox3.Text = device.Text2;
+                    textBox5.Text = device.Text3;
+                }
             }
             else if(type == Devices.Laptop)
             {
@@ -109,6 +132,17 @@ namespace ServiceCenterAccounting
                 numericUpDown3.Visible = true;
                 labelNum3.Visible = true;
                 labelNum3.Text = "Общ.объём памяти:";
+                
+                if(device != null && device.Type == Devices.Laptop)
+                {
+                    textBox1.Text = device.Text1;
+                    textBox2.Text = device.Text2;
+                    textBox3.Text = device.Text3;
+                    textBox5.Text = device.Text4;
+                    numericUpDown1.Value = device.Num1;
+                    numericUpDown2.Value = device.Num2;
+                    numericUpDown3.Value = device.Num3;
+                }
             }
             else
             {
@@ -124,6 +158,13 @@ namespace ServiceCenterAccounting
                     "from component_or_other_device_types");
                 comboBox1.DisplayMember = "name";
                 comboBox1.ValueMember = "id";
+
+                if(device != null && device.Type == Devices.Other)
+                {
+                    textBox1.Text = device.Text1;
+                    textBox2.Text = device.Text2;
+                    comboBox1.SelectedValue = device.Num1;
+                }
             }
         }
 
