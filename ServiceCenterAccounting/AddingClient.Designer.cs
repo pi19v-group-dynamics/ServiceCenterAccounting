@@ -46,6 +46,7 @@ namespace ServiceCenterAccounting
             this.numberWarning = new System.Windows.Forms.Label();
             this.lastNameWarning = new System.Windows.Forms.Label();
             this.firstNameWarning = new System.Windows.Forms.Label();
+            this.numLable = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -67,6 +68,7 @@ namespace ServiceCenterAccounting
             this.lastNameField.Size = new System.Drawing.Size(102, 20);
             this.lastNameField.TabIndex = 4;
             this.lastNameField.TextChanged += new System.EventHandler(this.lastNameField_TextChanged);
+            this.lastNameField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lastNameField_KeyPress);
             // 
             // label2
             // 
@@ -87,6 +89,7 @@ namespace ServiceCenterAccounting
             this.firstNameField.Size = new System.Drawing.Size(102, 20);
             this.firstNameField.TabIndex = 6;
             this.firstNameField.TextChanged += new System.EventHandler(this.firstNameField_TextChanged);
+            this.firstNameField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstNameField_KeyPress);
             // 
             // label3
             // 
@@ -107,6 +110,7 @@ namespace ServiceCenterAccounting
             this.middleNameField.Size = new System.Drawing.Size(102, 20);
             this.middleNameField.TabIndex = 8;
             this.middleNameField.TextChanged += new System.EventHandler(this.middleNameField_TextChanged);
+            this.middleNameField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.middleNameField_KeyPress);
             // 
             // label4
             // 
@@ -128,6 +132,7 @@ namespace ServiceCenterAccounting
             this.seriesField.Size = new System.Drawing.Size(102, 20);
             this.seriesField.TabIndex = 10;
             this.seriesField.TextChanged += new System.EventHandler(this.seriesField_TextChanged);
+            this.seriesField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.seriesField_KeyPress);
             // 
             // label5
             // 
@@ -142,13 +147,13 @@ namespace ServiceCenterAccounting
             // 
             // numberField
             // 
-            this.numberField.Location = new System.Drawing.Point(129, 238);
-            this.numberField.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numberField.Location = new System.Drawing.Point(203, 293);
             this.numberField.MaxLength = 10;
             this.numberField.Name = "numberField";
-            this.numberField.Size = new System.Drawing.Size(102, 20);
+            this.numberField.Size = new System.Drawing.Size(104, 22);
             this.numberField.TabIndex = 12;
             this.numberField.TextChanged += new System.EventHandler(this.numberField_TextChanged);
+            this.numberField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberField_KeyPress);
             // 
             // cancleBut
             // 
@@ -168,7 +173,7 @@ namespace ServiceCenterAccounting
             this.addBut.Location = new System.Drawing.Point(214, 316);
             this.addBut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addBut.Name = "addBut";
-            this.addBut.Size = new System.Drawing.Size(89, 28);
+            this.addBut.Size = new System.Drawing.Size(114, 34);
             this.addBut.TabIndex = 15;
             this.addBut.Text = "Сохранить";
             this.addBut.UseVisualStyleBackColor = true;
@@ -234,11 +239,22 @@ namespace ServiceCenterAccounting
             this.firstNameWarning.TabIndex = 20;
             this.firstNameWarning.Text = "!!!";
             // 
+            // numLable
+            // 
+            this.numLable.AutoSize = true;
+            this.numLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numLable.Location = new System.Drawing.Point(160, 293);
+            this.numLable.Name = "numLable";
+            this.numLable.Size = new System.Drawing.Size(37, 20);
+            this.numLable.TabIndex = 21;
+            this.numLable.Text = "+38";
+            // 
             // AddingClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 368);
+            this.ClientSize = new System.Drawing.Size(482, 453);
+            this.Controls.Add(this.numLable);
             this.Controls.Add(this.firstNameWarning);
             this.Controls.Add(this.lastNameWarning);
             this.Controls.Add(this.numberWarning);
@@ -284,5 +300,6 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label numberWarning;
         private System.Windows.Forms.Label lastNameWarning;
         private System.Windows.Forms.Label firstNameWarning;
+        private System.Windows.Forms.Label numLable;
     }
 }

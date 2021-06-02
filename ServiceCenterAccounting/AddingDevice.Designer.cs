@@ -201,6 +201,11 @@ namespace ServiceCenterAccounting
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(265, 161);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown2.TabIndex = 24;
@@ -211,7 +216,7 @@ namespace ServiceCenterAccounting
             // 
             this.labelNum2.AutoSize = true;
             this.labelNum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNum2.Location = new System.Drawing.Point(224, 138);
+            this.labelNum2.Location = new System.Drawing.Point(220, 138);
             this.labelNum2.Name = "labelNum2";
             this.labelNum2.Size = new System.Drawing.Size(169, 20);
             this.labelNum2.TabIndex = 27;
@@ -221,6 +226,11 @@ namespace ServiceCenterAccounting
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(74, 161);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown1.TabIndex = 26;
@@ -241,6 +251,11 @@ namespace ServiceCenterAccounting
             // numericUpDown3
             // 
             this.numericUpDown3.Location = new System.Drawing.Point(455, 161);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown3.TabIndex = 28;
@@ -282,7 +297,7 @@ namespace ServiceCenterAccounting
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(441, 35);
+            this.comboBox1.Location = new System.Drawing.Point(441, 38);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(134, 24);
             this.comboBox1.TabIndex = 33;
