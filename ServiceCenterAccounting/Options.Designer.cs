@@ -145,13 +145,25 @@
             this.NotesData.Name = "NotesData";
             this.NotesData.Size = new System.Drawing.Size(449, 172);
             this.NotesData.TabIndex = 10;
+            this.NotesData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NotesData_CellContentClick);
+            this.NotesData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.NotesData_CellValueChanged);
             // 
             // NotesUpDown
             // 
             this.NotesUpDown.Location = new System.Drawing.Point(408, 150);
+            this.NotesUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.NotesUpDown.Name = "NotesUpDown";
             this.NotesUpDown.Size = new System.Drawing.Size(41, 20);
             this.NotesUpDown.TabIndex = 11;
+            this.NotesUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label6
             // 
@@ -180,6 +192,7 @@
             this.DeleteNotes.TabIndex = 14;
             this.DeleteNotes.Text = "Удалить";
             this.DeleteNotes.UseVisualStyleBackColor = true;
+            this.DeleteNotes.Click += new System.EventHandler(this.DeleteNotes_Click);
             // 
             // Type_of_delete
             // 
