@@ -896,7 +896,9 @@ namespace ServiceCenterAccounting
                     $"GRANT Select ON TABLE \"public\".\"stages_of_execution\" TO \"{login}\"; " +
                     $"GRANT Select ON TABLE \"public\".\"types_of_device\" TO \"{login}\"; " +
                     $"GRANT Select ON TABLE \"public\".\"types_of_service\" TO \"{login}\"; " +
-                    $"GRANT Select ON TABLE \"public\".\"workers\" TO \"{login}\";"; 
+                    $"GRANT Select ON TABLE \"public\".\"workers\" TO \"{login}\";" +
+                    $"GRANT Insert, Select ON TABLE \"public\".\"logging\" TO \"{login}\";" +
+                    $"GRANT Update ON TABLE \"public\".\"workers\" TO \"{login}\";"; 
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();

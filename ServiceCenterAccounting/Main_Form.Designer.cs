@@ -175,6 +175,7 @@
             this.btn_Change.TabIndex = 2;
             this.btn_Change.Text = "Изменение заказа";
             this.btn_Change.UseVisualStyleBackColor = true;
+            this.btn_Change.Click += new System.EventHandler(this.btn_Change_of_Status_Click);
             // 
             // btn_Change_Status
             // 
