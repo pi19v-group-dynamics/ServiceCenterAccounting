@@ -806,5 +806,10 @@ namespace ServiceCenterAccounting
                 Connection.Close();
             }
         }
+
+        private void Initial_Setup_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

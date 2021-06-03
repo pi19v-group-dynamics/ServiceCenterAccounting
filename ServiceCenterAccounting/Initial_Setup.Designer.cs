@@ -420,6 +420,7 @@ namespace ServiceCenterAccounting
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Initial_Setup";
+            this.Load += new System.EventHandler(this.Initial_Setup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

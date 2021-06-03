@@ -32,20 +32,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Name_srv_text = new System.Windows.Forms.TextBox();
+            this.Address_srv_text = new System.Windows.Forms.TextBox();
+            this.Number_srv_text = new System.Windows.Forms.TextBox();
+            this.ChangeInfo = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.Type_of_notes = new System.Windows.Forms.ComboBox();
+            this.NotesData = new System.Windows.Forms.DataGridView();
+            this.NotesUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.InsertNote = new System.Windows.Forms.Button();
+            this.DeleteNotes = new System.Windows.Forms.Button();
+            this.Type_of_delete = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.NotesData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NotesUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -85,35 +85,36 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Номер телефона предприятия";
             // 
-            // textBox1
+            // Name_srv_text
             // 
-            this.textBox1.Location = new System.Drawing.Point(180, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 20);
-            this.textBox1.TabIndex = 4;
+            this.Name_srv_text.Location = new System.Drawing.Point(180, 41);
+            this.Name_srv_text.Name = "Name_srv_text";
+            this.Name_srv_text.Size = new System.Drawing.Size(126, 20);
+            this.Name_srv_text.TabIndex = 4;
             // 
-            // textBox2
+            // Address_srv_text
             // 
-            this.textBox2.Location = new System.Drawing.Point(180, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(126, 20);
-            this.textBox2.TabIndex = 5;
+            this.Address_srv_text.Location = new System.Drawing.Point(180, 75);
+            this.Address_srv_text.Name = "Address_srv_text";
+            this.Address_srv_text.Size = new System.Drawing.Size(126, 20);
+            this.Address_srv_text.TabIndex = 5;
             // 
-            // textBox3
+            // Number_srv_text
             // 
-            this.textBox3.Location = new System.Drawing.Point(180, 110);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(126, 20);
-            this.textBox3.TabIndex = 6;
+            this.Number_srv_text.Location = new System.Drawing.Point(180, 110);
+            this.Number_srv_text.Name = "Number_srv_text";
+            this.Number_srv_text.Size = new System.Drawing.Size(126, 20);
+            this.Number_srv_text.TabIndex = 6;
             // 
-            // button1
+            // ChangeInfo
             // 
-            this.button1.Location = new System.Drawing.Point(312, 68);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 35);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Изменить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ChangeInfo.Location = new System.Drawing.Point(312, 68);
+            this.ChangeInfo.Name = "ChangeInfo";
+            this.ChangeInfo.Size = new System.Drawing.Size(119, 35);
+            this.ChangeInfo.TabIndex = 7;
+            this.ChangeInfo.Text = "Изменить";
+            this.ChangeInfo.UseVisualStyleBackColor = true;
+            this.ChangeInfo.Click += new System.EventHandler(this.ChangeInfo_Click);
             // 
             // label5
             // 
@@ -124,28 +125,33 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Выберите справочник";
             // 
-            // comboBox1
+            // Type_of_notes
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(140, 149);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 9;
+            this.Type_of_notes.FormattingEnabled = true;
+            this.Type_of_notes.Items.AddRange(new object[] {
+            "Работники",
+            "Типы услуг",
+            "Типы компонентов"});
+            this.Type_of_notes.Location = new System.Drawing.Point(140, 149);
+            this.Type_of_notes.Name = "Type_of_notes";
+            this.Type_of_notes.Size = new System.Drawing.Size(121, 21);
+            this.Type_of_notes.TabIndex = 9;
+            this.Type_of_notes.SelectionChangeCommitted += new System.EventHandler(this.Type_of_notes_SelectionChangeCommitted);
             // 
-            // dataGridView1
+            // NotesData
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 176);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(449, 172);
-            this.dataGridView1.TabIndex = 10;
+            this.NotesData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.NotesData.Location = new System.Drawing.Point(12, 176);
+            this.NotesData.Name = "NotesData";
+            this.NotesData.Size = new System.Drawing.Size(449, 172);
+            this.NotesData.TabIndex = 10;
             // 
-            // numericUpDown1
+            // NotesUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(408, 150);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown1.TabIndex = 11;
+            this.NotesUpDown.Location = new System.Drawing.Point(408, 150);
+            this.NotesUpDown.Name = "NotesUpDown";
+            this.NotesUpDown.Size = new System.Drawing.Size(41, 20);
+            this.NotesUpDown.TabIndex = 11;
             // 
             // label6
             // 
@@ -156,54 +162,55 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Страница:";
             // 
-            // button2
+            // InsertNote
             // 
-            this.button2.Location = new System.Drawing.Point(12, 354);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 29);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Добавить";
-            this.button2.UseVisualStyleBackColor = true;
+            this.InsertNote.Location = new System.Drawing.Point(12, 354);
+            this.InsertNote.Name = "InsertNote";
+            this.InsertNote.Size = new System.Drawing.Size(125, 29);
+            this.InsertNote.TabIndex = 13;
+            this.InsertNote.Text = "Добавить";
+            this.InsertNote.UseVisualStyleBackColor = true;
+            this.InsertNote.Click += new System.EventHandler(this.InsertNote_Click);
             // 
-            // button3
+            // DeleteNotes
             // 
-            this.button3.Location = new System.Drawing.Point(338, 354);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(123, 29);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Удалить";
-            this.button3.UseVisualStyleBackColor = true;
+            this.DeleteNotes.Location = new System.Drawing.Point(338, 354);
+            this.DeleteNotes.Name = "DeleteNotes";
+            this.DeleteNotes.Size = new System.Drawing.Size(123, 29);
+            this.DeleteNotes.TabIndex = 14;
+            this.DeleteNotes.Text = "Удалить";
+            this.DeleteNotes.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // Type_of_delete
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.Type_of_delete.FormattingEnabled = true;
+            this.Type_of_delete.Items.AddRange(new object[] {
             "Одно поле",
             "Выделенные поля",
             "Все поля"});
-            this.comboBox2.Location = new System.Drawing.Point(211, 362);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 15;
-            this.comboBox2.Text = "Выберите метод";
+            this.Type_of_delete.Location = new System.Drawing.Point(211, 362);
+            this.Type_of_delete.Name = "Type_of_delete";
+            this.Type_of_delete.Size = new System.Drawing.Size(121, 21);
+            this.Type_of_delete.TabIndex = 15;
+            this.Type_of_delete.Text = "Выберите метод";
             // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 385);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.Type_of_delete);
+            this.Controls.Add(this.DeleteNotes);
+            this.Controls.Add(this.InsertNote);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.NotesUpDown);
+            this.Controls.Add(this.NotesData);
+            this.Controls.Add(this.Type_of_notes);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.ChangeInfo);
+            this.Controls.Add(this.Number_srv_text);
+            this.Controls.Add(this.Address_srv_text);
+            this.Controls.Add(this.Name_srv_text);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -213,8 +220,9 @@
             this.Name = "Options";
             this.ShowIcon = false;
             this.Text = "Options";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Load += new System.EventHandler(this.Options_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.NotesData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NotesUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,17 +234,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox Name_srv_text;
+        private System.Windows.Forms.TextBox Address_srv_text;
+        private System.Windows.Forms.TextBox Number_srv_text;
+        private System.Windows.Forms.Button ChangeInfo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox Type_of_notes;
+        private System.Windows.Forms.DataGridView NotesData;
+        private System.Windows.Forms.NumericUpDown NotesUpDown;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button InsertNote;
+        private System.Windows.Forms.Button DeleteNotes;
+        private System.Windows.Forms.ComboBox Type_of_delete;
     }
 }
