@@ -77,7 +77,7 @@ namespace ServiceCenterAccounting
         {
             DataTable dt = null;
             device = new Device();
-            if(type = Devices.Computer)
+            if(type == Devices.Computer)
             {
                 dt = Connect.Select("SELECT motherboard, cpu, gpu, power_supply as power, " + 
                     "number_of_drives as num, total_drives_capacity as dcapacity, cpu_cooling as cooling, " + 
@@ -97,7 +97,7 @@ namespace ServiceCenterAccounting
                 device.MultiText = dt.Rows[0].Field<string>("additional");
                 
             }
-            else if(type = Devices.Laptop) 
+            else if(type == Devices.Laptop) 
             {
                 dt = Connect.Select("SELECT manufacturer as man, model, cpu, ram, " + 
                     "ram_capacity as rcapacity, number_of_drives as num, total_drives_capacity as dcapacity " +
@@ -113,14 +113,14 @@ namespace ServiceCenterAccounting
                 device.Num3 = dt.Rows[0].Field<int>("dcapacity");
 
             }
-            else if(type = Devices.Phone)
+            else if(type == Devices.Phone)
             {
                 dt = Connect.Select($"SELECT manufacturer as man, model, imei from smartphones where id_smartphone = {(int)type}");
                 device.Text1 = dt.Rows[0].Field<string>("man");
                 device.Text2 = dt.Rows[0].Field<string>("model");
                 device.Text3 = dt.Rows[0].Field<string>("imei");
             }
-            else if(type = Devices.Other)
+            else if(type == Devices.Other)
             {
                 dt = Connect.Select($"SELECT id_component_type as type, manufacturer as man, model from components_or_other_devices where id_component_or_other_devices = {(int)type}");
                 device.Text1 = dt.Rows[0].Field<string>("man");
@@ -192,10 +192,8 @@ namespace ServiceCenterAccounting
                 if (isUpdating)
                 {
                     string result = null;
-                    string device_id = null;
-                    string sql = null;
                     string name = null;
-                    string column;
+                    string column = null;
 
                     result = Connect.GetString("UPDATE clients SET (last_name_client, first_name_client, middle_name_client, passport_series, phone) = " + 
                         $"('{client.LastName}', '{client.FirstName}', '{client.MiddleName}', '{client.Series}', '{client.Number}') " + 
@@ -247,7 +245,7 @@ namespace ServiceCenterAccounting
 
                     result = Connect.GetString($"UPDATE orders SET (date_of_adoption, customer_comment, id_type_of_service) = " + 
                         $"('{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', {servicesList.SelectedValue}) " + 
-                        $"WHERE id_orders = {deviceAndOrder.Rows[0]("order")}");
+                        $"WHERE id_orders = {deviceAndOrder.Rows[0].Field<int>("order")}");
                     if (result == null)
                     {
                             MessageBox.Show("Не удалось обновить данные о заказе!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);

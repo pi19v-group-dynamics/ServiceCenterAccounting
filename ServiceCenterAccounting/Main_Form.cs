@@ -137,5 +137,27 @@ namespace ServiceCenterAccounting
             Action_for_Orders action = new Action_for_Orders(id_order, is_acepted);
             action.ShowDialog();
         }
+
+        private void btn_Change_of_Status_Click(object sender, EventArgs e)
+        {
+            string id_order = null;
+            if (tabControl1.SelectedTab.Text.Equals("Принятые заказы"))
+            {
+                DataGridViewRow row = dg_Orders_Accepted.SelectedRows[0];
+                id_order = row.Cells[0].Value.ToString();
+            }
+            else if (tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
+            {
+                DataGridViewRow row = dg_Orders_in_Progress.SelectedRows[0];
+                id_order = row.Cells[0].Value.ToString();
+            }
+            else
+            {
+                DataGridViewRow row = dg_Completed_Orders.SelectedRows[0];
+                id_order = row.Cells[0].Value.ToString();
+            }
+            AddingAndChangingOrders f = new AddingAndChangingOrders(id_order);
+            f.ShowDialog();
+        }
     }
 }
