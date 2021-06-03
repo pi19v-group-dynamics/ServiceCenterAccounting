@@ -41,7 +41,6 @@ namespace ServiceCenterAccounting
             adding.ShowDialog();
         }
 
-
         private void bnt_Reports_Click(object sender, EventArgs e)
         {
             Reports_Creator reports = new Reports_Creator();
