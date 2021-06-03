@@ -137,6 +137,7 @@ namespace ServiceCenterAccounting
                 for (int j = 0; j < table.Columns.Count; j++)
                 {
                     pdfTable.AddCell(new Phrase(table.Rows[i][j].ToString(), font));
+                    if (j == table.Columns.Count - 1) { cell.Colspan = 2; }
                 }
             }
             table.Clear();
@@ -190,6 +191,10 @@ namespace ServiceCenterAccounting
                 stream.Close();
             }
         }
-    
+
+        private void Action_for_Orders_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

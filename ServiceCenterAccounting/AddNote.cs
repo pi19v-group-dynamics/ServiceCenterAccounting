@@ -11,8 +11,7 @@ using System.Windows.Forms;
 namespace ServiceCenterAccounting
 {
     public partial class AddNote : Form
-    {
-        string result;
+    { 
         public AddNote(string SelectedNote)
         {
             InitializeComponent();
@@ -29,9 +28,9 @@ namespace ServiceCenterAccounting
             switch (textBox2.Text)
             {
                 case "Типы услуг":
-                    result=Connect.GetString($"INSERT INTO types_of_service(name_type_of_service,cost_of_service) VALUES ('{Note.Text}',{Price.Value})");break;
+                    Connect.Insert($"INSERT INTO types_of_service(name_type_of_service,cost_of_service) VALUES ('{Note.Text}',{Price.Value})");break;
                 case "Типы компонентов":
-                    result = Connect.GetString($"INSERT INTO component_or_other_device_types(name_component_or_other_device_type) VALUES ('{Note.Text}')");break;
+                    Connect.Insert($"INSERT INTO component_or_other_device_types(name_component_or_other_device_type) VALUES ('{Note.Text}')");break;
             }
         }
 

@@ -46,12 +46,29 @@ namespace ServiceCenterAccounting
             {
                 connection.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, connection);
-                result = cmd.ExecuteNonQuery().ToString();
+                result = cmd.ExecuteScalar().ToString();
                 return result;
             }
             catch
             {
                 return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        static public void Insert(string sql)
+        {
+            try
+            {
+                connection.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, connection);
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                MessageBox.Show("Что-то пошло не так");
             }
             finally
             {

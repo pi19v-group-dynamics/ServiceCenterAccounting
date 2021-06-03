@@ -90,6 +90,7 @@
             this.Name = "Action_for_Orders";
             this.ShowIcon = false;
             this.Text = "Изменение статуса заказа";
+            this.Load += new System.EventHandler(this.Action_for_Orders_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Cost_of_Parts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
