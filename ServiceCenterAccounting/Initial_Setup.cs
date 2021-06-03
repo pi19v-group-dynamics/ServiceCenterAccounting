@@ -194,6 +194,9 @@ namespace ServiceCenterAccounting
                         if (is_have_login_admin & is_have_password_admin & is_have_repeat_password)
                         {
                             counter++;
+                            RegistryKey currentUserKey = Registry.CurrentUser;
+                            RegistryKey SCA_Key = currentUserKey.CreateSubKey("SCA_Key");
+                            SCA_Key.SetValue("login_op", tb_Login.Text);
                             l_Text4.Visible = false;
                             l_Input_Text4.Visible = false;
                             l_Input_Text5.Visible = false;
@@ -656,7 +659,7 @@ namespace ServiceCenterAccounting
                     "( " +
                         "id_orders serial NOT NULL, " +
                         "id_client integer NOT NULL, " +
-                        "id_worker integer NOT NULL, " +
+                        "id_worker integer, " +
                         "date_of_adoption date NOT NULL, " +
                         "date_of_completion date, " +
                         "customer_comment text COLLATE pg_catalog.\"default\", " +
@@ -787,7 +790,12 @@ namespace ServiceCenterAccounting
                     $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"orders\" TO \"{login}\"; " + 
                     $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"orders_and_devices\" TO \"{login}\"; " + 
                     $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"smartphones\" TO \"{login}\"; " +
-                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"stationary_computers\" TO \"{login}\";";
+                    $"GRANT Delete, Insert, References, Select, Trigger, Truncate, Update ON TABLE \"public\".\"stationary_computers\" TO \"{login}\";" +
+                    $"GRANT Select ON TABLE \"public\".\"component_or_other_device_types\" TO \"{login}\"; " +
+                    $"GRANT Select ON TABLE \"public\".\"stages_of_execution\" TO \"{login}\"; " +
+                    $"GRANT Select ON TABLE \"public\".\"types_of_device\" TO \"{login}\"; " +
+                    $"GRANT Select ON TABLE \"public\".\"types_of_service\" TO \"{login}\"; " +
+                    $"GRANT Select ON TABLE \"public\".\"workers\" TO \"{login}\";"; 
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();
@@ -797,6 +805,11 @@ namespace ServiceCenterAccounting
                 MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Connection.Close();
             }
+        }
+
+        private void Initial_Setup_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
