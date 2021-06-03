@@ -8,10 +8,22 @@ namespace ServiceCenterAccounting
     {
         bool is_have_login = false;
         bool is_have_passvord = false;
+        bool Is_operator;
 
-        public Authorization()
+        public Authorization(bool is_operator)
         {
             InitializeComponent();
+            Is_operator = is_operator;
+            if(Is_operator)
+            {
+                label1.Text = "Введите логин оператора";
+                label2.Text = "Введите пароль оператора";
+            }
+            else
+            {
+                label1.Text = "Введите логин администратора";
+                label2.Text = "Введите пароль админимтратора";
+            }
         }
 
         private void Eng_and_Digits_KeyPress(object sender, KeyPressEventArgs e)
@@ -57,23 +69,46 @@ namespace ServiceCenterAccounting
 
         private void tb_Enter_Click(object sender, EventArgs e)
         {
-            if (is_have_login & is_have_passvord)
+            RegistryKey currentUserKey = Registry.CurrentUser;
+            RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
+            string login_op = SCA_Key.GetValue("login_op").ToString();
+            if (Is_operator)
             {
-                RegistryKey currentUserKey = Registry.CurrentUser;
-                RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
-                string name_database = SCA_Key.GetValue("name_database").ToString();
-                Connect.OpenConnection(name_database, tb_Login.Text, tb_Password.Text);
-                try
+                if (is_have_login & is_have_passvord & tb_Login.Text.Equals(login_op))
                 {
-                    Connect.connection.Open();
-                    Connect.connection.Close();
-                    this.Close();
-                }
-                catch
-                {
-                    MessageBox.Show("Неверный логин или пароль!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string name_database = SCA_Key.GetValue("name_database").ToString();
+                    Connect.OpenConnection(name_database, tb_Login.Text, tb_Password.Text);
+                    try
+                    {
+                        Connect.connection.Open();
+                        Connect.connection.Close();
+                        this.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Неверный логин или пароль оператора!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
+            else
+            {
+                if (is_have_login & is_have_passvord & !tb_Login.Text.Equals(login_op))
+                {
+                    string name_database = SCA_Key.GetValue("name_database").ToString();
+                    Connect.OpenConnection(name_database, tb_Login.Text, tb_Password.Text);
+                    try
+                    {
+                        Connect.connection.Open();
+                        Connect.connection.Close();
+                        this.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Неверный логин или пароль администратора!", "Ошибка подключения к БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            
 
         }
 

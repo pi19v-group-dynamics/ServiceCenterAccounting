@@ -764,7 +764,7 @@ namespace ServiceCenterAccounting
                     "END " +
                     "$BODY$; " +
                     "ALTER FUNCTION public.insert_into_logging() " +
-                        $"OWNER TO postgres;" +
+                        $"OWNER to {login};" +
                     $"CREATE TRIGGER t_client " +
                         "AFTER INSERT OR DELETE OR UPDATE " +
                         "ON public.clients " +

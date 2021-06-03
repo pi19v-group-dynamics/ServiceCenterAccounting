@@ -18,7 +18,7 @@ namespace ServiceCenterAccounting
                 Initial_Setup setup = new Initial_Setup();
                 setup.ShowDialog();
             }
-            Authorization authorization = new Authorization();
+            Authorization authorization = new Authorization(true);
             authorization.ShowDialog();
             dg_Orders_Accepted.DataSource = Connect.Select("SELECT id_orders, " +
                 "concat(clients.last_name_client, ' ', substring(clients.first_name_client, 1, 1), '. ', substring(clients.middle_name_client, 1, 1), '. ') " +
@@ -165,6 +165,16 @@ namespace ServiceCenterAccounting
             AddingAndChangingOrders f = new AddingAndChangingOrders(id_orderAndDevice);
             f.ShowDialog();
             LoadTable();
+        }
+
+        private void btn_Settings_Click(object sender, EventArgs e)
+        {
+            Authorization authorization = new Authorization(false);
+            authorization.ShowDialog();
+            Options options = new Options();
+            options.ShowDialog();
+            authorization = new Authorization(true);
+            authorization.ShowDialog();
         }
     }
 }

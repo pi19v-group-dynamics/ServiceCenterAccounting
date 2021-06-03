@@ -91,7 +91,7 @@
             this.tp_Orders_in_Progress.Controls.Add(this.dg_Orders_in_Progress);
             this.tp_Orders_in_Progress.Location = new System.Drawing.Point(4, 22);
             this.tp_Orders_in_Progress.Name = "tp_Orders_in_Progress";
-            this.tp_Orders_in_Progress.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tp_Orders_in_Progress.Padding = new System.Windows.Forms.Padding(3);
             this.tp_Orders_in_Progress.Size = new System.Drawing.Size(604, 268);
             this.tp_Orders_in_Progress.TabIndex = 1;
             this.tp_Orders_in_Progress.Text = "Заказы в работе";
@@ -154,6 +154,7 @@
             this.btn_Settings.TabIndex = 4;
             this.btn_Settings.Text = "Настройки";
             this.btn_Settings.UseVisualStyleBackColor = true;
+            this.btn_Settings.Click += new System.EventHandler(this.btn_Settings_Click);
             // 
             // bnt_Report
             // 
@@ -168,7 +169,7 @@
             // btn_Change
             // 
             this.btn_Change.Location = new System.Drawing.Point(5, 102);
-            this.btn_Change.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Change.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Change.Name = "btn_Change";
             this.btn_Change.Size = new System.Drawing.Size(138, 23);
             this.btn_Change.TabIndex = 2;
@@ -178,7 +179,7 @@
             // btn_Change_Status
             // 
             this.btn_Change_Status.Location = new System.Drawing.Point(5, 75);
-            this.btn_Change_Status.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Change_Status.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Change_Status.Name = "btn_Change_Status";
             this.btn_Change_Status.Size = new System.Drawing.Size(138, 23);
             this.btn_Change_Status.TabIndex = 1;
@@ -205,7 +206,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form_Main";
             this.ShowIcon = false;
-            this.Text = "Form1";
+            this.Text = "Service Center Accounting";
             this.tabControl1.ResumeLayout(false);
             this.tp_Accepted_Orders.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dg_Orders_Accepted)).EndInit();
