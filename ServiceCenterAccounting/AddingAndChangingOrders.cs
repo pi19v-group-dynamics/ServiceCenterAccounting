@@ -59,13 +59,13 @@ namespace ServiceCenterAccounting
                     "customer_comment as comment, id_type_of_service as service " +
                     $"from orders where id_orders = {deviceAndOrder.Rows[0].Field<int>("order")}");
 
-                dateTimePicker.Value = Convert.ToDateTime(order.Rows[0].Field<string>("date"));
+                dateTimePicker.Value = order.Rows[0].Field<DateTime>("date");
                 typeList.SelectedValue = order.Rows[0].Field<int>("service");
                 commentField.Text = order.Rows[0].Field<string>("comment");
 
                 DataTable dt = Connect.Select("select last_name_client as lname, first_name_client as fname, " +
                     "middle_name_client as mname, passport_series as series, phone " +
-                    "from clients where id_client = 2");
+                    $"from clients where id_client = {order.Rows[0].Field<int>("client")}");
                 client = new Client(dt.Rows[0].Field<string>("lname"), dt.Rows[0].Field<string>("fname"),
                     dt.Rows[0].Field<string>("mname"), dt.Rows[0].Field<string>("series"), dt.Rows[0].Field<string>("phone"));
                 clientField.Text = $"{client.LastName} {client.FirstName[0]}. {client.MiddleName[0]}. ({client.Series})";
@@ -77,12 +77,13 @@ namespace ServiceCenterAccounting
         {
             DataTable dt = null;
             device = new Device();
+            typeList.SelectedValue = (int)type;
             if(type == Devices.Computer)
             {
                 dt = Connect.Select("SELECT motherboard, cpu, gpu, power_supply as power, " + 
                     "number_of_drives as num, total_drives_capacity as dcapacity, cpu_cooling as cooling, " + 
                     "additional_devices as additional, ram, ram_capacity as rcapacity " + 
-                    $"from stationary_computers where id_stationary_computer = {(int)type}");
+                    $"from stationary_computers where id_stationary_computer = {id}");
 
                 device.Type = type;
                 device.Text1 = dt.Rows[0].Field<string>("motherboard");
@@ -101,7 +102,7 @@ namespace ServiceCenterAccounting
             {
                 dt = Connect.Select("SELECT manufacturer as man, model, cpu, ram, " + 
                     "ram_capacity as rcapacity, number_of_drives as num, total_drives_capacity as dcapacity " +
-                    $"from laptops_and_monoblocks where id_laptop_or_monoblock = {(int)type}");
+                    $"from laptops_and_monoblocks where id_laptop_or_monoblock = {id}");
 
                 device.Type = type;
                 device.Text1 = dt.Rows[0].Field<string>("man");
@@ -115,14 +116,16 @@ namespace ServiceCenterAccounting
             }
             else if(type == Devices.Phone)
             {
-                dt = Connect.Select($"SELECT manufacturer as man, model, imei from smartphones where id_smartphone = {(int)type}");
+                dt = Connect.Select($"SELECT manufacturer as man, model, imei from smartphones where id_smartphone = {id}");
+                device.Type = type;
                 device.Text1 = dt.Rows[0].Field<string>("man");
                 device.Text2 = dt.Rows[0].Field<string>("model");
                 device.Text3 = dt.Rows[0].Field<string>("imei");
             }
             else if(type == Devices.Other)
             {
-                dt = Connect.Select($"SELECT id_component_type as type, manufacturer as man, model from components_or_other_devices where id_component_or_other_devices = {(int)type}");
+                dt = Connect.Select($"SELECT id_component_type as type, manufacturer as man, model from components_or_other_devices where id_component_or_other_devices = {id}");
+                device.Type = type;
                 device.Text1 = dt.Rows[0].Field<string>("man");
                 device.Text2 = dt.Rows[0].Field<string>("model");
                 device.Num1 = dt.Rows[0].Field<int>("type");
@@ -197,7 +200,7 @@ namespace ServiceCenterAccounting
 
                     result = Connect.GetString("UPDATE clients SET (last_name_client, first_name_client, middle_name_client, passport_series, phone) = " + 
                         $"('{client.LastName}', '{client.FirstName}', '{client.MiddleName}', '{client.Series}', '{client.Number}') " + 
-                        $"WHERE id_client = {order.Rows[0].Field<int>("client")}");
+                        $"WHERE id_client = {order.Rows[0].Field<int>("client")} RETURNING id_client");
                     if (result == null)
                     {
                             MessageBox.Show("Не удалось обновить данные о клиенте!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -232,6 +235,9 @@ namespace ServiceCenterAccounting
                             $"VALUES ({device.Num1}, '{device.Text1}', '{device.Text2}') RETURNING id_component_or_other_devices";
                     }
 
+                    name = Connect.GetString($"select name_table from types_of_device where id_type_of_device  = {deviceAndOrder.Rows[0].Field<int>("type")}");
+                    Connect.GetString($"delete from {name} where {column} = {deviceAndOrder.Rows[0].Field<int>("devise")}");
+
                     device_id = Connect.GetString(sql);
                     if (device_id == null)
                     {
@@ -240,19 +246,23 @@ namespace ServiceCenterAccounting
                     }
 
 
-                    name = Connect.GetString($"select name_table from types_of_device where id_type_of_device  = {deviceAndOrder.Rows[0].Field<int>("type")}");
-                    Connect.GetString($"delete from {name} where {column} = {deviceAndOrder.Rows[0].Field<int>("device")}");
+                    
 
                     result = Connect.GetString($"UPDATE orders SET (date_of_adoption, customer_comment, id_type_of_service) = " + 
                         $"('{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', {servicesList.SelectedValue}) " + 
-                        $"WHERE id_orders = {deviceAndOrder.Rows[0].Field<int>("order")}");
+                        $"WHERE id_orders = {deviceAndOrder.Rows[0].Field<int>("order")} RETURNING id_orders");
                     if (result == null)
                     {
                             MessageBox.Show("Не удалось обновить данные о заказе!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                     }
                     result = Connect.GetString($"UPDATE orders_and_devices SET (id_type_of_device, id_specific_device) = " + 
-                        $"({(int)device.Type}, {device_id}) WHERE id_order_and_device = {id}");
+                        $"({(int)device.Type}, {device_id}) WHERE id_order_and_device = {id} RETURNING id_order_and_device");
+                    if (result == null)
+                    {
+                        MessageBox.Show("Не удалось объединить устройство и заказ!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
                 else 
