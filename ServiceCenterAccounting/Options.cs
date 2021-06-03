@@ -79,22 +79,46 @@ namespace ServiceCenterAccounting
         private void Type_of_notes_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SelectedNote = Type_of_notes.SelectedItem.ToString();
+            LoadNotes();
         }
         public void LoadNotes() {
             switch (SelectedNote) {
                 case "Работники":
                     NotesData.DataSource = Connect.Select("select id_worker as ID,last_name_worker as \"Фамилия работника\",first_name_worker as \"Имя работника\"," +
                     "middle_name_worker as \"Отчество работника\",interest_rate as \"Процентная ставка\",employment as " +
-                    " \"Занятость работника\",date_of_brth as \"Дата рождения\" from workers");
+                    " \"Занятость работника\",date_of_brth as \"Дата рождения\" from workers ORDER BY ID OFFSET ((" + (NotesUpDown.Value - 1) + ") * " + 15 + ") " +
+                    "ROWS FETCH NEXT " + 15 + "ROWS ONLY;");
+                    NotesUpDown.Maximum = (Convert.ToInt32(Connect.GetString("select count(*) from workers"))/15)+1;
                     break;
                 case "Типы услуг":
                     NotesData.DataSource = Connect.Select("select id_type_of_service as ID,name_type_of_service as " +
-                    "\"Название услуги\",cost_of_service as \"Стоимость услуги\" from types_of_service");
+                    "\"Название услуги\",cost_of_service as \"Стоимость услуги\" from types_of_service ORDER BY ID OFFSET ((" + (NotesUpDown.Value - 1) + ") * " + 15 + ") " +
+                    "ROWS FETCH NEXT " + 15 + "ROWS ONLY;");
+                    NotesUpDown.Maximum = (Convert.ToInt32(Connect.GetString("select count(*) from types_of_service")) / 15) + 1;
                     break;
                 case "Типы компонентов":
                     NotesData.DataSource = Connect.Select("select id_component_or_other_device_type as ID,name_component_or_other_device_type as \"Название компонента\" " +
-                        "from component_or_other_device_types");
+                        "from component_or_other_device_types ORDER BY ID OFFSET ((" + (NotesUpDown.Value - 1) + ") * " + 15 + ") " +
+                    "ROWS FETCH NEXT " + 15 + "ROWS ONLY;");
+                    NotesUpDown.Maximum = (Convert.ToInt32(Connect.GetString("select count(*) from component_or_other_device_types")) / 15) + 1;
                     break;
+                case "Журналирование":
+                    NotesData.DataSource = Connect.Select("select date_and_time_of_action as \"Дата и время действия\",name_of_action as \"Название действия\",role_of_action as \"Роль базы\" " +
+                    "from logging ORDER BY ID OFFSET ((" + (NotesUpDown.Value - 1) + ") * " + 15 + ") " +
+                    "ROWS FETCH NEXT " + 15 + "ROWS ONLY;");
+                    NotesUpDown.Maximum = (Convert.ToInt32(Connect.GetString("select count(*) from logging")) / 15) + 1;
+                    break;
+            }
+            if (SelectedNote == "Журналирование")
+            {
+                InsertNote.Visible = false;
+                Type_of_delete.Visible = false;
+                DeleteNotes.Visible = false;
+            }
+            else {
+                InsertNote.Visible = true;
+                Type_of_delete.Visible = true;
+                DeleteNotes.Visible = true;
             }
         }
 
@@ -103,8 +127,56 @@ namespace ServiceCenterAccounting
             switch (SelectedNote) {
                 case "Типы услуг":new AddNote(SelectedNote).ShowDialog();break;
                 case "Типы компонентов":new AddNote(SelectedNote).ShowDialog();break;
-                case "Работники":
-                
+                case "Работники":new AddWorker().ShowDialog();break;
+            }
+            LoadNotes();
+        }
+
+        private void DeleteNotes_Click(object sender, EventArgs e)
+        {
+            switch (Type_of_delete.SelectedItem.ToString()) {
+                case "Все поля":
+                    switch (SelectedNote)
+                    {
+                        case "Типы услуг": Connect.GetString("DELETE FROM types_of_service"); break;
+                        case "Типы компонентов": Connect.GetString("DELETE FROM component_or_other_device_types"); break;
+                        case "Работники": Connect.GetString("DELETE FRO workers"); break;
+                    }
+                    break;
+                case "Одно поле":
+                    switch (SelectedNote)
+                    {
+                        case "Типы услуг": Connect.GetString($"DELETE FROM types_of_service where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
+                        case "Типы компонентов": Connect.GetString($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={NotesData.CurrentRow.Cells[0].Value}"); break;
+                        case "Работники": Connect.GetString($"DELETE FROM workers where id_worker={NotesData.CurrentRow.Cells[0].Value}"); break;
+                    }
+                    break;
+                case "Выделенные поля":
+                    foreach (DataRow rows in NotesData.SelectedRows)
+                    {
+                        switch (SelectedNote)
+                        {
+                            case "Типы услуг": Connect.GetString($"DELETE FROM types_of_service where id_type_of_service={rows[0]}"); break;
+                            case "Типы компонентов": Connect.GetString($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={rows[0]}"); break;
+                            case "Работники": Connect.GetString($"DELETE FROM workers where id_worker={rows[0]}"); break;
+                        }
+                    }
+                    break;
+            }
+            LoadNotes();
+        }
+
+        private void NotesData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void NotesData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            switch (SelectedNote) {
+                case "Типы услуг": Connect.GetString($"UPDATE types_of_service SET name_type_of_service='{NotesData.CurrentRow.Cells[1].Value}',cost_of_service={Convert.ToInt32(NotesData.CurrentRow.Cells[2].Value)} where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
+                case "Типы компонентов": Connect.GetString($"UPDATE component_or_other_device_types SET name_component_or_other_device_type='{NotesData.CurrentRow.Cells[1].Value}'"); break;
+                case "Работники": Connect.GetString($"UPDATE workers SET last_name_worker='{NotesData.CurrentRow.Cells[1].Value}',first_name_worker='{NotesData.CurrentRow.Cells[2].Value}',middle_name_worker='{NotesData.CurrentRow.Cells[3].Value}',interest_rate={Convert.ToInt32(NotesData.CurrentRow.Cells[4].Value)} where id_worker={NotesData.CurrentRow.Cells[0]}"); break;
             }
         }
     }

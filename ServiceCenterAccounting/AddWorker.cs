@@ -60,8 +60,8 @@ namespace ServiceCenterAccounting
                                 $"Поля доступные для заполнения не могут содержать только пробелы!", "Ошибка",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else { Connect.GetString($"INSERT INTO workers(last_name_worker,first_name_worker,middle_name_worker,interest_rate,employment,date_of_brth) VALUES('{Last_Name_Text.Text}','{First_Name_Text.Text}','{Middle_Name_Text.Text}',{numericUpDown1.Value},'f',{Date_of_Birth.Value.ToString("yyyy/mm/dd")})"); }
-            
+            else { Connect.GetString($"INSERT INTO workers(last_name_worker,first_name_worker,middle_name_worker,interest_rate,employment," +
+                $"date_of_brth) VALUES('{Last_Name_Text.Text}','{First_Name_Text.Text}','{Middle_Name_Text.Text}',{numericUpDown1.Value},'f',{Date_of_Birth.Value.ToString("yyyy/mm/dd")})"); }
+            }
         }
     }
-}
