@@ -32,7 +32,7 @@ namespace ServiceCenterAccounting
                 firstNameField.Text = c.FirstName;
                 middleNameField.Text = c.MiddleName;
                 seriesField.Text = c.Series;
-                numberField.Text = c.Number;
+                numberField.Text = c.Number.Substring(3);
             }
         }
 
@@ -145,7 +145,6 @@ namespace ServiceCenterAccounting
 
     public class Client
     {
-        public string Id { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -158,8 +157,7 @@ namespace ServiceCenterAccounting
         }
 
         public Client(string lastName, string firstName, string middleName, string series, string number)
-        {
-            Id = null;
+        { 
             LastName = lastName;
             FirstName = firstName;
             MiddleName = middleName;
