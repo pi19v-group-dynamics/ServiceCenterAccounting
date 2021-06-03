@@ -36,8 +36,6 @@ namespace ServiceCenterAccounting
             this.label4 = new System.Windows.Forms.Label();
             this.First_Name_Text = new System.Windows.Forms.TextBox();
             this.Middle_Name_Text = new System.Windows.Forms.TextBox();
-            this.Date_of_Birth = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
             this.InsertButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -105,26 +103,9 @@ namespace ServiceCenterAccounting
             this.Middle_Name_Text.TabIndex = 6;
             this.Middle_Name_Text.TextChanged += new System.EventHandler(this.Middle_Name_Text_TextChanged);
             // 
-            // Date_of_Birth
-            // 
-            this.Date_of_Birth.Location = new System.Drawing.Point(104, 164);
-            this.Date_of_Birth.Name = "Date_of_Birth";
-            this.Date_of_Birth.Size = new System.Drawing.Size(121, 20);
-            this.Date_of_Birth.TabIndex = 7;
-            this.Date_of_Birth.CloseUp += new System.EventHandler(this.Date_of_Birth_CloseUp);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 164);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Дата рождения";
-            // 
             // InsertButton
             // 
-            this.InsertButton.Location = new System.Drawing.Point(74, 190);
+            this.InsertButton.Location = new System.Drawing.Point(74, 174);
             this.InsertButton.Name = "InsertButton";
             this.InsertButton.Size = new System.Drawing.Size(164, 36);
             this.InsertButton.TabIndex = 9;
@@ -152,12 +133,10 @@ namespace ServiceCenterAccounting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 238);
+            this.ClientSize = new System.Drawing.Size(301, 218);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.InsertButton);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.Date_of_Birth);
             this.Controls.Add(this.Middle_Name_Text);
             this.Controls.Add(this.First_Name_Text);
             this.Controls.Add(this.label4);
@@ -183,8 +162,6 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox First_Name_Text;
         private System.Windows.Forms.TextBox Middle_Name_Text;
-        private System.Windows.Forms.DateTimePicker Date_of_Birth;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button InsertButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
