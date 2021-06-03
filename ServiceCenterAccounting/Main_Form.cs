@@ -39,8 +39,8 @@ namespace ServiceCenterAccounting
         {
             AddingAndChangingOrders adding = new AddingAndChangingOrders();
             adding.ShowDialog();
+            LoadTable();
         }
-
 
         private void bnt_Reports_Click(object sender, EventArgs e)
         {
@@ -49,6 +49,11 @@ namespace ServiceCenterAccounting
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
+        private void LoadTable()
         {
             if (tabControl1.SelectedTab.Text.Equals("Принятые заказы"))
             {
@@ -65,9 +70,9 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 1");
                 dg_Orders_Accepted.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = true;
+                btn_Change_Status.Visible = true;
             }
-            else if(tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
+            else if (tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
             {
                 dg_Orders_in_Progress.DataSource = Connect.Select("SELECT id_orders, " +
                     "concat(clients.last_name_client, ' ', substring(clients.first_name_client, 1, 1), '. ', substring(clients.middle_name_client, 1, 1), '. ') " +
@@ -86,9 +91,9 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 2");
                 dg_Orders_in_Progress.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = true;
+                btn_Change_Status.Visible = true;
             }
-            else if(tabControl1.SelectedTab.Text.Equals("Завершенные заказы"))
+            else if (tabControl1.SelectedTab.Text.Equals("Завершенные заказы"))
             {
                 dg_Completed_Orders.DataSource = Connect.Select("SELECT id_orders, " +
                     "concat(clients.last_name_client, ' ', substring(clients.first_name_client, 1, 1), '. ', substring(clients.middle_name_client, 1, 1), '. ') " +
@@ -110,7 +115,7 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 3");
                 dg_Completed_Orders.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = false;
+                btn_Change_Status.Visible = false;
             }
         }
 
@@ -141,23 +146,25 @@ namespace ServiceCenterAccounting
         private void btn_Change_of_Status_Click(object sender, EventArgs e)
         {
             string id_order = null;
+            string id_orderAndDevice = null;
+            DataGridViewRow row = null;
             if (tabControl1.SelectedTab.Text.Equals("Принятые заказы"))
             {
-                DataGridViewRow row = dg_Orders_Accepted.SelectedRows[0];
-                id_order = row.Cells[0].Value.ToString();
+                row = dg_Orders_Accepted.SelectedRows[0];
             }
             else if (tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
             {
-                DataGridViewRow row = dg_Orders_in_Progress.SelectedRows[0];
-                id_order = row.Cells[0].Value.ToString();
+                row = dg_Orders_in_Progress.SelectedRows[0];
             }
             else
             {
-                DataGridViewRow row = dg_Completed_Orders.SelectedRows[0];
-                id_order = row.Cells[0].Value.ToString();
+                row = dg_Completed_Orders.SelectedRows[0];
             }
-            AddingAndChangingOrders f = new AddingAndChangingOrders(id_order);
+            id_order = row.Cells[0].Value.ToString();
+            id_orderAndDevice = Connect.GetString($"SELECT id_order_and_device from orders_and_devices where id_order = {id_order}");
+            AddingAndChangingOrders f = new AddingAndChangingOrders(id_orderAndDevice);
             f.ShowDialog();
+            LoadTable();
         }
     }
 }
