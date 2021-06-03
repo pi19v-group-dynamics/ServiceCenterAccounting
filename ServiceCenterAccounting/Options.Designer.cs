@@ -131,7 +131,8 @@
             this.Type_of_notes.Items.AddRange(new object[] {
             "Работники",
             "Типы услуг",
-            "Типы компонентов"});
+            "Типы компонентов",
+            "Журналирование"});
             this.Type_of_notes.Location = new System.Drawing.Point(140, 149);
             this.Type_of_notes.Name = "Type_of_notes";
             this.Type_of_notes.Size = new System.Drawing.Size(121, 21);
