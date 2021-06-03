@@ -41,11 +41,12 @@ namespace ServiceCenterAccounting
 
         static public string GetString(string sql)
         {
+            string result="";
             try
             {
                 connection.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(sql, connection);
-                string result = cmd.ExecuteScalar().ToString();
+                result = cmd.ExecuteNonQuery().ToString();
                 return result;
             }
             catch
