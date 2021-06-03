@@ -33,10 +33,10 @@ namespace ServiceCenterAccounting
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Price = new System.Windows.Forms.NumericUpDown();
+            this.Note = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Price)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +66,7 @@ namespace ServiceCenterAccounting
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Стоимость";
+            this.label3.Visible = false;
             // 
             // button1
             // 
@@ -75,25 +76,28 @@ namespace ServiceCenterAccounting
             this.button1.TabIndex = 3;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // numericUpDown1
+            // Price
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(107, 72);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.Price.Location = new System.Drawing.Point(107, 72);
+            this.Price.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 4;
+            this.Price.Name = "Price";
+            this.Price.Size = new System.Drawing.Size(120, 20);
+            this.Price.TabIndex = 4;
+            this.Price.Visible = false;
             // 
-            // textBox1
+            // Note
             // 
-            this.textBox1.Location = new System.Drawing.Point(128, 46);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
+            this.Note.Location = new System.Drawing.Point(128, 46);
+            this.Note.Name = "Note";
+            this.Note.Size = new System.Drawing.Size(100, 20);
+            this.Note.TabIndex = 5;
+            this.Note.TextChanged += new System.EventHandler(this.Note_TextChanged);
             // 
             // textBox2
             // 
@@ -109,8 +113,8 @@ namespace ServiceCenterAccounting
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 132);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.Note);
+            this.Controls.Add(this.Price);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -118,7 +122,7 @@ namespace ServiceCenterAccounting
             this.Name = "AddNote";
             this.Text = "AddNote";
             this.Load += new System.EventHandler(this.AddNote_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Price)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,8 +134,8 @@ namespace ServiceCenterAccounting
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.NumericUpDown Price;
+        private System.Windows.Forms.TextBox Note;
         private System.Windows.Forms.TextBox textBox2;
     }
 }
