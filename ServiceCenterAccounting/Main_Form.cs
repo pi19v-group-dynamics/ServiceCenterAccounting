@@ -141,6 +141,7 @@ namespace ServiceCenterAccounting
             }
             Action_for_Orders action = new Action_for_Orders(id_order, is_acepted);
             action.ShowDialog();
+            LoadTable();
         }
 
         private void btn_Change_of_Status_Click(object sender, EventArgs e)
