@@ -107,8 +107,18 @@ namespace ServiceCenterAccounting
                     "from logging ORDER BY ID OFFSET ((" + (NotesUpDown.Value - 1) + ") * " + 15 + ") " +
                     "ROWS FETCH NEXT " + 15 + "ROWS ONLY;");
                     NotesUpDown.Maximum = (Convert.ToInt32(Connect.GetString("select count(*) from logging")) / 15) + 1;
-
                     break;
+            }
+            if (SelectedNote == "Журналирование")
+            {
+                InsertNote.Visible = false;
+                Type_of_delete.Visible = false;
+                DeleteNotes.Visible = false;
+            }
+            else {
+                InsertNote.Visible = true;
+                Type_of_delete.Visible = true;
+                DeleteNotes.Visible = true;
             }
         }
 
