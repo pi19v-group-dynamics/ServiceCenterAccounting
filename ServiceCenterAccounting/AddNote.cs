@@ -36,7 +36,7 @@ namespace ServiceCenterAccounting
 
         private void Note_TextChanged(object sender, EventArgs e)
         {
-            if (DigitsOnly(Note.Text))
+            if (DigitsOnly(Note.Text)==true)
             {
                 Note.Clear();
             }
@@ -44,7 +44,14 @@ namespace ServiceCenterAccounting
 
         private bool DigitsOnly(string text)
         {
-            throw new NotImplementedException();
+            int len = text.Length;
+            for (int i = 0; i < len; ++i)
+            {
+                char c = text[i];
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
     }
 }

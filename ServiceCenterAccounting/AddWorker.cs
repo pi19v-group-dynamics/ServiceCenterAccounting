@@ -19,13 +19,20 @@ namespace ServiceCenterAccounting
 
         private void Last_Name_Text_TextChanged(object sender, EventArgs e)
         {
-            if (DigitsOnly(Last_Name_Text.Text))
+            if (DigitsOnly(Last_Name_Text.Text)==true)
                 Last_Name_Text.Clear();
         }
 
         private bool DigitsOnly(string text)
         {
-            throw new NotImplementedException();
+            int len = text.Length;
+            for (int i = 0; i < len; ++i)
+            {
+                char c = text[i];
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
 
         private void AddWorker_Load(object sender, EventArgs e)
@@ -35,13 +42,13 @@ namespace ServiceCenterAccounting
 
         private void First_Name_Text_TextChanged(object sender, EventArgs e)
         {
-            if (DigitsOnly(First_Name_Text.Text))
+            if (DigitsOnly(First_Name_Text.Text)==true)
                 First_Name_Text.Clear();
         }
 
         private void Middle_Name_Text_TextChanged(object sender, EventArgs e)
         {
-            if (DigitsOnly(First_Name_Text.Text))
+            if (DigitsOnly(First_Name_Text.Text)==true)
                 First_Name_Text.Clear();
         }
 
