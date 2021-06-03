@@ -38,8 +38,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_Settings = new System.Windows.Forms.Button();
             this.bnt_Report = new System.Windows.Forms.Button();
-            this.btn_Change_of_Status = new System.Windows.Forms.Button();
-            this.btn_Change_Stattus = new System.Windows.Forms.Button();
+            this.btn_Change = new System.Windows.Forms.Button();
+            this.btn_Change_Status = new System.Windows.Forms.Button();
             this.btn_Add_Order = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Accepted_Orders.SuspendLayout();
@@ -134,8 +134,8 @@
             // 
             this.groupBox2.Controls.Add(this.btn_Settings);
             this.groupBox2.Controls.Add(this.bnt_Report);
-            this.groupBox2.Controls.Add(this.btn_Change_of_Status);
-            this.groupBox2.Controls.Add(this.btn_Change_Stattus);
+            this.groupBox2.Controls.Add(this.btn_Change);
+            this.groupBox2.Controls.Add(this.btn_Change_Status);
             this.groupBox2.Controls.Add(this.btn_Add_Order);
             this.groupBox2.Location = new System.Drawing.Point(617, 25);
             this.groupBox2.Name = "groupBox2";
@@ -162,24 +162,24 @@
             this.bnt_Report.UseVisualStyleBackColor = true;
             this.bnt_Report.Click += new System.EventHandler(this.bnt_Reports_Click);
             // 
-            // btn_Change_of_Status
+            // btn_Change
             // 
-            this.btn_Change_of_Status.Location = new System.Drawing.Point(4, 61);
-            this.btn_Change_of_Status.Name = "btn_Change_of_Status";
-            this.btn_Change_of_Status.Size = new System.Drawing.Size(138, 23);
-            this.btn_Change_of_Status.TabIndex = 2;
-            this.btn_Change_of_Status.Text = "Изменение заказа";
-            this.btn_Change_of_Status.UseVisualStyleBackColor = true;
+            this.btn_Change.Location = new System.Drawing.Point(4, 61);
+            this.btn_Change.Name = "btn_Change";
+            this.btn_Change.Size = new System.Drawing.Size(138, 23);
+            this.btn_Change.TabIndex = 2;
+            this.btn_Change.Text = "Изменение заказа";
+            this.btn_Change.UseVisualStyleBackColor = true;
             // 
-            // btn_Change_Stattus
+            // btn_Change_Status
             // 
-            this.btn_Change_Stattus.Location = new System.Drawing.Point(4, 32);
-            this.btn_Change_Stattus.Name = "btn_Change_Stattus";
-            this.btn_Change_Stattus.Size = new System.Drawing.Size(138, 23);
-            this.btn_Change_Stattus.TabIndex = 1;
-            this.btn_Change_Stattus.Text = "Изменить статус";
-            this.btn_Change_Stattus.UseVisualStyleBackColor = true;
-            this.btn_Change_Stattus.Click += new System.EventHandler(this.btn_Change_Stattus_Click);
+            this.btn_Change_Status.Location = new System.Drawing.Point(4, 32);
+            this.btn_Change_Status.Name = "btn_Change_Status";
+            this.btn_Change_Status.Size = new System.Drawing.Size(138, 23);
+            this.btn_Change_Status.TabIndex = 1;
+            this.btn_Change_Status.Text = "Изменить статус";
+            this.btn_Change_Status.UseVisualStyleBackColor = true;
+            this.btn_Change_Status.Click += new System.EventHandler(this.btn_Change_Stattus_Click);
             // 
             // btn_Add_Order
             // 
@@ -220,8 +220,8 @@
         private System.Windows.Forms.TabPage tp_Completed_Orders;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bnt_Report;
-        private System.Windows.Forms.Button btn_Change_of_Status;
-        private System.Windows.Forms.Button btn_Change_Stattus;
+        private System.Windows.Forms.Button btn_Change;
+        private System.Windows.Forms.Button btn_Change_Status;
         private System.Windows.Forms.Button btn_Add_Order;
         private System.Windows.Forms.Button btn_Settings;
         private System.Windows.Forms.TabPage tp_Accepted_Orders;

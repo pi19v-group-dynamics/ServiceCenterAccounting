@@ -65,7 +65,7 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 1");
                 dg_Orders_Accepted.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = true;
+                btn_Change_Status.Visible = true;
             }
             else if(tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
             {
@@ -86,7 +86,7 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 2");
                 dg_Orders_in_Progress.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = true;
+                btn_Change_Status.Visible = true;
             }
             else if(tabControl1.SelectedTab.Text.Equals("Завершенные заказы"))
             {
@@ -110,7 +110,7 @@ namespace ServiceCenterAccounting
                     "LEFT JOIN stages_of_execution on stages_of_execution.id_stage_of_execution = orders.id_stage_of_execution " +
                     "WHERE stages_of_execution.id_stage_of_execution = 3");
                 dg_Completed_Orders.Columns[0].Visible = false;
-                btn_Change_of_Status.Visible = false;
+                btn_Change_Status.Visible = false;
             }
         }
 

@@ -718,7 +718,108 @@ namespace ServiceCenterAccounting
                     ") " +
                     "TABLESPACE pg_default; " +
                     "ALTER TABLE public.smartphones " +
-                        $"OWNER to {login}; ";
+                        $"OWNER to {login}; " +
+                    $"CREATE TABLE public.logging " + 
+                    "( " +
+                        "date_and_time_of_action timestamp(0) without time zone NOT NULL, " +
+                        "name_of_action character varying(255) COLLATE pg_catalog.\"default\" NOT NULL, " +
+                        "role_of_action character varying(255) COLLATE pg_catalog.\"default\" NOT NULL " +
+                    ") " +
+                    "TABLESPACE pg_default; " +
+                    "ALTER TABLE public.logging " +
+                        $"OWNER to {login};" +
+                    "CREATE FUNCTION public.f_update_orders() " +
+                        "RETURNS trigger " +
+                        "LANGUAGE 'plpgsql' " +
+                        "COST 100 " +
+                        "VOLATILE NOT LEAKPROOF " +
+                    "AS $BODY$ " +
+                    "BEGIN " +
+
+                        "IF(NEW.id_stage_of_execution = 3) THEN " +
+                            "NEW.price := (SELECT types_of_service.cost_of_service FROM types_of_service WHERE types_of_service.id_type_of_service = OLD.id_type_of_service) +OLD.cost_of_parts; " +
+                        "END IF; " +
+                    "RETURN NEW; " +
+                    "END " +
+                    "$BODY$; " + 
+                    "ALTER FUNCTION public.f_update_orders()" +
+                        $"OWNER TO {login};" +
+                    $"CREATE FUNCTION public.insert_into_logging() " +
+                        "RETURNS trigger " +
+                        "LANGUAGE 'plpgsql' " +
+                        "COST 100 " +
+                        "VOLATILE NOT LEAKPROOF " +
+                    "AS $BODY$ " +
+                    "BEGIN " +
+                        "IF TG_OP = 'INSERT' THEN " +
+                            "INSERT INTO logging(date_and_time_of_action, name_of_action, role_of_action) VALUES(CURRENT_TIMESTAMP, TG_OP, CURRENT_USER); " +
+                            "RETURN NEW; " +
+                        "ELSIF TG_OP = 'UPDATE' THEN " +
+                            "INSERT INTO logging(date_and_time_of_action, name_of_action, role_of_action) VALUES(CURRENT_TIMESTAMP, TG_OP, CURRENT_USER); " +
+                            "RETURN NEW; " +
+                        "ELSIF TG_OP = 'DELETE' THEN " +
+                            "INSERT INTO logging(date_and_time_of_action, name_of_action, role_of_action) VALUES(CURRENT_TIMESTAMP, TG_OP, CURRENT_USER); " +
+                            "RETURN OLD; " +
+                        "END IF; " +
+                    "END " +
+                    "$BODY$; " +
+                    "ALTER FUNCTION public.insert_into_logging() " +
+                        $"OWNER TO postgres;" +
+                    $"CREATE TRIGGER t_client " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.clients " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_component_or_other_device_types " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.component_or_other_device_types " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_components_or_other_devices " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.components_or_other_devices " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_laptops_and_monoblocks " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.laptops_and_monoblocks " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_orders  " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.orders " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_update_orders " +
+                        "BEFORE UPDATE OF id_stage_of_execution " +
+                        "ON public.orders " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.f_update_orders();" +
+                    "CREATE TRIGGER t_orders_and_devices " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.orders_and_devices " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_smartphones " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.smartphones " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_stationary_computers " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.stationary_computers " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER t_types_of_service " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.types_of_service " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();" +
+                    "CREATE TRIGGER workers " +
+                        "AFTER INSERT OR DELETE OR UPDATE " +
+                        "ON public.workers " +
+                        "FOR EACH ROW " +
+                        "EXECUTE PROCEDURE public.insert_into_logging();";
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();
