@@ -69,10 +69,10 @@ namespace ServiceCenterAccounting
             BaseFont baseFont = BaseFont.CreateFont("C:/Windows/Fonts/times.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
             iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
             iTextSharp.text.Font font1 = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
-            font1.Size = 18;
-            font.Size = 11;
+            font1.Size = 16;
+            font.Size = 10;
             pdfTable.DefaultCell.Padding = 10;
-            pdfTable.WidthPercentage = 100;
+            pdfTable.WidthPercentage = 90;
             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
             pdfTable.DefaultCell.BorderWidth = 1;
             if (sub_keys.Contains("SCA_Key"))
@@ -97,7 +97,7 @@ namespace ServiceCenterAccounting
                 cell.Border = 0;
                 pdfTable.AddCell(cell);
                 cell = new PdfPCell(new Phrase($"Клиент:", font1));
-                cell.Colspan = 11; cell.HorizontalAlignment = 0; cell.Border = 0;
+                cell.Colspan = 8; cell.HorizontalAlignment = 0; cell.Border = 0;
                 pdfTable.AddCell(cell);
             }
             DataTable table;
@@ -132,15 +132,20 @@ namespace ServiceCenterAccounting
                 cell.BackgroundColor = new BaseColor(240, 240, 240);
                 pdfTable.AddCell(cell);
             }
-            for (int i = 0; i < table.Rows.Count - 1; i++)
+            cell = new PdfPCell(new Phrase($" ", font1));
+            cell.Border = 0;
+            pdfTable.AddCell(cell);
+            for (int i = 0; i < table.Rows.Count; i++)
             {
                 for (int j = 0; j < table.Columns.Count; j++)
                 {
                     pdfTable.AddCell(new Phrase(table.Rows[i][j].ToString(), font));
-                    if (j == table.Columns.Count - 1) { cell.Colspan = 2; }
                 }
             }
-            table.Clear();
+            cell = new PdfPCell(new Phrase($" ", font1));
+            cell.Border = 0;
+            pdfTable.AddCell(cell);
+            DataTable table1=new DataTable();
             cell = new PdfPCell(new Phrase($"Информация об устройстве клиента:", font1));
             cell.Colspan = 8; cell.HorizontalAlignment = 1; cell.Border = 0;
             pdfTable.AddCell(cell);
@@ -148,35 +153,80 @@ namespace ServiceCenterAccounting
             switch (type_of_device)
             {
                 case 1:
-                    table = Connect.Select($"select smartphones.manufacturer as \"Производитель\",smartphones.model as \"Модель\",smartphones.imei as " +
+                    table1 = Connect.Select($"select smartphones.manufacturer as \"Производитель\",smartphones.model as \"Модель\",smartphones.imei as " +
                     "IMEI from smartphones inner join orders_and_devices on(smartphones.id_smartphone=orders_and_devices.id_specific_device) " +
                     $"where orders_and_devices.id_order={id_order}"); break;
                 case 2:
-                    table = Connect.Select("select motherboard as \"Мат.плата\", cpu as \"Процессор\", gpu as \"Видеокарта\", power_supply as \"БП\", " +
+                    table1 = Connect.Select("select motherboard as \"Мат.плата\", cpu as \"Процессор\", gpu as \"Видеокарта\", power_supply as \"БП\", " +
                     "number_of_drives as \"Кол - во носителей\", cpu_cooling as \"Охлаждение\", ram as \"ОЗУ\", additional_devices as \"Остальные устройства\" " +
                     "from stationary_computers inner join orders_and_devices on (stationary_computers.id_stationary_computer = orders_and_devices.id_specific_device) " +
                     $"where orders_and_devices.id_order ={id_order}"); break;
                 case 3:
-                    table = Connect.Select("select manufacturer as \"Производитель\",model as \"Модель\",cpu as \"Процессор\",ram as \"ОЗУ\",number_of_drives as \"Кол - во носителей\" " +
+                    table1 = Connect.Select("select manufacturer as \"Производитель\",model as \"Модель\",cpu as \"Процессор\",ram as \"ОЗУ\" " +
                     "from laptops_and_monoblocks inner join orders_and_devices on(laptops_and_monoblocks.id_laptop_or_monoblock=orders_and_devices.id_specific_device) " +
                     $"where orders_and_devices.id_order={id_order}"); break;
                 case 4:
-                    table = Connect.Select("Select component_or_other_device_types.name_component_or_other_device_type as \"Тип устройства\",manufacturer as \"Производитель\",model as \"Модель\" " +
+                    table1 = Connect.Select("Select component_or_other_device_types.name_component_or_other_device_type as \"Тип устройства\",manufacturer as \"Производитель\",model as \"Модель\" " +
              "from components_or_other_devices inner join orders_and_devices on(components_or_other_devices.id_component_or_other_devices=orders_and_devices.id_specific_device) " +
              "inner join component_or_other_device_types on(component_or_other_device_types.id_component_or_other_device_type=components_or_other_devices.id_component_type) " +
              $"where orders_and_devices.id_order={id_order}"); break;
             }
-            for (int i = 0; i < table.Columns.Count; i++)
+            for (int i = 0; i < table1.Columns.Count; i++)
             {
-                cell = new PdfPCell(new Phrase(table.Columns[i].ColumnName, font));
+                cell = new PdfPCell(new Phrase(table1.Columns[i].ColumnName, font));
                 cell.BackgroundColor = new BaseColor(240, 240, 240);
                 pdfTable.AddCell(cell);
             }
-            for (int i = 0; i < table.Rows.Count - 1; i++)
+            if (type_of_device == 1 ||type_of_device== 4)
             {
-                for (int j = 0; j < table.Columns.Count; j++)
                 {
-                    pdfTable.AddCell(new Phrase(table.Rows[i][j].ToString(), font));
+                    for (int i = 0; i < 5; i++)
+                    {
+                        cell = new PdfPCell(new Phrase($" ", font1));
+                        cell.Border = 0; pdfTable.AddCell(cell);
+                    }
+
+                }
+            }
+            if (type_of_device == 3)
+            {
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        cell = new PdfPCell(new Phrase($" ", font1));
+                        cell.Border = 0; pdfTable.AddCell(cell);
+                    }
+
+                }
+            }
+            for (int i = 0; i < table1.Rows.Count; i++)
+            {
+                for (int j = 0; j < table1.Columns.Count; j++)
+                {
+                    pdfTable.AddCell(new Phrase(table1.Rows[i][j].ToString(), font));
+                }
+            }
+            if (type_of_device == 1 || type_of_device == 4)
+            {
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        cell = new PdfPCell(new Phrase($" ", font1));
+                        cell.Border = 0; 
+                        pdfTable.AddCell(cell);
+                    }
+
+                }
+            }
+            if (type_of_device == 3)
+            {
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        cell = new PdfPCell(new Phrase($" ", font1));
+                        cell.Border = 0; pdfTable.AddCell(cell);
+                    }
+
                 }
             }
             SaveFileDialog dialog = new SaveFileDialog();
