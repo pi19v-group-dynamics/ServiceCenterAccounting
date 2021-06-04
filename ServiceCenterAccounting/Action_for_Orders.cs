@@ -52,9 +52,11 @@ namespace ServiceCenterAccounting
             }
             else
             {
+                string id_worker = Connect.GetString($"SELECT id_worker From orders WHERE id_orders = {Id_order}");
                  Connect.Select($"UPDATE orders SET date_of_completion = '{DateTime.Now.ToString("d")}', " +
                      $"id_stage_of_execution = 3, " +
                      $"cost_of_parts = {nud_Cost_of_Parts.Value.ToString().Replace(',', '.')} WHERE id_orders = {Id_order}");
+                Connect.Insert($"UPDATE workers SET employment = false WHERE id_worker = {id_worker}");
                 Create_Receipt(Id_order);
                 this.Close();
             }
