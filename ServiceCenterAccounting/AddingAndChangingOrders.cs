@@ -63,6 +63,8 @@ namespace ServiceCenterAccounting
                 typeList.SelectedValue = order.Rows[0].Field<int>("service");
                 commentField.Text = order.Rows[0].Field<string>("comment");
 
+                servicesList.SelectedValue = order.Rows[0].Field<int>("service");
+
                 DataTable dt = Connect.Select("select last_name_client as lname, first_name_client as fname, " +
                     "middle_name_client as mname, passport_series as series, phone " +
                     $"from clients where id_client = {order.Rows[0].Field<int>("client")}");
@@ -244,9 +246,6 @@ namespace ServiceCenterAccounting
                         MessageBox.Show("Не удалось обновить информацию о девайсе!", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
-
-                    
 
                     result = Connect.GetString($"UPDATE orders SET (date_of_adoption, customer_comment, id_type_of_service) = " + 
                         $"('{dateTimePicker.Value.ToShortDateString()}', '{commentField.Text}', {servicesList.SelectedValue}) " + 

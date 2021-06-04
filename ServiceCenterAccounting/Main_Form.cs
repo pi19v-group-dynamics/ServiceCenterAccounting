@@ -177,5 +177,29 @@ namespace ServiceCenterAccounting
             authorization = new Authorization(true);
             authorization.ShowDialog();
         }
+
+        private void dg_Orders_Accepted_DoubleClick(object sender, EventArgs e)
+        {
+            string id_order = null;
+            string id_orderAndDevice = null;
+            DataGridViewRow row = null;
+            if (tabControl1.SelectedTab.Text.Equals("Принятые заказы"))
+            {
+                row = dg_Orders_Accepted.SelectedRows[0];
+            }
+            else if (tabControl1.SelectedTab.Text.Equals("Заказы в работе"))
+            {
+                row = dg_Orders_in_Progress.SelectedRows[0];
+            }
+            else
+            {
+                row = dg_Completed_Orders.SelectedRows[0];
+            }
+            id_order = row.Cells[0].Value.ToString();
+            id_orderAndDevice = Connect.GetString($"SELECT id_order_and_device from orders_and_devices where id_order = {id_order}");
+            InfoAboutOrder f = new InfoAboutOrder(id_orderAndDevice);
+            f.ShowDialog();
+            LoadTable();
+        }
     }
 }
