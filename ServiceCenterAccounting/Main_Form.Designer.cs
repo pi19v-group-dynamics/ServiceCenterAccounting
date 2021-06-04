@@ -63,6 +63,7 @@
             this.tabControl1.Size = new System.Drawing.Size(816, 362);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.DoubleClick += new System.EventHandler(this.tabControl1_DoubleClick);
             // 
             // tp_Accepted_Orders
             // 
@@ -115,6 +116,7 @@
             this.dg_Orders_in_Progress.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dg_Orders_in_Progress.Size = new System.Drawing.Size(795, 322);
             this.dg_Orders_in_Progress.TabIndex = 0;
+            this.dg_Orders_in_Progress.DoubleClick += new System.EventHandler(this.dg_Orders_in_Progress_DoubleClick);
             // 
             // tp_Completed_Orders
             // 
