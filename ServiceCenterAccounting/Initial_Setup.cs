@@ -898,7 +898,19 @@ namespace ServiceCenterAccounting
                     $"GRANT Select ON TABLE \"public\".\"types_of_service\" TO \"{login}\"; " +
                     $"GRANT Select ON TABLE \"public\".\"workers\" TO \"{login}\";" +
                     $"GRANT Insert, Select ON TABLE \"public\".\"logging\" TO \"{login}\";" +
-                    $"GRANT Update ON TABLE \"public\".\"workers\" TO \"{login}\";"; 
+                    $"GRANT Update ON TABLE \"public\".\"workers\" TO \"{login}\";" +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"clients_id_client_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"component_or_other_device_typ_id_component_or_other_device__seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"components_or_other_devices_id_component_or_other_devices_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"laptops_and_monoblocks_id_laptop_or_monoblock_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"orders_and_devices_id_order_and_device_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"orders_id_orders_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"smartphones_id_smartphone_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"stages_of_execution_id_stage_of_execution_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"stationary_computers_id_stationary_computer_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"types_of_device_id_type_of_device_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"types_of_service_id_type_of_service_seq\" TO \"{login}\"; " +
+                    $"GRANT Usage ON SEQUENCE \"public\".\"workers_id_worker_seq\" TO \"{login}\";"; 
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();
