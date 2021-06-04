@@ -49,8 +49,9 @@ namespace ServiceCenterAccounting
                 result = cmd.ExecuteScalar().ToString();
                 return result;
             }
-            catch
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             finally
@@ -58,6 +59,7 @@ namespace ServiceCenterAccounting
                 connection.Close();
             }
         }
+
         static public void Insert(string sql)
         {
             try
