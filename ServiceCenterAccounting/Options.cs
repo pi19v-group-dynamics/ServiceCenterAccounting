@@ -31,7 +31,6 @@ namespace ServiceCenterAccounting
         {
             if (sub_keys.Contains("SCA_Key"))
             {
-                RegistryKey SCA_Key = currentUserKey.OpenSubKey("SCA_Key");
                 Name_srv_text.Text = SCA_Key.GetValue("name_srvice").ToString();
                 Address_srv_text.Text = SCA_Key.GetValue("addres_service").ToString();
                 Number_srv_text.Text = SCA_Key.GetValue("phone_service").ToString();
@@ -40,17 +39,17 @@ namespace ServiceCenterAccounting
 
         private void ChangeInfo_Click(object sender, EventArgs e)
         {
-            if (DigitsOnly(Name_srv_text.Text) ||
+            if (DigitsOnly(Name_srv_text.Text)==true ||
               Name_srv_text.Text.StartsWith("-") | Name_srv_text.Text.StartsWith("`") | Name_srv_text.Text.StartsWith("'")
               || Name_srv_text.Text == (" ") || Name_srv_text.Text.StartsWith(".") || Name_srv_text.Text.StartsWith(",")
               || Name_srv_text.Text.StartsWith("/"))
             {
-                MessageBox.Show($"Заполните название видеосалона!\nПоля доступные для заполнения не могут содержать только пробелы!",
+                MessageBox.Show($"Заполните название сервиса!\nПоля доступные для заполнения не могут содержать только пробелы!",
                                 "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else { SCA_Key.SetValue("name_srvice", Name_srv_text.Text); }
 
-            if (String.IsNullOrWhiteSpace(Address_srv_text.Text) || DigitsOnly(Address_srv_text.Text) ||
+            if (String.IsNullOrWhiteSpace(Address_srv_text.Text) || DigitsOnly(Address_srv_text.Text)==true ||
               Address_srv_text.Text.StartsWith("-") | Address_srv_text.Text.StartsWith("`") | Address_srv_text.Text.StartsWith("'")
               || Address_srv_text.Text.StartsWith(" ") || Address_srv_text.Text.StartsWith(".") || Address_srv_text.Text.StartsWith(",")
               || Address_srv_text.Text.StartsWith("/"))
@@ -74,7 +73,14 @@ namespace ServiceCenterAccounting
 
         private bool DigitsOnly(string text)
         {
-            throw new NotImplementedException();
+            int len = text.Length;
+            for (int i = 0; i < len; ++i)
+            {
+                char c = text[i];
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
 
         private void Type_of_notes_SelectionChangeCommitted(object sender, EventArgs e)
@@ -140,17 +146,17 @@ namespace ServiceCenterAccounting
                 case "Все поля":
                     switch (SelectedNote)
                     {
-                        case "Типы услуг": Connect.GetString("DELETE FROM types_of_service"); break;
-                        case "Типы компонентов": Connect.GetString("DELETE FROM component_or_other_device_types"); break;
-                        case "Работники": Connect.GetString("DELETE FRO workers"); break;
+                        case "Типы услуг": Connect.Insert("DELETE FROM types_of_service"); break;
+                        case "Типы компонентов": Connect.Insert("DELETE FROM component_or_other_device_types"); break;
+                        case "Работники": Connect.Insert("DELETE FROM workers"); break;
                     }
                     break;
                 case "Одно поле":
                     switch (SelectedNote)
                     {
-                        case "Типы услуг": Connect.GetString($"DELETE FROM types_of_service where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
-                        case "Типы компонентов": Connect.GetString($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={NotesData.CurrentRow.Cells[0].Value}"); break;
-                        case "Работники": Connect.GetString($"DELETE FROM workers where id_worker={NotesData.CurrentRow.Cells[0].Value}"); break;
+                        case "Типы услуг": Connect.Insert($"DELETE FROM types_of_service where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
+                        case "Типы компонентов": Connect.Insert($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={NotesData.CurrentRow.Cells[0].Value}"); break;
+                        case "Работники": Connect.Insert($"DELETE FROM workers where id_worker={NotesData.CurrentRow.Cells[0].Value}"); break;
                     }
                     break;
                 case "Выделенные поля":
@@ -158,9 +164,9 @@ namespace ServiceCenterAccounting
                     {
                         switch (SelectedNote)
                         {
-                            case "Типы услуг": Connect.GetString($"DELETE FROM types_of_service where id_type_of_service={rows[0]}"); break;
-                            case "Типы компонентов": Connect.GetString($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={rows[0]}"); break;
-                            case "Работники": Connect.GetString($"DELETE FROM workers where id_worker={rows[0]}"); break;
+                            case "Типы услуг": Connect.Insert($"DELETE FROM types_of_service where id_type_of_service={rows[0]}"); break;
+                            case "Типы компонентов": Connect.Insert($"DELETE FROM component_or_other_device_types where id_component_or_other_device_type={rows[0]}"); break;
+                            case "Работники": Connect.Insert($"DELETE FROM workers where id_worker={rows[0]}"); break;
                         }
                     }
                     break;
@@ -176,9 +182,9 @@ namespace ServiceCenterAccounting
         private void NotesData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             switch (SelectedNote) {
-                case "Типы услуг": result=Connect.GetString($"UPDATE types_of_service SET name_type_of_service='{NotesData.CurrentRow.Cells[1].Value}',cost_of_service={Convert.ToInt32(NotesData.CurrentRow.Cells[2].Value)} where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
-                case "Типы компонентов": result=Connect.GetString($"UPDATE component_or_other_device_types SET name_component_or_other_device_type='{NotesData.CurrentRow.Cells[1].Value}'"); break;
-                case "Работники": result=Connect.GetString($"UPDATE workers SET last_name_worker='{NotesData.CurrentRow.Cells[1].Value}',first_name_worker='{NotesData.CurrentRow.Cells[2].Value}',middle_name_worker='{NotesData.CurrentRow.Cells[3].Value}',interest_rate={Convert.ToInt32(NotesData.CurrentRow.Cells[4].Value)} where id_worker={NotesData.CurrentRow.Cells[0]}"); break;
+                case "Типы услуг": Connect.Insert($"UPDATE types_of_service SET name_type_of_service='{NotesData.CurrentRow.Cells[1].Value}',cost_of_service={Convert.ToInt32(NotesData.CurrentRow.Cells[2].Value)} where id_type_of_service={NotesData.CurrentRow.Cells[0].Value}"); break;
+                case "Типы компонентов": Connect.Insert($"UPDATE component_or_other_device_types SET name_component_or_other_device_type='{NotesData.CurrentRow.Cells[1].Value}'"); break;
+                case "Работники": Connect.Insert($"UPDATE workers SET last_name_worker='{NotesData.CurrentRow.Cells[1].Value}',first_name_worker='{NotesData.CurrentRow.Cells[2].Value}',middle_name_worker='{NotesData.CurrentRow.Cells[3].Value}',interest_rate={Convert.ToInt32(NotesData.CurrentRow.Cells[4].Value)},employment={NotesData.CurrentRow.Cells[5].Value} where id_worker={NotesData.CurrentRow.Cells[0].Value}"); break;
             }
             LoadNotes();
         }
