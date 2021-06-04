@@ -737,7 +737,7 @@ namespace ServiceCenterAccounting
                     "BEGIN " +
 
                         "IF(NEW.id_stage_of_execution = 3) THEN " +
-                            "NEW.price := (SELECT types_of_service.cost_of_service FROM types_of_service WHERE types_of_service.id_type_of_service = OLD.id_type_of_service) +OLD.cost_of_parts; " +
+                            "NEW.price := (SELECT types_of_service.cost_of_service FROM types_of_service WHERE types_of_service.id_type_of_service = OLD.id_type_of_service) + NEW.cost_of_parts; " +
                         "END IF; " +
                     "RETURN NEW; " +
                     "END " +
@@ -910,7 +910,9 @@ namespace ServiceCenterAccounting
                     $"GRANT Usage ON SEQUENCE \"public\".\"stationary_computers_id_stationary_computer_seq\" TO \"{login}\"; " +
                     $"GRANT Usage ON SEQUENCE \"public\".\"types_of_device_id_type_of_device_seq\" TO \"{login}\"; " +
                     $"GRANT Usage ON SEQUENCE \"public\".\"types_of_service_id_type_of_service_seq\" TO \"{login}\"; " +
-                    $"GRANT Usage ON SEQUENCE \"public\".\"workers_id_worker_seq\" TO \"{login}\";"; 
+                    $"GRANT Usage ON SEQUENCE \"public\".\"workers_id_worker_seq\" TO \"{login}\";" +
+                    $"GRANT Execute ON FUNCTION \"public\".\"f_update_orders\"() TO \"{login}\";" +
+                    $"GRANT Execute ON FUNCTION \"public\".\"insert_into_logging\"() TO \"{login}\";"; 
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 Command.Dispose();
                 Connection.Close();
